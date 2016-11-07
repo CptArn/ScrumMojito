@@ -1,3 +1,5 @@
 language: java
+before_script: cd Server
+script: mvn clean verify
 notifications:
   slack: scrummojito:MjnMALRNtGdBC9JhXUTx4D1o
