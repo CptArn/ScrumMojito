@@ -1,2 +1,2 @@
 # ScrumMojito
-Scrum project voor programeren 5
+Scrum project voor programmeren 5
