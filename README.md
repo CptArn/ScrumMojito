@@ -1,4 +1,4 @@
-# ScrumMojito
+# ScrumMojito [![Build Status](https://travis-ci.org/Jejskov/ScrumMojito.svg?branch=master)](https://travis-ci.org/Jejskov/ScrumMojito)
 Scrum project voor programmeren 5
 
 Installatie:
