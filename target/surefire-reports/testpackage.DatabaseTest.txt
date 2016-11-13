@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: testpackage.DatabaseTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 1.237 sec <<< FAILURE!
-test2DuplicateUsers(testpackage.DatabaseTest)  Time elapsed: 0.098 sec  <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 1.323 sec <<< FAILURE!
+test2DuplicateUsers(testpackage.DatabaseTest)  Time elapsed: 0.11 sec  <<< FAILURE!
 java.lang.AssertionError: expected:<2> but was:<3>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -39,7 +39,7 @@ java.lang.AssertionError: expected:<2> but was:<3>
 	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
 	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
 
-test3UpdateUsers(testpackage.DatabaseTest)  Time elapsed: 0.029 sec  <<< ERROR!
+test3UpdateUsers(testpackage.DatabaseTest)  Time elapsed: 0.032 sec  <<< ERROR!
 com.mongodb.MongoWriteException: After applying the update to the document {_id: 1 , ...}, the (immutable) field '_id' was found to have been altered to _id: 3
 	at com.mongodb.MongoCollectionImpl.executeSingleWriteRequest(MongoCollectionImpl.java:523)
 	at com.mongodb.MongoCollectionImpl.update(MongoCollectionImpl.java:508)
@@ -76,7 +76,7 @@ com.mongodb.MongoWriteException: After applying the update to the document {_id:
 	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
 	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
 
-test4DeleteUsers(testpackage.DatabaseTest)  Time elapsed: 0.073 sec  <<< ERROR!
+test4DeleteUsers(testpackage.DatabaseTest)  Time elapsed: 0.082 sec  <<< ERROR!
 java.lang.Exception: Unexpected exception, expected<java.lang.NullPointerException> but was<java.lang.AssertionError>
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)

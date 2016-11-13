@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="1" name="testpackage.DatabaseTest" time="1.228" errors="2" skipped="0">
+<testsuite tests="4" failures="1" name="testpackage.DatabaseTest" time="1.313" errors="2" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_112\jre\bin"/>
@@ -21,7 +21,7 @@
     <property name="basedir" value="C:\Users\Arne\Documents\Odisee\ScrumMojito"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_112\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter1897148538773915807.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter3821438224013477809.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\Arne\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -45,7 +45,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_112\jre"/>
-    <property name="sun.java.command" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter1897148538773915807.jar C:\Users\Arne\AppData\Local\Temp\surefire7866929090463622173tmp C:\Users\Arne\AppData\Local\Temp\surefire8387602669678781508tmp"/>
+    <property name="sun.java.command" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter3821438224013477809.jar C:\Users\Arne\AppData\Local\Temp\surefire1124018440696300535tmp C:\Users\Arne\AppData\Local\Temp\surefire5901082958028602040tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="user.language.format" value="nl"/>
@@ -63,8 +63,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="testpackage.DatabaseTest" name="test1AddUsers" time="0.158"/>
-  <testcase classname="testpackage.DatabaseTest" name="test2DuplicateUsers" time="0.098">
+  <testcase classname="testpackage.DatabaseTest" name="test1AddUsers" time="0.172"/>
+  <testcase classname="testpackage.DatabaseTest" name="test2DuplicateUsers" time="0.109">
     <failure message="expected:&lt;2&gt; but was:&lt;3&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;3&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -101,17 +101,17 @@
 	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
 	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
 </failure>
-    <system-out>15:38:27.178 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
-15:38:27.202 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
-15:38:27.202 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {count : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
-15:38:27.225 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
-15:38:27.225 [main] DEBUG org.mongodb.driver.protocol.insert - Inserting 1 documents into namespace mojito.users on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
-15:38:27.249 [main] DEBUG org.mongodb.driver.protocol.insert - Insert completed
-15:38:27.249 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
-15:38:27.273 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
+    <system-out>15:41:25.558 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
+15:41:25.584 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
+15:41:25.584 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {count : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
+15:41:25.610 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
+15:41:25.611 [main] DEBUG org.mongodb.driver.protocol.insert - Inserting 1 documents into namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
+15:41:25.638 [main] DEBUG org.mongodb.driver.protocol.insert - Insert completed
+15:41:25.638 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
+15:41:25.665 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
 </system-out>
   </testcase>
-  <testcase classname="testpackage.DatabaseTest" name="test3UpdateUsers" time="0.029">
+  <testcase classname="testpackage.DatabaseTest" name="test3UpdateUsers" time="0.032">
     <error message="After applying the update to the document {_id: 1 , ...}, the (immutable) field &apos;_id&apos; was found to have been altered to _id: 3" type="com.mongodb.MongoWriteException">com.mongodb.MongoWriteException: After applying the update to the document {_id: 1 , ...}, the (immutable) field &apos;_id&apos; was found to have been altered to _id: 3
 	at com.mongodb.MongoCollectionImpl.executeSingleWriteRequest(MongoCollectionImpl.java:523)
 	at com.mongodb.MongoCollectionImpl.update(MongoCollectionImpl.java:508)
@@ -148,10 +148,10 @@
 	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
 	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
 </error>
-    <system-out>15:38:27.277 [main] DEBUG org.mongodb.driver.protocol.update - Updating documents in namespace mojito.users on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
+    <system-out>15:41:25.669 [main] DEBUG org.mongodb.driver.protocol.update - Updating documents in namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
 </system-out>
   </testcase>
-  <testcase classname="testpackage.DatabaseTest" name="test4DeleteUsers" time="0.072">
+  <testcase classname="testpackage.DatabaseTest" name="test4DeleteUsers" time="0.082">
     <error message="Unexpected exception, expected&lt;java.lang.NullPointerException&gt; but was&lt;java.lang.AssertionError&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.NullPointerException&gt; but was&lt;java.lang.AssertionError&gt;
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
@@ -188,13 +188,13 @@ Caused by: java.lang.AssertionError: email@email.com
 	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
 	... 20 more
 </error>
-    <system-out>15:38:27.306 [main] DEBUG org.mongodb.driver.protocol.delete - Deleting documents from namespace mojito.users on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
-15:38:27.330 [main] DEBUG org.mongodb.driver.protocol.delete - Delete completed
-15:38:27.330 [main] DEBUG org.mongodb.driver.protocol.delete - Deleting documents from namespace mojito.users on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
-15:38:27.354 [main] DEBUG org.mongodb.driver.protocol.delete - Delete completed
+    <system-out>15:41:25.700 [main] DEBUG org.mongodb.driver.protocol.delete - Deleting documents from namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
+15:41:25.726 [main] DEBUG org.mongodb.driver.protocol.delete - Delete completed
+15:41:25.727 [main] DEBUG org.mongodb.driver.protocol.delete - Deleting documents from namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
+15:41:25.754 [main] DEBUG org.mongodb.driver.protocol.delete - Delete completed
 19650
-15:38:27.354 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37762}] to server ds147497.mlab.com:47497
-15:38:27.378 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
+15:41:25.754 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
+15:41:25.780 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
 Document{{_id=1, facebook_id=19650, email=email@email.com, firstname=Jan, lastname=Peeters, location=Oiljst, age=18}}
 </system-out>
   </testcase>

@@ -1,5 +1,4 @@
 language: java
-before_script: cd Server
 script: mvn package
 notifications:
   slack: scrummojito:MjnMALRNtGdBC9JhXUTx4D1o
