@@ -24,7 +24,8 @@ public class Data {
     public void addUser(User u) {
     Bson filter = new Document("facebook_id", u.getFacebook_id());
     Document found = db.getCollection("users").find(filter).first();
-    if (found.getInteger("facebook_id") == null) {
+    System.out.println(found);
+    if (found == null) {
     	MongoCollection<Document> coll = db.getCollection("users");
     	u.setId((int) (coll.count() + 1));
     	Document d = new Document("_id", u.getId())
