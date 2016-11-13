@@ -1,4 +1,4 @@
 language: java
-script: mvn package
+script: mvn test
 notifications:
   slack: scrummojito:MjnMALRNtGdBC9JhXUTx4D1o

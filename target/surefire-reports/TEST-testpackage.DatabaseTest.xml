@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="1" name="testpackage.DatabaseTest" time="1.313" errors="2" skipped="0">
+<testsuite tests="4" failures="0" name="testpackage.DatabaseTest" time="1.363" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_112\jre\bin"/>
@@ -21,7 +21,7 @@
     <property name="basedir" value="C:\Users\Arne\Documents\Odisee\ScrumMojito"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_112\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter3821438224013477809.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter831487093718865680.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\Arne\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -45,7 +45,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_112\jre"/>
-    <property name="sun.java.command" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter3821438224013477809.jar C:\Users\Arne\AppData\Local\Temp\surefire1124018440696300535tmp C:\Users\Arne\AppData\Local\Temp\surefire5901082958028602040tmp"/>
+    <property name="sun.java.command" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter831487093718865680.jar C:\Users\Arne\AppData\Local\Temp\surefire4922739971358658174tmp C:\Users\Arne\AppData\Local\Temp\surefire421864619723640831tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="user.language.format" value="nl"/>
@@ -63,139 +63,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="testpackage.DatabaseTest" name="test1AddUsers" time="0.172"/>
-  <testcase classname="testpackage.DatabaseTest" name="test2DuplicateUsers" time="0.109">
-    <failure message="expected:&lt;2&gt; but was:&lt;3&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;3&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:743)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:555)
-	at org.junit.Assert.assertEquals(Assert.java:542)
-	at testpackage.DatabaseTest.test2DuplicateUsers(DatabaseTest.java:42)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
-	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
-	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
-</failure>
-    <system-out>15:41:25.558 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-15:41:25.584 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
-15:41:25.584 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {count : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-15:41:25.610 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
-15:41:25.611 [main] DEBUG org.mongodb.driver.protocol.insert - Inserting 1 documents into namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-15:41:25.638 [main] DEBUG org.mongodb.driver.protocol.insert - Insert completed
-15:41:25.638 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-15:41:25.665 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
-</system-out>
-  </testcase>
-  <testcase classname="testpackage.DatabaseTest" name="test3UpdateUsers" time="0.032">
-    <error message="After applying the update to the document {_id: 1 , ...}, the (immutable) field &apos;_id&apos; was found to have been altered to _id: 3" type="com.mongodb.MongoWriteException">com.mongodb.MongoWriteException: After applying the update to the document {_id: 1 , ...}, the (immutable) field &apos;_id&apos; was found to have been altered to _id: 3
-	at com.mongodb.MongoCollectionImpl.executeSingleWriteRequest(MongoCollectionImpl.java:523)
-	at com.mongodb.MongoCollectionImpl.update(MongoCollectionImpl.java:508)
-	at com.mongodb.MongoCollectionImpl.updateOne(MongoCollectionImpl.java:355)
-	at com.mongodb.MongoCollectionImpl.updateOne(MongoCollectionImpl.java:350)
-	at Entities.Data.updateUser(Data.java:89)
-	at testpackage.DatabaseTest.test3UpdateUsers(DatabaseTest.java:49)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
-	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
-	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
-</error>
-    <system-out>15:41:25.669 [main] DEBUG org.mongodb.driver.protocol.update - Updating documents in namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-</system-out>
-  </testcase>
-  <testcase classname="testpackage.DatabaseTest" name="test4DeleteUsers" time="0.082">
-    <error message="Unexpected exception, expected&lt;java.lang.NullPointerException&gt; but was&lt;java.lang.AssertionError&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.NullPointerException&gt; but was&lt;java.lang.AssertionError&gt;
-	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
-	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
-	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
-Caused by: java.lang.AssertionError: email@email.com
-	at org.junit.Assert.fail(Assert.java:88)
-	at testpackage.DatabaseTest.test4DeleteUsers(DatabaseTest.java:61)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
-	... 20 more
-</error>
-    <system-out>15:41:25.700 [main] DEBUG org.mongodb.driver.protocol.delete - Deleting documents from namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-15:41:25.726 [main] DEBUG org.mongodb.driver.protocol.delete - Delete completed
-15:41:25.727 [main] DEBUG org.mongodb.driver.protocol.delete - Deleting documents from namespace mojito.users on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-15:41:25.754 [main] DEBUG org.mongodb.driver.protocol.delete - Delete completed
-19650
-15:41:25.754 [main] DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value=&apos;users&apos;}} to database mojito on connection [connectionId{localValue:2, serverValue:37793}] to server ds147497.mlab.com:47497
-15:41:25.780 [main] DEBUG org.mongodb.driver.protocol.command - Command execution completed
-Document{{_id=1, facebook_id=19650, email=email@email.com, firstname=Jan, lastname=Peeters, location=Oiljst, age=18}}
-</system-out>
-  </testcase>
+  <testcase classname="testpackage.DatabaseTest" name="test1AddUsers" time="0.226"/>
+  <testcase classname="testpackage.DatabaseTest" name="test2DuplicateUsers" time="0.081"/>
+  <testcase classname="testpackage.DatabaseTest" name="test3UpdateUsers" time="0.111"/>
+  <testcase classname="testpackage.DatabaseTest" name="test4DeleteUsers" time="0.081"/>
 </testsuite>
