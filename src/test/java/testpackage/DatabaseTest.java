@@ -20,6 +20,7 @@ public class DatabaseTest {
 	@BeforeClass
 	public static void setUp() {
 		dataLayer = new Data();
+		dataLayer.deleteAllUsers();
 		u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18);
 		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21);
 	}
@@ -34,7 +35,15 @@ public class DatabaseTest {
 	}
 	
 	@Test
-	public void test2UpdateUsers() {
+	public void test2DuplicateUsers() {
+		int before = dataLayer.getCollectionDocuments("users").size();
+		dataLayer.addUser(u1);
+		int after = dataLayer.getCollectionDocuments("users").size();
+		assertEquals(before, after);
+	}
+	
+	@Test
+	public void test3UpdateUsers() {
 		u1.setFirstname("nieuwenaam");
 		u2.setEmail("nieuweemail@email.com");
 		dataLayer.updateUser(u1);
@@ -45,7 +54,7 @@ public class DatabaseTest {
 	}
 	
 	@Test(expected=NullPointerException.class)
-	public void test3DeleteUsers() {
+	public void test4DeleteUsers() {
 		dataLayer.deleteUser(u1);
 		dataLayer.deleteUser(u2);
 		User return1 = dataLayer.getUser(u1.getFacebook_id());
