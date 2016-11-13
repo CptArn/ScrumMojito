@@ -6,6 +6,7 @@ import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -76,7 +77,7 @@ public class Data {
     
     public void updateUser(User u) {
 	MongoCollection<Document> coll = db.getCollection("users");
-	Bson filter = new Document("_id", u.getId());
+	Bson filter = new Document("facebook_id", u.getFacebook_id());
 	Bson newValue = new Document("_id", u.getId())
 		.append("facebook_id", u.getFacebook_id())
 		.append("email", u.getEmail())
@@ -92,6 +93,18 @@ public class Data {
 	MongoCollection<Document> coll = db.getCollection("users");
 	Bson filter = new Document("_id", u.getId());
 	coll.deleteOne(filter);
+    }
+    
+    public User getUser(int id) {
+    	System.out.println(id);
+    	Bson filter = new Document("facebook_id", id);
+    	Document doc = db.getCollection("users").find(filter).first();
+    	System.out.println(doc);
+    	return new User(doc);
+    }
+    
+    public void deleteAllUsers() {
+    	db.getCollection("users").deleteMany(new BasicDBObject());
     }
     
     
