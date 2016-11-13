@@ -22,16 +22,20 @@ public class Data {
     }
     
     public void addUser(User u) {
-	MongoCollection<Document> coll = db.getCollection("users");
-	u.setId((int) (coll.count() + 1));
-	Document d = new Document("_id", u.getId())
-		.append("facebook_id", u.getFacebook_id())
-		.append("email", u.getEmail())
-                .append("firstname", u.getFirstname())
-                .append("lastname", u.getLastname())
-                .append("location", u.getLocation())
-                .append("age", u.getAge());
-	coll.insertOne(d);
+    Bson filter = new Document("facebook_id", u.getFacebook_id());
+    Document found = db.getCollection("users").find(filter).first();
+    if (found.getInteger("facebook_id") == null) {
+    	MongoCollection<Document> coll = db.getCollection("users");
+    	u.setId((int) (coll.count() + 1));
+    	Document d = new Document("_id", u.getId())
+    		.append("facebook_id", u.getFacebook_id())
+    		.append("email", u.getEmail())
+                    .append("firstname", u.getFirstname())
+                    .append("lastname", u.getLastname())
+                    .append("location", u.getLocation())
+                    .append("age", u.getAge());
+    	coll.insertOne(d);
+    }
     }
     
     public void addMessage(Message m) {
