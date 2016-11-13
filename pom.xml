@@ -39,6 +39,14 @@
 	      <version>4.11</version>
 	      <scope>main</scope>
         </dependency>
+        <dependency>
+        	<groupId>org.springframework.social</groupId>
+        	<artifactId>spring-social-facebook</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.social</groupId>
+        	<artifactId>spring-social-core</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>
