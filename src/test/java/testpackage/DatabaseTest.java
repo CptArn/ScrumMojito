@@ -20,7 +20,7 @@ public class DatabaseTest {
 	@BeforeClass
 	public static void setUp() {
 		dataLayer = new Data();
-		dataLayer.deleteAllUsers();
+		// dataLayer.deleteAllUsers();
 		u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18);
 		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21);
 	}
