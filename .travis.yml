@@ -1,4 +1,6 @@
 language: java
 script: mvn clean verify
+jdk:
+  - oraclejdk8
 notifications:
   slack: scrummojito:MjnMALRNtGdBC9JhXUTx4D1o
