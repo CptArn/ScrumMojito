@@ -8,29 +8,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequestMapping("/login")
 @Controller
-@RequestMapping("/")
-public class facebook_loginController {
+public class FacebookController {
 
-    private Facebook facebook;
+	
+	private Facebook facebook;
     private ConnectionRepository connectionRepository;
 
-    public facebook_loginController(Facebook facebook, ConnectionRepository connectionRepository) {
+    public FacebookController(Facebook facebook, ConnectionRepository connectionRepository) {
         this.facebook = facebook;
         this.connectionRepository = connectionRepository;
     }
 
-    @GetMapping
-    public String helloFacebook(Model model) {
-        if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
-            return "redirect:/connect/facebook";
-        }
-
-        model.addAttribute("facebookProfile", facebook.userOperations().getUserProfile());
-        PagedList<Post> feed = facebook.feedOperations().getFeed();
-        model.addAttribute("feed", feed);
-        return "hello";
+    @RequestMapping("/facebook_oauth")
+    @ResponseBody
+    public String helloFacebook(@RequestParam(value="code") String code) {
+        return "oAUTH code: " + code;
     }
-
+	
 }
