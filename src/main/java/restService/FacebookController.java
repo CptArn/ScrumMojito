@@ -11,13 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class FacebookController{
 	
-	@RequestMapping("/fb")
-    @ResponseBody
-    public String fb(@RequestParam(value="code") String code) {
-		return SpringSocial.getInstance().getID("facebook", code);
-    	//return facebook.userOperations().getUserProfile();
-    	//return "oAUTH code: " + request.getParameter("code");
-		// https://www.facebook.com/dialog/oauth?client_id=1794346987494326&redirect_uri=http://localhost:8080/login/fb
-    }
+
 	
 }
