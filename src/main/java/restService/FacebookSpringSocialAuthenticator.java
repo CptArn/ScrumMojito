@@ -32,7 +32,7 @@ public class FacebookSpringSocialAuthenticator {
   private FacebookConnectionFactory facebookConnectionFactory;
  
   public FacebookSpringSocialAuthenticator() {
-    this.applicationHost = "http://localhost:8080";
+    this.applicationHost = "https://studyfindr.herokuapp.com";
     facebookConnectionFactory =
       new FacebookConnectionFactory("1794346987494326", "70d05b6625be77ee4db63a8d529e7746");
   }
