@@ -3,9 +3,9 @@ package Entities;
 import org.bson.Document;
 
 public class User {
-    public User(int facebook_id, String email, String firstname, String lastname, String location, int age) {
+    public User(int id, String email, String firstname, String lastname, String location, int age) {
 	super();
-	this.facebook_id = facebook_id;
+	this.id = id;
 	this.email = email;
 	this.firstname = firstname;
 	this.lastname = lastname;
@@ -14,8 +14,7 @@ public class User {
     }
     
     public User(Document doc) {
-    	this.id = doc.getInteger("_id");
-    	this.facebook_id = doc.getInteger("facebook_id");
+    	this.id = doc.getInteger("id");
     	this.email = doc.getString("email");
     	this.firstname = doc.getString("firstname");
     	this.lastname = doc.getString("lastname");
@@ -25,32 +24,23 @@ public class User {
 
     @Override
     public String toString() {
-	return "User [id=" + id + ", facebook_id=" + facebook_id + ", email=" + email + ", firstname=" + firstname
+	return "User [id=" + id + ", email=" + email + ", firstname=" + firstname
 		+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + "]";
     }
 
     private int id;
-    private int facebook_id;
     private String email;
     private String firstname;
     private String lastname;
     private String location;
     private int age;
 
-    public int getId() {
+    public int getid() {
 	return id;
     }
 
-    public void setId(int id) {
+    public void setid(int id) {
 	this.id = id;
-    }
-
-    public int getFacebook_id() {
-	return facebook_id;
-    }
-
-    public void setFacebook_id(int facebook_id) {
-	this.facebook_id = facebook_id;
     }
 
     public String getEmail() {
@@ -109,14 +99,12 @@ public class User {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (facebook_id != other.facebook_id)
+		if (id != other.id)
 			return false;
 		if (firstname == null) {
 			if (other.firstname != null)
 				return false;
 		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (id != other.id)
 			return false;
 		if (lastname == null) {
 			if (other.lastname != null)

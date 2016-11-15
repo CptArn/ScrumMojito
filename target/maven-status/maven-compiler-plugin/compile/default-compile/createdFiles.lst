@@ -1,9 +1,9 @@
 Entities\Photo.class
+Entities\User.class
+Entities\School.class
+restService\Application.class
 Entities\Match.class
 restService\Greeting.class
 restService\GreetingController.class
 Entities\Message.class
 Entities\Data.class
-Entities\User.class
-Entities\School.class
-restService\Application.class

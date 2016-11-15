@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="testpackage.DatabaseTest" time="1.652" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="testpackage.DatabaseTest" time="120.519" errors="4" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_112\jre\bin"/>
     <property name="java.vm.version" value="25.112-b15"/>
-    <property name="user.country.format" value="BE"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
@@ -15,47 +14,46 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\Arne\Documents\Odisee\ScrumMojito"/>
+    <property name="user.dir" value="C:\Users\arnev\Documents\Odisee\ScrumMojito"/>
     <property name="java.runtime.version" value="1.8.0_112-b15"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="basedir" value="C:\Users\Arne\Documents\Odisee\ScrumMojito"/>
+    <property name="basedir" value="C:\Users\arnev\Documents\Odisee\ScrumMojito"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_112\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter1304368090562748726.jar"/>
-    <property name="java.io.tmpdir" value="C:\Users\Arne\AppData\Local\Temp\"/>
+    <property name="surefire.real.class.path" value="C:\Users\arnev\AppData\Local\Temp\surefirebooter1271260625297484809.jar"/>
+    <property name="java.io.tmpdir" value="C:\Users\arnev\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_112\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\FileBot\;C:\Users\Arne\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Calibre2\;C:\Program Files (x86)\Skype\Phone\;C:\wamp\bin\php\php5.5.12;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;C:\Users\Arne\AppData\Local\Programs\Python\Python35-32\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\NetBeans 8.2\java\maven\bin;C:\Users\Arne\AppData\Local\atom\bin;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Arne\AppData\Roaming\npm;C:\Users\Arne\AppData\Local\Microsoft\WindowsApps;."/>
-    <property name="surefire.test.class.path" value="C:\Users\Arne\Documents\Odisee\ScrumMojito\target\test-classes;C:\Users\Arne\Documents\Odisee\ScrumMojito\target\classes;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-web\1.4.2.RELEASE\spring-boot-starter-web-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter\1.4.2.RELEASE\spring-boot-starter-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot\1.4.2.RELEASE\spring-boot-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\1.4.2.RELEASE\spring-boot-autoconfigure-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-logging\1.4.2.RELEASE\spring-boot-starter-logging-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\ch\qos\logback\logback-classic\1.1.7\logback-classic-1.1.7.jar;C:\Users\Arne\.m2\repository\ch\qos\logback\logback-core\1.1.7\logback-core-1.1.7.jar;C:\Users\Arne\.m2\repository\org\slf4j\jul-to-slf4j\1.7.21\jul-to-slf4j-1.7.21.jar;C:\Users\Arne\.m2\repository\org\slf4j\log4j-over-slf4j\1.7.21\log4j-over-slf4j-1.7.21.jar;C:\Users\Arne\.m2\repository\org\yaml\snakeyaml\1.17\snakeyaml-1.17.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\1.4.2.RELEASE\spring-boot-starter-tomcat-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\8.5.6\tomcat-embed-core-8.5.6.jar;C:\Users\Arne\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\8.5.6\tomcat-embed-el-8.5.6.jar;C:\Users\Arne\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\8.5.6\tomcat-embed-websocket-8.5.6.jar;C:\Users\Arne\.m2\repository\org\hibernate\hibernate-validator\5.2.4.Final\hibernate-validator-5.2.4.Final.jar;C:\Users\Arne\.m2\repository\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;C:\Users\Arne\.m2\repository\org\jboss\logging\jboss-logging\3.3.0.Final\jboss-logging-3.3.0.Final.jar;C:\Users\Arne\.m2\repository\com\fasterxml\classmate\1.3.3\classmate-1.3.3.jar;C:\Users\Arne\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.8.4\jackson-databind-2.8.4.jar;C:\Users\Arne\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.8.4\jackson-annotations-2.8.4.jar;C:\Users\Arne\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.8.4\jackson-core-2.8.4.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-web\4.3.4.RELEASE\spring-web-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-aop\4.3.4.RELEASE\spring-aop-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-webmvc\4.3.4.RELEASE\spring-webmvc-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-test\1.4.2.RELEASE\spring-boot-starter-test-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-test\1.4.2.RELEASE\spring-boot-test-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\1.4.2.RELEASE\spring-boot-test-autoconfigure-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\assertj\assertj-core\2.5.0\assertj-core-2.5.0.jar;C:\Users\Arne\.m2\repository\org\mockito\mockito-core\1.10.19\mockito-core-1.10.19.jar;C:\Users\Arne\.m2\repository\org\objenesis\objenesis\2.1\objenesis-2.1.jar;C:\Users\Arne\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Arne\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\Arne\.m2\repository\org\skyscreamer\jsonassert\1.3.0\jsonassert-1.3.0.jar;C:\Users\Arne\.m2\repository\org\json\json\20140107\json-20140107.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-core\4.3.4.RELEASE\spring-core-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-test\4.3.4.RELEASE\spring-test-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\com\jayway\jsonpath\json-path\2.2.0\json-path-2.2.0.jar;C:\Users\Arne\.m2\repository\net\minidev\json-smart\2.2.1\json-smart-2.2.1.jar;C:\Users\Arne\.m2\repository\net\minidev\accessors-smart\1.1\accessors-smart-1.1.jar;C:\Users\Arne\.m2\repository\org\ow2\asm\asm\5.0.3\asm-5.0.3.jar;C:\Users\Arne\.m2\repository\org\slf4j\slf4j-api\1.7.21\slf4j-api-1.7.21.jar;C:\Users\Arne\.m2\repository\org\springframework\data\spring-data-mongodb\1.9.5.RELEASE\spring-data-mongodb-1.9.5.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-tx\4.3.4.RELEASE\spring-tx-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-context\4.3.4.RELEASE\spring-context-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-beans\4.3.4.RELEASE\spring-beans-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-expression\4.3.4.RELEASE\spring-expression-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\data\spring-data-commons\1.12.5.RELEASE\spring-data-commons-1.12.5.RELEASE.jar;C:\Users\Arne\.m2\repository\org\mongodb\mongo-java-driver\3.2.2\mongo-java-driver-3.2.2.jar;C:\Users\Arne\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.21\jcl-over-slf4j-1.7.21.jar;C:\Users\Arne\.m2\repository\junit\junit\4.11\junit-4.11.jar;"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_112\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_112/bin/server;C:/Program Files/Java/jre1.8.0_112/bin;C:/Program Files/Java/jre1.8.0_112/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Dell\DW WLAN Card;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;c:\Program Files\WIDCOMM\Bluetooth Software\;c:\Program Files\WIDCOMM\Bluetooth Software\syswow64;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp\bin\php\php5.5.12;C:\ProgramData\ComposerSetup\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\;C:\Users\arnev\AppData\Local\atom\bin;C:\Users\arnev\AppData\Local\Programs\Git\cmd;c:\wamp\;C:\wamp\bin\php\php5.5.12;C:\Users\arnev\AppData\Roaming\npm;C:\Program Files (x86)\Nmap;C:\Users\arnev\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\sts-3.8.2.RELEASE;;."/>
+    <property name="surefire.test.class.path" value="C:\Users\arnev\Documents\Odisee\ScrumMojito\target\test-classes;C:\Users\arnev\Documents\Odisee\ScrumMojito\target\classes;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-web\1.4.2.RELEASE\spring-boot-starter-web-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter\1.4.2.RELEASE\spring-boot-starter-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot\1.4.2.RELEASE\spring-boot-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\1.4.2.RELEASE\spring-boot-autoconfigure-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-logging\1.4.2.RELEASE\spring-boot-starter-logging-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\ch\qos\logback\logback-classic\1.1.7\logback-classic-1.1.7.jar;C:\Users\arnev\.m2\repository\ch\qos\logback\logback-core\1.1.7\logback-core-1.1.7.jar;C:\Users\arnev\.m2\repository\org\slf4j\jul-to-slf4j\1.7.21\jul-to-slf4j-1.7.21.jar;C:\Users\arnev\.m2\repository\org\slf4j\log4j-over-slf4j\1.7.21\log4j-over-slf4j-1.7.21.jar;C:\Users\arnev\.m2\repository\org\yaml\snakeyaml\1.17\snakeyaml-1.17.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\1.4.2.RELEASE\spring-boot-starter-tomcat-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\8.5.6\tomcat-embed-core-8.5.6.jar;C:\Users\arnev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\8.5.6\tomcat-embed-el-8.5.6.jar;C:\Users\arnev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\8.5.6\tomcat-embed-websocket-8.5.6.jar;C:\Users\arnev\.m2\repository\org\hibernate\hibernate-validator\5.2.4.Final\hibernate-validator-5.2.4.Final.jar;C:\Users\arnev\.m2\repository\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;C:\Users\arnev\.m2\repository\org\jboss\logging\jboss-logging\3.3.0.Final\jboss-logging-3.3.0.Final.jar;C:\Users\arnev\.m2\repository\com\fasterxml\classmate\1.3.3\classmate-1.3.3.jar;C:\Users\arnev\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.8.4\jackson-databind-2.8.4.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-web\4.3.4.RELEASE\spring-web-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-aop\4.3.4.RELEASE\spring-aop-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-webmvc\4.3.4.RELEASE\spring-webmvc-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-test\1.4.2.RELEASE\spring-boot-starter-test-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-test\1.4.2.RELEASE\spring-boot-test-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\1.4.2.RELEASE\spring-boot-test-autoconfigure-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\assertj\assertj-core\2.5.0\assertj-core-2.5.0.jar;C:\Users\arnev\.m2\repository\org\mockito\mockito-core\1.10.19\mockito-core-1.10.19.jar;C:\Users\arnev\.m2\repository\org\objenesis\objenesis\2.1\objenesis-2.1.jar;C:\Users\arnev\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\arnev\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\arnev\.m2\repository\org\skyscreamer\jsonassert\1.3.0\jsonassert-1.3.0.jar;C:\Users\arnev\.m2\repository\org\json\json\20140107\json-20140107.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-core\4.3.4.RELEASE\spring-core-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-test\4.3.4.RELEASE\spring-test-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\com\jayway\jsonpath\json-path\2.2.0\json-path-2.2.0.jar;C:\Users\arnev\.m2\repository\net\minidev\json-smart\2.2.1\json-smart-2.2.1.jar;C:\Users\arnev\.m2\repository\net\minidev\accessors-smart\1.1\accessors-smart-1.1.jar;C:\Users\arnev\.m2\repository\org\ow2\asm\asm\5.0.3\asm-5.0.3.jar;C:\Users\arnev\.m2\repository\org\slf4j\slf4j-api\1.7.21\slf4j-api-1.7.21.jar;C:\Users\arnev\.m2\repository\org\springframework\data\spring-data-mongodb\1.9.5.RELEASE\spring-data-mongodb-1.9.5.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-tx\4.3.4.RELEASE\spring-tx-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-context\4.3.4.RELEASE\spring-context-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-beans\4.3.4.RELEASE\spring-beans-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-expression\4.3.4.RELEASE\spring-expression-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\data\spring-data-commons\1.12.5.RELEASE\spring-data-commons-1.12.5.RELEASE.jar;C:\Users\arnev\.m2\repository\org\mongodb\mongo-java-driver\3.2.2\mongo-java-driver-3.2.2.jar;C:\Users\arnev\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.21\jcl-over-slf4j-1.7.21.jar;C:\Users\arnev\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-facebook\2.0.3.RELEASE\spring-social-facebook-2.0.3.RELEASE.jar;C:\Users\arnev\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.8.4\jackson-core-2.8.4.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-config\1.1.4.RELEASE\spring-social-config-1.1.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-web\1.1.4.RELEASE\spring-social-web-1.1.4.RELEASE.jar;C:\Users\arnev\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar;C:\Users\arnev\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.8.4\jackson-annotations-2.8.4.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-core\1.1.4.RELEASE\spring-social-core-1.1.4.RELEASE.jar;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.0"/>
-    <property name="user.home" value="C:\Users\Arne"/>
+    <property name="user.home" value="C:\Users\arnev"/>
     <property name="user.timezone" value="Europe/Paris"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="Cp1252"/>
-    <property name="user.name" value="Arne"/>
-    <property name="java.class.path" value="C:\Users\Arne\Documents\Odisee\ScrumMojito\target\test-classes;C:\Users\Arne\Documents\Odisee\ScrumMojito\target\classes;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-web\1.4.2.RELEASE\spring-boot-starter-web-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter\1.4.2.RELEASE\spring-boot-starter-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot\1.4.2.RELEASE\spring-boot-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\1.4.2.RELEASE\spring-boot-autoconfigure-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-logging\1.4.2.RELEASE\spring-boot-starter-logging-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\ch\qos\logback\logback-classic\1.1.7\logback-classic-1.1.7.jar;C:\Users\Arne\.m2\repository\ch\qos\logback\logback-core\1.1.7\logback-core-1.1.7.jar;C:\Users\Arne\.m2\repository\org\slf4j\jul-to-slf4j\1.7.21\jul-to-slf4j-1.7.21.jar;C:\Users\Arne\.m2\repository\org\slf4j\log4j-over-slf4j\1.7.21\log4j-over-slf4j-1.7.21.jar;C:\Users\Arne\.m2\repository\org\yaml\snakeyaml\1.17\snakeyaml-1.17.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\1.4.2.RELEASE\spring-boot-starter-tomcat-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\8.5.6\tomcat-embed-core-8.5.6.jar;C:\Users\Arne\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\8.5.6\tomcat-embed-el-8.5.6.jar;C:\Users\Arne\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\8.5.6\tomcat-embed-websocket-8.5.6.jar;C:\Users\Arne\.m2\repository\org\hibernate\hibernate-validator\5.2.4.Final\hibernate-validator-5.2.4.Final.jar;C:\Users\Arne\.m2\repository\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;C:\Users\Arne\.m2\repository\org\jboss\logging\jboss-logging\3.3.0.Final\jboss-logging-3.3.0.Final.jar;C:\Users\Arne\.m2\repository\com\fasterxml\classmate\1.3.3\classmate-1.3.3.jar;C:\Users\Arne\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.8.4\jackson-databind-2.8.4.jar;C:\Users\Arne\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.8.4\jackson-annotations-2.8.4.jar;C:\Users\Arne\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.8.4\jackson-core-2.8.4.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-web\4.3.4.RELEASE\spring-web-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-aop\4.3.4.RELEASE\spring-aop-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-webmvc\4.3.4.RELEASE\spring-webmvc-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-starter-test\1.4.2.RELEASE\spring-boot-starter-test-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-test\1.4.2.RELEASE\spring-boot-test-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\1.4.2.RELEASE\spring-boot-test-autoconfigure-1.4.2.RELEASE.jar;C:\Users\Arne\.m2\repository\org\assertj\assertj-core\2.5.0\assertj-core-2.5.0.jar;C:\Users\Arne\.m2\repository\org\mockito\mockito-core\1.10.19\mockito-core-1.10.19.jar;C:\Users\Arne\.m2\repository\org\objenesis\objenesis\2.1\objenesis-2.1.jar;C:\Users\Arne\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Arne\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\Arne\.m2\repository\org\skyscreamer\jsonassert\1.3.0\jsonassert-1.3.0.jar;C:\Users\Arne\.m2\repository\org\json\json\20140107\json-20140107.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-core\4.3.4.RELEASE\spring-core-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-test\4.3.4.RELEASE\spring-test-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\com\jayway\jsonpath\json-path\2.2.0\json-path-2.2.0.jar;C:\Users\Arne\.m2\repository\net\minidev\json-smart\2.2.1\json-smart-2.2.1.jar;C:\Users\Arne\.m2\repository\net\minidev\accessors-smart\1.1\accessors-smart-1.1.jar;C:\Users\Arne\.m2\repository\org\ow2\asm\asm\5.0.3\asm-5.0.3.jar;C:\Users\Arne\.m2\repository\org\slf4j\slf4j-api\1.7.21\slf4j-api-1.7.21.jar;C:\Users\Arne\.m2\repository\org\springframework\data\spring-data-mongodb\1.9.5.RELEASE\spring-data-mongodb-1.9.5.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-tx\4.3.4.RELEASE\spring-tx-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-context\4.3.4.RELEASE\spring-context-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-beans\4.3.4.RELEASE\spring-beans-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\spring-expression\4.3.4.RELEASE\spring-expression-4.3.4.RELEASE.jar;C:\Users\Arne\.m2\repository\org\springframework\data\spring-data-commons\1.12.5.RELEASE\spring-data-commons-1.12.5.RELEASE.jar;C:\Users\Arne\.m2\repository\org\mongodb\mongo-java-driver\3.2.2\mongo-java-driver-3.2.2.jar;C:\Users\Arne\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.21\jcl-over-slf4j-1.7.21.jar;C:\Users\Arne\.m2\repository\junit\junit\4.11\junit-4.11.jar;"/>
+    <property name="user.name" value="arnev"/>
+    <property name="java.class.path" value="C:\Users\arnev\Documents\Odisee\ScrumMojito\target\test-classes;C:\Users\arnev\Documents\Odisee\ScrumMojito\target\classes;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-web\1.4.2.RELEASE\spring-boot-starter-web-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter\1.4.2.RELEASE\spring-boot-starter-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot\1.4.2.RELEASE\spring-boot-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\1.4.2.RELEASE\spring-boot-autoconfigure-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-logging\1.4.2.RELEASE\spring-boot-starter-logging-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\ch\qos\logback\logback-classic\1.1.7\logback-classic-1.1.7.jar;C:\Users\arnev\.m2\repository\ch\qos\logback\logback-core\1.1.7\logback-core-1.1.7.jar;C:\Users\arnev\.m2\repository\org\slf4j\jul-to-slf4j\1.7.21\jul-to-slf4j-1.7.21.jar;C:\Users\arnev\.m2\repository\org\slf4j\log4j-over-slf4j\1.7.21\log4j-over-slf4j-1.7.21.jar;C:\Users\arnev\.m2\repository\org\yaml\snakeyaml\1.17\snakeyaml-1.17.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\1.4.2.RELEASE\spring-boot-starter-tomcat-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\8.5.6\tomcat-embed-core-8.5.6.jar;C:\Users\arnev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\8.5.6\tomcat-embed-el-8.5.6.jar;C:\Users\arnev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\8.5.6\tomcat-embed-websocket-8.5.6.jar;C:\Users\arnev\.m2\repository\org\hibernate\hibernate-validator\5.2.4.Final\hibernate-validator-5.2.4.Final.jar;C:\Users\arnev\.m2\repository\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;C:\Users\arnev\.m2\repository\org\jboss\logging\jboss-logging\3.3.0.Final\jboss-logging-3.3.0.Final.jar;C:\Users\arnev\.m2\repository\com\fasterxml\classmate\1.3.3\classmate-1.3.3.jar;C:\Users\arnev\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.8.4\jackson-databind-2.8.4.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-web\4.3.4.RELEASE\spring-web-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-aop\4.3.4.RELEASE\spring-aop-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-webmvc\4.3.4.RELEASE\spring-webmvc-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-starter-test\1.4.2.RELEASE\spring-boot-starter-test-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-test\1.4.2.RELEASE\spring-boot-test-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\1.4.2.RELEASE\spring-boot-test-autoconfigure-1.4.2.RELEASE.jar;C:\Users\arnev\.m2\repository\org\assertj\assertj-core\2.5.0\assertj-core-2.5.0.jar;C:\Users\arnev\.m2\repository\org\mockito\mockito-core\1.10.19\mockito-core-1.10.19.jar;C:\Users\arnev\.m2\repository\org\objenesis\objenesis\2.1\objenesis-2.1.jar;C:\Users\arnev\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\arnev\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\arnev\.m2\repository\org\skyscreamer\jsonassert\1.3.0\jsonassert-1.3.0.jar;C:\Users\arnev\.m2\repository\org\json\json\20140107\json-20140107.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-core\4.3.4.RELEASE\spring-core-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-test\4.3.4.RELEASE\spring-test-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\com\jayway\jsonpath\json-path\2.2.0\json-path-2.2.0.jar;C:\Users\arnev\.m2\repository\net\minidev\json-smart\2.2.1\json-smart-2.2.1.jar;C:\Users\arnev\.m2\repository\net\minidev\accessors-smart\1.1\accessors-smart-1.1.jar;C:\Users\arnev\.m2\repository\org\ow2\asm\asm\5.0.3\asm-5.0.3.jar;C:\Users\arnev\.m2\repository\org\slf4j\slf4j-api\1.7.21\slf4j-api-1.7.21.jar;C:\Users\arnev\.m2\repository\org\springframework\data\spring-data-mongodb\1.9.5.RELEASE\spring-data-mongodb-1.9.5.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-tx\4.3.4.RELEASE\spring-tx-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-context\4.3.4.RELEASE\spring-context-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-beans\4.3.4.RELEASE\spring-beans-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\spring-expression\4.3.4.RELEASE\spring-expression-4.3.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\data\spring-data-commons\1.12.5.RELEASE\spring-data-commons-1.12.5.RELEASE.jar;C:\Users\arnev\.m2\repository\org\mongodb\mongo-java-driver\3.2.2\mongo-java-driver-3.2.2.jar;C:\Users\arnev\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.21\jcl-over-slf4j-1.7.21.jar;C:\Users\arnev\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-facebook\2.0.3.RELEASE\spring-social-facebook-2.0.3.RELEASE.jar;C:\Users\arnev\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.8.4\jackson-core-2.8.4.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-config\1.1.4.RELEASE\spring-social-config-1.1.4.RELEASE.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-web\1.1.4.RELEASE\spring-social-web-1.1.4.RELEASE.jar;C:\Users\arnev\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar;C:\Users\arnev\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.8.4\jackson-annotations-2.8.4.jar;C:\Users\arnev\.m2\repository\org\springframework\social\spring-social-core\1.1.4.RELEASE\spring-social-core-1.1.4.RELEASE.jar;"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_112\jre"/>
-    <property name="sun.java.command" value="C:\Users\Arne\AppData\Local\Temp\surefirebooter1304368090562748726.jar C:\Users\Arne\AppData\Local\Temp\surefire1733519860369053969tmp C:\Users\Arne\AppData\Local\Temp\surefire2805720797680515090tmp"/>
+    <property name="sun.java.command" value="C:\Users\arnev\AppData\Local\Temp\surefirebooter1271260625297484809.jar C:\Users\arnev\AppData\Local\Temp\surefire1624551874598591731tmp C:\Users\arnev\AppData\Local\Temp\surefire6946873233357249930tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
-    <property name="user.language.format" value="nl"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.8.0_112"/>
     <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_112\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_112\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_112\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_112\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_112\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_112\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_112\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_112\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_112\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="localRepository" value="C:\Users\Arne\.m2\repository"/>
+    <property name="localRepository" value="C:\Users\arnev\.m2\repository"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -63,8 +61,303 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="testpackage.DatabaseTest" name="test1AddUsers" time="0.202"/>
-  <testcase classname="testpackage.DatabaseTest" name="test2DuplicateUsers" time="0.071"/>
-  <testcase classname="testpackage.DatabaseTest" name="test3UpdateUsers" time="0.095"/>
-  <testcase classname="testpackage.DatabaseTest" name="test4DeleteUsers" time="0.071"/>
+  <testcase classname="testpackage.DatabaseTest" name="test1AddUsers" time="30.03">
+    <error message="Timed out after 30000 ms while waiting for a server that matches ReadPreferenceServerSelector{readPreference=primary}. Client view of cluster state is {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]" type="com.mongodb.MongoTimeoutException">com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches ReadPreferenceServerSelector{readPreference=primary}. Client view of cluster state is {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+	at com.mongodb.connection.BaseCluster.createTimeoutException(BaseCluster.java:369)
+	at com.mongodb.connection.BaseCluster.selectServer(BaseCluster.java:101)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:75)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:71)
+	at com.mongodb.binding.ClusterBinding.getReadConnectionSource(ClusterBinding.java:63)
+	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:210)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:482)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:79)
+	at com.mongodb.Mongo.execute(Mongo.java:772)
+	at com.mongodb.Mongo$2.execute(Mongo.java:759)
+	at com.mongodb.FindIterableImpl$FindOperationIterable.first(FindIterableImpl.java:207)
+	at com.mongodb.FindIterableImpl.first(FindIterableImpl.java:148)
+	at Entities.Data.addUser(Data.java:26)
+	at testpackage.DatabaseTest.test1AddUsers(DatabaseTest.java:30)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
+</error>
+    <system-out>14:33:13.497 [main] INFO org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+14:33:14.533 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:1}
+14:33:14.536 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] INFO org.mongodb.driver.cluster - Exception in monitor thread while connecting to server ds147497.mlab.com:47497
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:63)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:114)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:128)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:50)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:58)
+	... 3 common frames omitted
+14:33:14.537 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+14:33:16.073 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:2}
+14:33:17.593 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:3}
+14:33:19.112 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:4}
+14:33:20.635 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:5}
+14:33:22.153 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:6}
+14:33:23.670 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:7}
+14:33:25.188 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:8}
+14:33:26.709 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:9}
+14:33:28.228 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:10}
+14:33:29.745 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:11}
+14:33:31.262 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:12}
+14:33:32.778 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:13}
+14:33:34.293 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:14}
+14:33:35.811 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:15}
+14:33:37.340 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:16}
+14:33:38.859 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:17}
+14:33:40.378 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:18}
+14:33:41.894 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:19}
+14:33:43.412 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:20}
+</system-out>
+  </testcase>
+  <testcase classname="testpackage.DatabaseTest" name="test2DuplicateUsers" time="30.003">
+    <error message="Timed out after 30000 ms while waiting for a server that matches ReadPreferenceServerSelector{readPreference=primary}. Client view of cluster state is {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]" type="com.mongodb.MongoTimeoutException">com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches ReadPreferenceServerSelector{readPreference=primary}. Client view of cluster state is {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+	at com.mongodb.connection.BaseCluster.createTimeoutException(BaseCluster.java:369)
+	at com.mongodb.connection.BaseCluster.selectServer(BaseCluster.java:101)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:75)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:71)
+	at com.mongodb.binding.ClusterBinding.getReadConnectionSource(ClusterBinding.java:63)
+	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:210)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:482)
+	at com.mongodb.operation.FindOperation.execute(FindOperation.java:79)
+	at com.mongodb.Mongo.execute(Mongo.java:772)
+	at com.mongodb.Mongo$2.execute(Mongo.java:759)
+	at com.mongodb.OperationIterable.iterator(OperationIterable.java:47)
+	at com.mongodb.OperationIterable.forEach(OperationIterable.java:70)
+	at com.mongodb.OperationIterable.into(OperationIterable.java:82)
+	at com.mongodb.FindIterableImpl.into(FindIterableImpl.java:163)
+	at Entities.Data.getCollectionDocuments(Data.java:77)
+	at testpackage.DatabaseTest.test2DuplicateUsers(DatabaseTest.java:39)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
+</error>
+    <system-out>14:33:43.507 [main] INFO org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]}. Waiting for 30000 ms before timing out
+14:33:44.931 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:21}
+14:33:46.452 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:22}
+14:33:47.970 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:23}
+14:33:49.496 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:24}
+14:33:51.015 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:25}
+14:33:52.543 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:26}
+14:33:54.072 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:27}
+14:33:55.598 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:28}
+14:33:57.117 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:29}
+14:33:58.637 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:30}
+14:34:00.153 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:31}
+14:34:01.667 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:32}
+14:34:03.268 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:33}
+14:34:04.796 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:34}
+14:34:06.324 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:35}
+14:34:07.843 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:36}
+14:34:09.368 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:37}
+14:34:10.892 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:38}
+14:34:12.421 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:39}
+</system-out>
+  </testcase>
+  <testcase classname="testpackage.DatabaseTest" name="test3UpdateUsers" time="30.004">
+    <error message="Timed out after 30000 ms while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]" type="com.mongodb.MongoTimeoutException">com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+	at com.mongodb.connection.BaseCluster.createTimeoutException(BaseCluster.java:369)
+	at com.mongodb.connection.BaseCluster.selectServer(BaseCluster.java:101)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:75)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:71)
+	at com.mongodb.binding.ClusterBinding.getWriteConnectionSource(ClusterBinding.java:68)
+	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:219)
+	at com.mongodb.operation.MixedBulkWriteOperation.execute(MixedBulkWriteOperation.java:168)
+	at com.mongodb.operation.MixedBulkWriteOperation.execute(MixedBulkWriteOperation.java:74)
+	at com.mongodb.Mongo.execute(Mongo.java:781)
+	at com.mongodb.Mongo$2.execute(Mongo.java:764)
+	at com.mongodb.MongoCollectionImpl.executeSingleWriteRequest(MongoCollectionImpl.java:515)
+	at com.mongodb.MongoCollectionImpl.update(MongoCollectionImpl.java:508)
+	at com.mongodb.MongoCollectionImpl.updateOne(MongoCollectionImpl.java:355)
+	at com.mongodb.MongoCollectionImpl.updateOne(MongoCollectionImpl.java:350)
+	at Entities.Data.updateUser(Data.java:93)
+	at testpackage.DatabaseTest.test3UpdateUsers(DatabaseTest.java:49)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
+</error>
+    <system-out>14:34:13.514 [main] INFO org.mongodb.driver.cluster - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]}. Waiting for 30000 ms before timing out
+14:34:13.950 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:40}
+14:34:15.477 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:41}
+14:34:17.005 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:42}
+14:34:18.531 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:43}
+14:34:20.049 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:44}
+14:34:21.567 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:45}
+14:34:23.097 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:46}
+14:34:24.615 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:47}
+14:34:26.137 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:48}
+14:34:27.654 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:49}
+14:34:29.178 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:50}
+14:34:30.696 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:51}
+14:34:32.212 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:52}
+14:34:33.745 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:53}
+14:34:35.266 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:54}
+14:34:36.780 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:55}
+14:34:38.295 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:56}
+14:34:39.820 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:57}
+14:34:41.344 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:58}
+14:34:42.877 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:59}
+</system-out>
+  </testcase>
+  <testcase classname="testpackage.DatabaseTest" name="test4DeleteUsers" time="30.001">
+    <error message="Unexpected exception, expected&lt;java.lang.NullPointerException&gt; but was&lt;com.mongodb.MongoTimeoutException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.NullPointerException&gt; but was&lt;com.mongodb.MongoTimeoutException&gt;
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:28)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
+Caused by: com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+	at com.mongodb.connection.BaseCluster.createTimeoutException(BaseCluster.java:369)
+	at com.mongodb.connection.BaseCluster.selectServer(BaseCluster.java:101)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:75)
+	at com.mongodb.binding.ClusterBinding$ClusterBindingConnectionSource.&lt;init&gt;(ClusterBinding.java:71)
+	at com.mongodb.binding.ClusterBinding.getWriteConnectionSource(ClusterBinding.java:68)
+	at com.mongodb.operation.OperationHelper.withConnection(OperationHelper.java:219)
+	at com.mongodb.operation.MixedBulkWriteOperation.execute(MixedBulkWriteOperation.java:168)
+	at com.mongodb.operation.MixedBulkWriteOperation.execute(MixedBulkWriteOperation.java:74)
+	at com.mongodb.Mongo.execute(Mongo.java:781)
+	at com.mongodb.Mongo$2.execute(Mongo.java:764)
+	at com.mongodb.MongoCollectionImpl.executeSingleWriteRequest(MongoCollectionImpl.java:515)
+	at com.mongodb.MongoCollectionImpl.delete(MongoCollectionImpl.java:499)
+	at com.mongodb.MongoCollectionImpl.deleteOne(MongoCollectionImpl.java:329)
+	at Entities.Data.deleteUser(Data.java:99)
+	at testpackage.DatabaseTest.test4DeleteUsers(DatabaseTest.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
+	... 20 more
+</error>
+    <system-out>14:34:43.516 [main] INFO org.mongodb.driver.cluster - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=ds147497.mlab.com:47497, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]}. Waiting for 30000 ms before timing out
+14:34:44.404 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:60}
+14:34:45.948 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:61}
+14:34:47.467 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:62}
+14:34:48.986 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:63}
+14:34:50.507 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:64}
+14:34:52.024 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:65}
+14:34:53.540 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:66}
+14:34:55.057 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:67}
+14:34:56.575 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:68}
+14:34:58.095 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:69}
+14:34:59.624 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:70}
+14:35:01.141 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:71}
+14:35:02.670 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:72}
+14:35:04.181 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:73}
+14:35:05.700 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:74}
+14:35:07.229 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:75}
+14:35:08.755 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:76}
+14:35:10.269 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:77}
+14:35:11.888 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:78}
+14:35:13.439 [cluster-ClusterId{value=&apos;582b0e99802ecc0bb47a7973&apos;, description=&apos;null&apos;}-ds147497.mlab.com:47497] DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:79}
+</system-out>
+  </testcase>
 </testsuite>

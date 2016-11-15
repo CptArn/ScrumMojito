@@ -22,19 +22,16 @@ public class Data {
     }
     
     public void addUser(User u) {
-    Bson filter = new Document("facebook_id", u.getFacebook_id());
+    Bson filter = new Document("facebook_id", u.getid());
     Document found = db.getCollection("users").find(filter).first();
-    System.out.println(found);
     if (found == null) {
     	MongoCollection<Document> coll = db.getCollection("users");
-    	u.setId((int) (coll.count() + 1));
-    	Document d = new Document("_id", u.getId())
-    		.append("facebook_id", u.getFacebook_id())
+    	Document d = new Document("_id", u.getid())
     		.append("email", u.getEmail())
-                    .append("firstname", u.getFirstname())
-                    .append("lastname", u.getLastname())
-                    .append("location", u.getLocation())
-                    .append("age", u.getAge());
+            .append("firstname", u.getFirstname())
+            .append("lastname", u.getLastname())
+            .append("location", u.getLocation())
+            .append("age", u.getAge());
     	coll.insertOne(d);
     }
     }
@@ -82,9 +79,8 @@ public class Data {
     
     public void updateUser(User u) {
 	MongoCollection<Document> coll = db.getCollection("users");
-	Bson filter = new Document("facebook_id", u.getFacebook_id());
-	Bson newValue = new Document("_id", u.getId())
-		.append("facebook_id", u.getFacebook_id())
+	Bson filter = new Document("_id", u.getid());
+	Bson newValue = new Document("_id", u.getid())
 		.append("email", u.getEmail())
                 .append("firstname", u.getFirstname())
                 .append("lastname", u.getLastname())
@@ -96,15 +92,13 @@ public class Data {
     
     public void deleteUser(User u) {
 	MongoCollection<Document> coll = db.getCollection("users");
-	Bson filter = new Document("_id", u.getId());
+	Bson filter = new Document("_id", u.getid());
 	coll.deleteOne(filter);
     }
     
     public User getUser(int id) {
-    	System.out.println(id);
-    	Bson filter = new Document("facebook_id", id);
+    	Bson filter = new Document("_id", id);
     	Document doc = db.getCollection("users").find(filter).first();
-    	System.out.println(doc);
     	return new User(doc);
     }
     

@@ -29,8 +29,8 @@ public class DatabaseTest {
 	public void test1AddUsers() {
 		dataLayer.addUser(u1);
 		dataLayer.addUser(u2);
-		User return1 = dataLayer.getUser(u1.getFacebook_id());
-		User return2 = dataLayer.getUser(u2.getFacebook_id());
+		User return1 = dataLayer.getUser(u1.getid());
+		User return2 = dataLayer.getUser(u2.getid());
 		assert(return1.equals(u1) && return2.equals(u2));
 	}
 	
@@ -48,8 +48,8 @@ public class DatabaseTest {
 		u2.setEmail("nieuweemail@email.com");
 		dataLayer.updateUser(u1);
 		dataLayer.updateUser(u2);
-		User return1 = dataLayer.getUser(u1.getFacebook_id());
-		User return2 = dataLayer.getUser(u2.getFacebook_id());
+		User return1 = dataLayer.getUser(u1.getid());
+		User return2 = dataLayer.getUser(u2.getid());
 		assert(return1.equals(u1) && return2.equals(u2));
 	}
 	
@@ -57,7 +57,7 @@ public class DatabaseTest {
 	public void test4DeleteUsers() {
 		dataLayer.deleteUser(u1);
 		dataLayer.deleteUser(u2);
-		User return1 = dataLayer.getUser(u1.getFacebook_id());
+		User return1 = dataLayer.getUser(u1.getid());
 		fail(return1.getEmail());
 	}
 }
