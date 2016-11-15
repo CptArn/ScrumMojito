@@ -14,7 +14,7 @@ public class User {
     }
     
     public User(Document doc) {
-    	this.id = doc.getInteger("id");
+    	this.id = doc.getInteger("_id");
     	this.email = doc.getString("email");
     	this.firstname = doc.getString("firstname");
     	this.lastname = doc.getString("lastname");
