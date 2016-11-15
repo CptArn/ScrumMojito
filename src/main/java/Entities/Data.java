@@ -22,7 +22,7 @@ public class Data {
     }
     
     public void addUser(User u) {
-    Bson filter = new Document("facebook_id", u.getid());
+    Bson filter = new Document("_id", u.getid());
     Document found = db.getCollection("users").find(filter).first();
     if (found == null) {
     	MongoCollection<Document> coll = db.getCollection("users");
