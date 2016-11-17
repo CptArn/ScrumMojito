@@ -7,6 +7,9 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -63,18 +66,22 @@ public class Data {
     }
     
     public void addSchool(School s) {
-	MongoCollection<Document> coll = db.getCollection("schools");
-	Document d = new Document("_id", coll.count() + 1)
-		.append("name", s.getName())
-		.append("name", s.getAddress());
-	coll.insertOne(d);
+		MongoCollection<Document> coll = db.getCollection("schools");
+		Bson filter = new Document("name", s.getName());
+		Document found = coll.find(filter).first();
+		if (found == null) {
+			Document d = new Document("_id", (int)(coll.count() + 1))
+					.append("name", s.getName())
+					.append("address", s.getAddress());
+			coll.insertOne(d);
+		}
     }
     
     public List<Document> getCollectionDocuments(String collection) {
-	MongoCollection<Document> coll = db.getCollection(collection);
-	List<Document> documents = (List<Document>) coll.find().into(
+		MongoCollection<Document> coll = db.getCollection(collection);
+		List<Document> documents = (List<Document>) coll.find().into(
 		new ArrayList<Document>());
-	return documents;
+		return documents;
     }
     
     public void updateUser(User u) {
@@ -91,9 +98,9 @@ public class Data {
     }
     
     public void deleteUser(User u) {
-	MongoCollection<Document> coll = db.getCollection("users");
-	Bson filter = new Document("_id", u.getid());
-	coll.deleteOne(filter);
+		MongoCollection<Document> coll = db.getCollection("users");
+		Bson filter = new Document("_id", u.getid());
+		coll.deleteOne(filter);
     }
     
     public User getUser(int id) {
@@ -106,6 +113,31 @@ public class Data {
     	db.getCollection("users").deleteMany(new BasicDBObject());
     }
     
+    public List<School> getAllSchools() {
+    	List<School> found = new ArrayList<School>();
+    	DBCursor cursor = ((DBCollection)db.getCollection("schools")).find();
+    	if (cursor.hasNext()) {
+    		Document o = (Document) cursor.next();
+    		found.add(new School(o));
+    	}
+    	return found;
+    }
+    
+    public School getSchool(School school) {
+    	School found;
+    	Bson filter = new Document("name", school.getName());
+    	Document objectFound = db.getCollection("schools").find(filter).first();
+		System.out.println(objectFound);
+    	found = new School(objectFound);
+    	return found;
+    }
+
+    public void deleteSchool(School school) {
+		MongoCollection<Document> coll = db.getCollection("schools");
+		Bson filter = new Document("name", school.getName());
+		coll.deleteOne(filter);
+	}
+
     
     /*List<Document> documents = (List<Document>) coll.find().into(
 		new ArrayList<Document>());
