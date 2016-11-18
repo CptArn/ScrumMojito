@@ -17,15 +17,14 @@ public class DatabaseTest {
 	static School s1;
 	static School s2;
 
-
 	@BeforeClass
 	public static void setUp() {
 		dataLayer = new Data();
 		// dataLayer.deleteAllUsers();
 		u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18);
 		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21);
-		s1 = new School("Odisee", "Gebroeders de smet straat 1 Gent");
-		s2 = new School("KULeuven", "Oude Markt 13");
+		s1 = new School("UGent", "St. Pietersnieuwstraat 33, 9000 Gent");
+		s2 = new School("UAntwerpen", "Prinsstraat 13, 2000 Antwerpen");
 	}
 
 	@Test
@@ -66,21 +65,24 @@ public class DatabaseTest {
 
 	@Test
 	public void test5AddSchool() {
+		int before = dataLayer.getCollectionDocuments("schools").size();
 		dataLayer.addSchool(s1);
 		dataLayer.addSchool(s2);
+		dataLayer.addSchool(s1);
+		int after = dataLayer.getCollectionDocuments("schools").size();
 
-		School return1 = dataLayer.getSchool(s1);
-		School return2 = dataLayer.getSchool(s2);
+		School return1 = dataLayer.getSchool(s1.getName());
+		School return2 = dataLayer.getSchool(s2.getName());
 		s1.setId(return1.getId());
 		s2.setId(return2.getId());
-		assert(return1.equals(s1) && return2.equals(s2));
+		assert(return1.equals(s1) && return2.equals(s2) && (after-before==2));
 	}
 
 	@Test(expected=NullPointerException.class)
 	public void test6DeleteSchool() {
 		dataLayer.deleteSchool(s1);
 		dataLayer.deleteSchool(s2);
-		School school = dataLayer.getSchool(s1);
+		School school = dataLayer.getSchool(s1.getName());
 		fail(school.getName());
 	}
 }

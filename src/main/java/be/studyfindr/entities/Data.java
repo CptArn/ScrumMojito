@@ -1,19 +1,21 @@
 package be.studyfindr.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.Mongo;
+import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+
 
 public class Data {
 	private MongoClient client;
@@ -115,19 +117,17 @@ public class Data {
 
 	public List<School> getAllSchools() {
 		List<School> found = new ArrayList<School>();
-		DBCursor cursor = ((DBCollection)db.getCollection("schools")).find();
-		if (cursor.hasNext()) {
-			Document o = (Document) cursor.next();
-			found.add(new School(o));
+		FindIterable<Document> returnedSchools = db.getCollection("schools").find();
+		for(Document doc : returnedSchools) {
+			found.add(new School(doc));
 		}
 		return found;
 	}
 
-	public School getSchool(School school) {
+	public School getSchool(String schoolName) {
 		School found;
-		Bson filter = new Document("name", school.getName());
+		Bson filter = new Document("name", schoolName);
 		Document objectFound = db.getCollection("schools").find(filter).first();
-		System.out.println(objectFound);
 		found = new School(objectFound);
 		return found;
 	}
