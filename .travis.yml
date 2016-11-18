@@ -8,6 +8,6 @@ addons:
       - oracle-java8-installer
 jdk:
   - oraclejdk8
-script: gradle check
+script: gradle check dist test
 notifications:
   slack: scrummojito:MjnMALRNtGdBC9JhXUTx4D1o
