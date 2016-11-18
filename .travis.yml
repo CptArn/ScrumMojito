@@ -6,6 +6,6 @@ addons:
       - oracle-java8-installer
 jdk:
   - oraclejdk8
-script: mvn clean verify
+script: gradle check
 notifications:
   slack: scrummojito:MjnMALRNtGdBC9JhXUTx4D1o
