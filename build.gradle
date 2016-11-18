@@ -25,6 +25,9 @@ repositories {
 	mavenCentral()
 }
 
+task stage {
+    dependsOn build
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
@@ -36,7 +39,7 @@ dependencies {
 }
 
 test {
-    afterTest { desc, result -> 
+    afterTest { desc, result ->
         println "Executing test: ${desc.name} [${desc.className}] with result: ${result.resultType}"
     }
 }
