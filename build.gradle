@@ -36,8 +36,15 @@ dependencies {
 }
 
 test {
-    testLogging {
-        events "failed"
-        exceptionFormat "short"
-    }
+	testLogging {
+		// set options for log level LIFECYCLE
+		events "failed"
+		exceptionFormat "short"
+
+		// set options for log level DEBUG
+		debug {
+			events "started", "skipped", "failed"
+			exceptionFormat "full"
+		}
+	}
 }
