@@ -36,15 +36,7 @@ dependencies {
 }
 
 test {
-	testLogging {
-		// set options for log level LIFECYCLE
-		events "failed", "skipped", "failed"
-		exceptionFormat "short"
-
-		// set options for log level DEBUG
-		debug {
-			events "started", "skipped", "failed"
-			exceptionFormat "full"
-		}
-	}
+    afterTest { desc, result -> 
+        println "Executing test: ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
 }

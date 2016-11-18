@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/studyfindr.iml" filepath="$PROJECT_DIR$/.idea/modules/studyfindr.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/studyfindr_main.iml" filepath="$PROJECT_DIR$/.idea/modules/studyfindr_main.iml" group="studyfindr" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/studyfindr_test.iml" filepath="$PROJECT_DIR$/.idea/modules/studyfindr_test.iml" group="studyfindr" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScrumMojito.iml" filepath="$PROJECT_DIR$/.idea/modules/ScrumMojito.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScrumMojito_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ScrumMojito_main.iml" group="ScrumMojito" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScrumMojito_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ScrumMojito_test.iml" group="ScrumMojito" />
     </modules>
   </component>
 </project>

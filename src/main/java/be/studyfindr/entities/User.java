@@ -3,85 +3,85 @@ package be.studyfindr.entities;
 import org.bson.Document;
 
 public class User {
-    public User(int id, String email, String firstname, String lastname, String location, int age) {
-	super();
-	this.id = id;
-	this.email = email;
-	this.firstname = firstname;
-	this.lastname = lastname;
-	this.location = location;
-	this.age = age;
-    }
-    
-    public User(Document doc) {
-    	this.id = doc.getInteger("_id");
-    	this.email = doc.getString("email");
-    	this.firstname = doc.getString("firstname");
-    	this.lastname = doc.getString("lastname");
-    	this.location = doc.getString("location");
-    	this.age = doc.getInteger("age");
-    }
+	public User(int id, String email, String firstname, String lastname, String location, int age) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.location = location;
+		this.age = age;
+	}
 
-    @Override
-    public String toString() {
-	return "User [id=" + id + ", email=" + email + ", firstname=" + firstname
-		+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + "]";
-    }
+	public User(Document doc) {
+		this.id = doc.getInteger("_id");
+		this.email = doc.getString("email");
+		this.firstname = doc.getString("firstname");
+		this.lastname = doc.getString("lastname");
+		this.location = doc.getString("location");
+		this.age = doc.getInteger("age");
+	}
 
-    private int id;
-    private String email;
-    private String firstname;
-    private String lastname;
-    private String location;
-    private int age;
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + "]";
+	}
 
-    public int getid() {
-	return id;
-    }
+	private int id;
+	private String email;
+	private String firstname;
+	private String lastname;
+	private String location;
+	private int age;
 
-    public void setid(int id) {
-	this.id = id;
-    }
+	public int getid() {
+		return id;
+	}
 
-    public String getEmail() {
-	return email;
-    }
+	public void setid(int id) {
+		this.id = id;
+	}
 
-    public void setEmail(String email) {
-	this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getFirstname() {
-	return firstname;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setFirstname(String firstname) {
-	this.firstname = firstname;
-    }
+	public String getFirstname() {
+		return firstname;
+	}
 
-    public String getLastname() {
-	return lastname;
-    }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 
-    public void setLastname(String lastname) {
-	this.lastname = lastname;
-    }
+	public String getLastname() {
+		return lastname;
+	}
 
-    public String getLocation() {
-	return location;
-    }
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 
-    public void setLocation(String location) {
-	this.location = location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public int getAge() {
-	return age;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public void setAge(int age) {
-	this.age = age;
-    }
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -118,6 +118,6 @@ public class User {
 			return false;
 		return true;
 	}
-    
+
 
 }

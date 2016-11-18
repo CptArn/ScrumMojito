@@ -2,10 +2,10 @@ package be.studyfindr.entities;
 
 public class Photo {
     public Photo(int id, int user_Id, String path) {
-	super();
-	this.id = id;
-	this.user_Id = user_Id;
-	this.path = path;
+        super();
+        this.id = id;
+        this.user_Id = user_Id;
+        this.path = path;
     }
 
     private int id;
@@ -13,27 +13,27 @@ public class Photo {
     private String path;
 
     public int getId() {
-	return id;
+        return id;
     }
 
     public void setId(int id) {
-	this.id = id;
+        this.id = id;
     }
 
     public int getUser_id() {
-	return user_Id;
+        return user_Id;
     }
 
     public void setUser_id(int user_id) {
-	user_Id = user_id;
+        user_Id = user_id;
     }
 
     public String getPath() {
-	return path;
+        return path;
     }
 
     public void setPath(String path) {
-	this.path = path;
+        this.path = path;
     }
 
 }
