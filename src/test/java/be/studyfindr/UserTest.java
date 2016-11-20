@@ -12,7 +12,7 @@ public class UserTest {
 
     @BeforeClass
     public static void setUp() {
-        u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18);
+        u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18, false, false, false);
     }
 
     @Test
@@ -23,7 +23,11 @@ public class UserTest {
         u1.setLastname("Jansens");
         u1.setLocation("Gent");
         u1.setid(42);
+        u1.setPreferenceFemale(true);
+        u1.setPreferenceFemale(true);
+        u1.setPreferenceFemale(true);
 
-        assert(u1.getAge() == 20 && u1.getEmail() == "email@gmail.com" && u1.getFirstname() == "Jos" && u1.getLastname() == "Jansens" && u1.getLocation() == "Gent" && u1.getid() == 42);
+        assert(u1.getAge() == 20 && u1.getEmail() == "email@gmail.com" && u1.getFirstname() == "Jos" && u1.getLastname() == "Jansens" && u1.getLocation() == "Gent"
+                && u1.getid() == 42);
     }
 }

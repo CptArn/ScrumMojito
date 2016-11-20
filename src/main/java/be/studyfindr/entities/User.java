@@ -3,7 +3,7 @@ package be.studyfindr.entities;
 import org.bson.Document;
 
 public class User {
-	public User(long id, String email, String firstname, String lastname, String location, int age) {
+	public User(long id, String email, String firstname, String lastname, String location, int age, boolean preferenceMale, boolean preferenceFemale, boolean preferenceTrans) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -11,6 +11,9 @@ public class User {
 		this.lastname = lastname;
 		this.location = location;
 		this.age = age;
+        this.preferenceMale = preferenceMale;
+        this.preferenceFemale = preferenceFemale;
+        this.preferenceTrans = preferenceTrans;
 	}
 
 	public User(Document doc) {
@@ -36,11 +39,9 @@ public class User {
 	private int age;
 
 	// Genders of interest
-	private boolean find_male;
-	private boolean find_female;
-	private boolean find_trans;
-
-	private Enums.Gender gender;
+    private boolean preferenceMale;
+	private boolean preferenceFemale;
+	private boolean preferenceTrans;
 
 	public long getid() {
 		return id;
@@ -89,6 +90,30 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+    public boolean getPreferenceMale() {
+        return preferenceMale;
+    }
+
+    public void setPreferenceMale(boolean preferenceMale) {
+        this.preferenceMale = preferenceMale;
+    }
+
+    public boolean getPreferenceFemale() {
+        return preferenceFemale;
+    }
+
+    public void setPreferenceFemale(boolean preferenceFemale) {
+        this.preferenceFemale = preferenceFemale;
+    }
+
+    public boolean getPreferenceTrans() {
+        return preferenceTrans;
+    }
+
+    public void setPreferenceTrans(boolean preferenceTrans) {
+        this.preferenceTrans = preferenceTrans;
+    }
 
 	@Override
 	public boolean equals(Object obj) {

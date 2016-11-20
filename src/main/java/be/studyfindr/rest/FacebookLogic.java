@@ -136,7 +136,10 @@ public class FacebookLogic {
                     user.getFirstName(),
                     user.getLastName(),
                     null,
-                    user.getAgeRange().getMin()
+                    user.getAgeRange().getMin(),
+                    false,
+                    false,
+                    false
             );
             backend.addUser(newUser);
             return true;
