@@ -21,8 +21,8 @@ public class DatabaseTest {
 	public static void setUp() {
 		dataLayer = new Data();
 		// dataLayer.deleteAllUsers();
-		u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, false);
-		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21, true, false, false);
+		u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, false, 18, 10, 1);
+		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21, true, false, false, 20, 15, 2);
 		s1 = new School("UGent", "St. Pietersnieuwstraat 33, 9000 Gent");
 		s2 = new School("UAntwerpen", "Prinsstraat 13, 2000 Antwerpen");
 	}

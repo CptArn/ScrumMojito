@@ -36,7 +36,13 @@ public class Data {
 					.append("firstname", u.getFirstname())
 					.append("lastname", u.getLastname())
 					.append("location", u.getLocation())
-					.append("age", u.getAge());
+					.append("age", u.getAge())
+					.append("prefMale", u.getPrefMale())
+					.append("prefFemale", u.getPrefFemale())
+					.append("prefTrans", u.getPrefTrans())
+					.append("prefAge", u.getPrefAge())
+					.append("prefDistance", u.getPrefDistance())
+					.append("prefLocation", u.getPrefLocation());
 			coll.insertOne(d);
 		}
 	}
@@ -94,7 +100,13 @@ public class Data {
 				.append("firstname", u.getFirstname())
 				.append("lastname", u.getLastname())
 				.append("location", u.getLocation())
-				.append("age", u.getAge());
+				.append("age", u.getAge())
+				.append("prefMale", u.getPrefMale())
+				.append("prefFemale", u.getPrefFemale())
+				.append("prefTrans", u.getPrefTrans())
+				.append("prefAge", u.getPrefAge())
+				.append("prefDistance", u.getPrefDistance())
+				.append("prefLocation", u.getPrefLocation());
 		Bson updateOperationDocument = new Document("$set", newValue);
 		coll.updateOne(filter, updateOperationDocument);
 	}

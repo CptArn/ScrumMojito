@@ -142,7 +142,10 @@ public class FacebookLogic {
                     user.getAgeRange().getMin(),
                     false,
                     false,
-                    false
+                    false,
+                    18,
+                    25,
+                    1
             );
             backend.addUser(newUser);
             return true;

@@ -3,7 +3,8 @@ package be.studyfindr.entities;
 import org.bson.Document;
 
 public class User {
-	public User(long id, String email, String firstname, String lastname, String location, int age, boolean preferenceMale, boolean preferenceFemale, boolean preferenceTrans) {
+	public User(long id, String email, String firstname, String lastname, String location, int age,
+				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAge, int prefDistance, int prefLocation) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -11,9 +12,12 @@ public class User {
 		this.lastname = lastname;
 		this.location = location;
 		this.age = age;
-        this.preferenceMale = preferenceMale;
-        this.preferenceFemale = preferenceFemale;
-        this.preferenceTrans = preferenceTrans;
+        this.prefMale = prefMale;
+        this.prefFemale = prefFemale;
+        this.prefTrans = prefTrans;
+		this.prefAge = prefAge;
+		this.prefDistance = prefDistance;
+		this.prefLocation = prefLocation;
 	}
 
 	public User(Document doc) {
@@ -23,12 +27,20 @@ public class User {
 		this.lastname = doc.getString("lastname");
 		this.location = doc.getString("location");
 		this.age = doc.getInteger("age");
+		this.prefMale = doc.getBoolean("prefMale");
+		this.prefFemale = doc.getBoolean("prefFemale");
+		this.prefTrans = doc.getBoolean("prefTrans");
+		this.prefAge = doc.getInteger("prefAge");
+		this.prefDistance = doc.getInteger("prefDistance");
+		this.prefLocation = doc.getInteger("prefLocation");
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + "]";
+				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + ", prefMale=" + prefMale
+				+ ", prefFemale=" + prefFemale + ", prefTrans=" + prefTrans + ", prefAge=" + prefAge + ", prefDistance="
+				+ prefDistance + ", prefLocation=" + prefLocation + "]";
 	}
 
 	private long id;
@@ -38,10 +50,14 @@ public class User {
 	private String location;
 	private int age;
 
-	// Genders of interest
-    private boolean preferenceMale;
-	private boolean preferenceFemale;
-	private boolean preferenceTrans;
+	// preferences
+    private boolean prefMale;
+	private boolean prefFemale;
+	private boolean prefTrans;
+	private int prefAge;
+	private int prefDistance;
+	private int prefLocation;
+
 
 	public long getid() {
 		return id;
@@ -91,65 +107,90 @@ public class User {
 		this.age = age;
 	}
 
-    public boolean getPreferenceMale() {
-        return preferenceMale;
+    public boolean getPrefMale() {
+        return prefMale;
     }
 
-    public void setPreferenceMale(boolean preferenceMale) {
-        this.preferenceMale = preferenceMale;
+    public void setPrefMale(boolean preferenceMale) {
+        this.prefMale = preferenceMale;
     }
 
-    public boolean getPreferenceFemale() {
-        return preferenceFemale;
+    public boolean getPrefFemale() {
+        return prefFemale;
     }
 
-    public void setPreferenceFemale(boolean preferenceFemale) {
-        this.preferenceFemale = preferenceFemale;
+    public void setPrefFemale(boolean prefFemale) {
+        this.prefFemale = prefFemale;
     }
 
-    public boolean getPreferenceTrans() {
-        return preferenceTrans;
+    public boolean getPrefTrans() {
+        return prefTrans;
     }
 
-    public void setPreferenceTrans(boolean preferenceTrans) {
-        this.preferenceTrans = preferenceTrans;
+    public void setPrefTrans(boolean prefTrans) {
+        this.prefTrans = prefTrans;
     }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (age != other.age)
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id != other.id)
-			return false;
-		if (firstname == null) {
-			if (other.firstname != null)
-				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (lastname == null) {
-			if (other.lastname != null)
-				return false;
-		} else if (!lastname.equals(other.lastname))
-			return false;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		return true;
+	public int getPrefAge() {
+		return prefAge;
 	}
 
+	public void setPrefAge(int prefAge) {
+		this.prefAge = prefAge;
+	}
 
+	public int getPrefDistance() {
+		return prefDistance;
+	}
+
+	public void setPrefDistance(int prefDistance) {
+		this.prefDistance = prefDistance;
+	}
+
+	public int getPrefLocation() {
+		return prefLocation;
+	}
+
+	public void setPrefLocation(int prefLocation) {
+		this.prefLocation = prefLocation;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		User user = (User) o;
+
+		if (id != user.id) return false;
+		if (getAge() != user.getAge()) return false;
+		if (getPrefMale() != user.getPrefMale()) return false;
+		if (getPrefFemale() != user.getPrefFemale()) return false;
+		if (getPrefTrans() != user.getPrefTrans()) return false;
+		if (getPrefAge() != user.getPrefAge()) return false;
+		if (getPrefDistance() != user.getPrefDistance()) return false;
+		if (getPrefLocation() != user.getPrefLocation()) return false;
+		if (!getEmail().equals(user.getEmail())) return false;
+		if (!getFirstname().equals(user.getFirstname())) return false;
+		if (!getLastname().equals(user.getLastname())) return false;
+		return getLocation().equals(user.getLocation());
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + getEmail().hashCode();
+		result = 31 * result + getFirstname().hashCode();
+		result = 31 * result + getLastname().hashCode();
+		result = 31 * result + getLocation().hashCode();
+		result = 31 * result + getAge();
+		result = 31 * result + (getPrefMale() ? 1 : 0);
+		result = 31 * result + (getPrefFemale() ? 1 : 0);
+		result = 31 * result + (getPrefTrans() ? 1 : 0);
+		result = 31 * result + getPrefAge();
+		result = 31 * result + getPrefDistance();
+		result = 31 * result + getPrefLocation();
+		return result;
+	}
 }

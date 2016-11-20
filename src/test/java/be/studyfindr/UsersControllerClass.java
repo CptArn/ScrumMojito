@@ -29,7 +29,7 @@ public class UsersControllerClass {
 
     @BeforeClass
     public static void setUp() {
-        u1 = new User(1, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, true);
+        u1 = new User(1, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, true, 18, 25, 1);
         dataLayer = new Data();
         dataLayer.addUser(u1);
     }
