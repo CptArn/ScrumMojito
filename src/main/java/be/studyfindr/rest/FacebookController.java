@@ -56,6 +56,13 @@ public class FacebookController {
 	  	return fb.callBack(code, state, session);
   	}
 
+	/**
+	 * Handles a Facebook logout by invalidating the access token.
+	 * @param accessToken access token to invalidate.
+	 * @param id id associated with the token.
+	 * @return status code and message.
+	 * @throws RestException when user input is invalid.
+	 */
 	@RequestMapping("/facebook/logout")
 	public HashMap<String, String> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws RestException {
 		if (!fb.userIsValid(accessToken, id)) throw new RestException("Invalid login");
@@ -66,6 +73,11 @@ public class FacebookController {
 		return status;
 	}
 
+	/**
+	 * Handles an exception associated with a Facebook operation.
+	 * @param ex exception descriptor.
+	 * @return error message.
+	 */
 	@ExceptionHandler(RestException.class)
 	public ResponseEntity<ErrorResponse> exceptionHandler(Exception ex) {
 		ErrorResponse error = new ErrorResponse();

@@ -35,6 +35,13 @@ public class User {
 	private String location;
 	private int age;
 
+	// Genders of interest
+	private boolean find_male;
+	private boolean find_female;
+	private boolean find_trans;
+
+	private Enums.Gender gender;
+
 	public long getid() {
 		return id;
 	}
