@@ -114,14 +114,17 @@ public class FacebookLogic {
 
         AccessGrant accessGrant = getAccessGrant(code);
         String facebookUserId = getFacebookUserId(accessGrant);
-        newUserHandler(getMyInfoFromFacebook(accessGrant.getAccessToken()));
+
+        // try to add user to database, return null on failure.
+        if (!newUserHandler(getMyInfoFromFacebook(accessGrant.getAccessToken()))) return null;
+
         return new LoginResponse(accessGrant.getAccessToken(), Long.parseLong(facebookUserId));
     }
 
     /**
-     *
-     * @param user
-     * @return
+     * Tries to add the user to the database, if the user already exists no action will be taken.
+     * @param user user to add to the database.
+     * @return true on success, false if something went wrong.
      */
     private boolean newUserHandler(User user){
         try{
@@ -148,17 +151,33 @@ public class FacebookLogic {
         }
     }
 
+    /**
+     * Helper method for auth. to access token exchange.
+     * @param authorizationCode auth. token.
+     * @return AccessGrant
+     */
     private AccessGrant getAccessGrant(String authorizationCode) {
         OAuth2Operations oauthOperations = facebookConnectionFactory.getOAuthOperations();
         return oauthOperations.exchangeForAccess(authorizationCode, applicationHost + "/auth/facebook/callback", null);
     }
 
+    /**
+     * Gets the user ID from Facebook based on the access token.
+     * @param accessGrant a valid access token.
+     * @return associated user ID.
+     */
     private String getFacebookUserId(AccessGrant accessGrant) {
         Connection<Facebook> connection = facebookConnectionFactory.createConnection(accessGrant);
         ConnectionKey connectionKey = connection.getKey();
         return connectionKey.getProviderUserId();
     }
 
+    /**
+     * Gets the profile information from Facebook.
+     * This method replaces the Spring method Facebook::userOperations().getUserProfile()
+     * @param accessToken valid access token.
+     * @return User object containing all profile details.
+     */
     public User getMyInfoFromFacebook(String accessToken){
         Facebook facebook;
         try {
@@ -170,17 +189,36 @@ public class FacebookLogic {
         return facebook.fetchObject("me", User.class, fields);
     }
 
+    /**
+     * Checks if the login session is valid by requesting the user ID from Facebook based on the given access token.
+     * This ID is compared to the user ID from the input and these should match to be valid.
+     * @param accessToken valid access token
+     * @param id id to check
+     * @return true if user is valid.
+     */
     public final boolean userIsValid(String accessToken, long id){
         User user = getMyInfoFromFacebook(accessToken);
         if (user == null) return false;
         return Long.parseLong(user.getId()) == id;
     }
 
+    /**
+     * Gets a user profile from the database based on id.
+     * @param accessToken valid access token.
+     * @param id id to find.
+     * @return user profile, null on failure.
+     */
     public be.studyfindr.entities.User getMyInfoFromBackend(String accessToken, long id){
         if (!userIsValid(accessToken, id)) return null;
         return backend.getUser(id);
     }
 
+    /**
+     * Logs out the current user by invalidating the access token.
+     * @param accessToken valid access token.
+     * @param id user id to logout.
+     * @return true on success, false on failure.
+     */
     public boolean logout(String accessToken, long id) {
         try{
             Connection<Facebook> connection = facebookConnectionFactory.createConnection(new AccessGrant(accessToken));
