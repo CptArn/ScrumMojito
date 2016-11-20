@@ -78,11 +78,26 @@ public class DatabaseTest {
 		assert(return1.equals(s1) && return2.equals(s2) && (after-before==2));
 	}
 
+	@Test
+	public void test6GetAllSchools() {
+		List<School> list = dataLayer.getAllSchools();
+		assert(list.contains(s1) && list.contains(s2));
+	}
+
+	@Test
+	public void test7UpdateSchools() {
+		s1.setName("KULeuven Gent");
+		dataLayer.updateSchool(s1);
+		School found = dataLayer.getSchool((s1.getName()));
+		assert(found.equals(s1));
+	}
+
 	@Test(expected=NullPointerException.class)
-	public void test6DeleteSchool() {
+	public void test8DeleteSchool() {
 		dataLayer.deleteSchool(s1);
 		dataLayer.deleteSchool(s2);
 		School school = dataLayer.getSchool(s1.getName());
 		fail(school.getName());
 	}
+
 }

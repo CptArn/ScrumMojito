@@ -132,6 +132,16 @@ public class Data {
 		return found;
 	}
 
+	public void updateSchool(School s) {
+		MongoCollection<Document> coll = db.getCollection("schools");
+		Bson filter = new Document("_id", s.getId());
+		Bson newValue = new Document("_id", s.getId())
+				.append("name", s.getName())
+				.append("address", s.getAddress());
+		Bson updateOperationDocument = new Document("$set", newValue);
+		coll.updateOne(filter, updateOperationDocument);
+	}
+
 	public void deleteSchool(School school) {
 		MongoCollection<Document> coll = db.getCollection("schools");
 		Bson filter = new Document("name", school.getName());

@@ -47,6 +47,7 @@ public class FacebookLoginController {
 
 	  String authorizeUrl = oauthOperations.buildAuthorizeUrl(
 	  		GrantType.AUTHORIZATION_CODE, params);
+	  System.out.println(authorizeUrl);
 	  return new RedirectView(authorizeUrl);
   }
 
