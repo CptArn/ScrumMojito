@@ -1,10 +1,9 @@
 package be.studyfindr;
 
+import be.studyfindr.rest.FacebookController;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.Request;
 import org.junit.runner.RunWith;
-import be.studyfindr.rest.FacebookLoginController;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,12 +18,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class FacebookControllerTest {
     private MockMvc mockMvc;
 
-    private FacebookLoginController controller;
+    private FacebookController controller;
 
     @Before
     public void setUp() {
         try {
-            controller = new FacebookLoginController();
+            controller = new FacebookController();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

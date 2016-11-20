@@ -79,13 +79,13 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void test6GetAllSchools() {
+ 	public void test6GetAllSchools() {
 		List<School> list = dataLayer.getAllSchools();
 		assert(list.contains(s1) && list.contains(s2));
 	}
 
 	@Test
-	public void test7UpdateSchools() {
+ 	public void test7UpdateSchools() {
 		s1.setName("KULeuven Gent");
 		dataLayer.updateSchool(s1);
 		School found = dataLayer.getSchool((s1.getName()));
@@ -99,5 +99,4 @@ public class DatabaseTest {
 		School school = dataLayer.getSchool(s1.getName());
 		fail(school.getName());
 	}
-
 }

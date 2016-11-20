@@ -105,7 +105,7 @@ public class Data {
 		coll.deleteOne(filter);
 	}
 
-	public User getUser(int id) {
+	public User getUser(long id) {
 		Bson filter = new Document("_id", id);
 		Document doc = db.getCollection("users").find(filter).first();
 		return new User(doc);

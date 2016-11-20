@@ -3,7 +3,7 @@ package be.studyfindr.entities;
 import org.bson.Document;
 
 public class User {
-	public User(int id, String email, String firstname, String lastname, String location, int age) {
+	public User(long id, String email, String firstname, String lastname, String location, int age) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -14,7 +14,7 @@ public class User {
 	}
 
 	public User(Document doc) {
-		this.id = doc.getInteger("_id");
+		this.id = doc.getLong("_id");
 		this.email = doc.getString("email");
 		this.firstname = doc.getString("firstname");
 		this.lastname = doc.getString("lastname");
@@ -28,18 +28,18 @@ public class User {
 				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + "]";
 	}
 
-	private int id;
+	private long id;
 	private String email;
 	private String firstname;
 	private String lastname;
 	private String location;
 	private int age;
 
-	public int getid() {
+	public long getid() {
 		return id;
 	}
 
-	public void setid(int id) {
+	public void setid(long id) {
 		this.id = id;
 	}
 
