@@ -20,7 +20,7 @@ public class UsersController {
         } else return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/user/{id}/update", method = RequestMethod.PUT)
+    @RequestMapping(path = "/user/{id}/update", method = RequestMethod.POST)
     public ResponseEntity<User> updateUserInfo(@PathVariable("id") long id, @RequestBody User user) {
         User currentUser = dataLayer.getUser(id);
         if (currentUser == null) {
