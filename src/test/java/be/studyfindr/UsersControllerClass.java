@@ -8,6 +8,7 @@ import org.bson.Document;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -56,28 +58,19 @@ public class UsersControllerClass {
         }
     }
 
-    @Test
-    public void test1PostInfo() {
+    /*@Test
+    public void test1PutInfo() {
         try {
-            MvcResult result = this.mockMvc.perform(post("/user/update")
-                    .param("id", "1")
-                    .param("email", "email@email.com")
-                    .param("firstname", "Bert")
-                    .param("lastname", "Peeters")
-                    .param("location", "Aalst")
-                    .param("age", "19")
-                    .param("prefMale", "true")
-                    .param("prefFemale", "true")
-                    .param("prefTrans", "true")
-                    .param("prefAge", "18")
-                    .param("prefDistance", "25")
-                    .param("prefLocation", "1")
+            String json = u1.toString();
+            MvcResult result = this.mockMvc.perform(put("/user/1/update")
+                    .contentType(MediaType.APPLICATION_JSON).content(json)
             ).andExpect(status().isOk()).andReturn();
-            assert(result.getResponse().getContentAsString().equals("Update successful"));
+            User user = new User(Document.parse(result.getResponse().getContentAsString()));
+            assert(user.equals(u1));
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
     @AfterClass
     public static void tearDown() {
