@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -53,8 +54,29 @@ public class UsersControllerClass {
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
+    }
 
-
+    @Test
+    public void test1PostInfo() {
+        try {
+            MvcResult result = this.mockMvc.perform(post("/user/update")
+                    .param("id", "1")
+                    .param("email", "email@email.com")
+                    .param("firstname", "Bert")
+                    .param("lastname", "Peeters")
+                    .param("location", "Aalst")
+                    .param("age", "19")
+                    .param("prefMale", "true")
+                    .param("prefFemale", "true")
+                    .param("prefTrans", "true")
+                    .param("prefAge", "18")
+                    .param("prefDistance", "25")
+                    .param("prefLocation", "1")
+            ).andExpect(status().isOk()).andReturn();
+            assert(result.getResponse().getContentAsString().equals("Update successful"));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @AfterClass
