@@ -1,8 +1,6 @@
 package be.studyfindr.entities;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.Mongo;
-import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
@@ -12,7 +10,6 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -40,7 +37,8 @@ public class Data {
 					.append("prefMale", u.getPrefMale())
 					.append("prefFemale", u.getPrefFemale())
 					.append("prefTrans", u.getPrefTrans())
-					.append("prefAge", u.getPrefAge())
+					.append("prefAgeMin", u.getPrefAgeMin())
+					.append("prefAgeMax", u.getPrefAgeMax())
 					.append("prefDistance", u.getPrefDistance())
 					.append("prefLocation", u.getPrefLocation());
 			coll.insertOne(d);
@@ -104,7 +102,8 @@ public class Data {
 				.append("prefMale", u.getPrefMale())
 				.append("prefFemale", u.getPrefFemale())
 				.append("prefTrans", u.getPrefTrans())
-				.append("prefAge", u.getPrefAge())
+				.append("prefAgeMin", u.getPrefAgeMin())
+				.append("prefAgeMax", u.getPrefAgeMax())
 				.append("prefDistance", u.getPrefDistance())
 				.append("prefLocation", u.getPrefLocation());
 		Bson updateOperationDocument = new Document("$set", newValue);
@@ -159,17 +158,4 @@ public class Data {
 		Bson filter = new Document("name", school.getName());
 		coll.deleteOne(filter);
 	}
-
-    
-    /*List<Document> documents = (List<Document>) coll.find().into(
-		new ArrayList<Document>());
-
-    for(Document document : documents){
-       System.out.println(document);
-    }*/
-	/*BasicDBObject u = new BasicDBObject("user", "testdb")
-		.append("firstname", user.getFirstname())
-		.append("lastname", user.getLastname());
-	coll.insertOne(u);*/
-
 }

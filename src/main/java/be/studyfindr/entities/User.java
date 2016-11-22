@@ -3,8 +3,9 @@ package be.studyfindr.entities;
 import org.bson.Document;
 
 public class User {
+
 	public User(long id, String email, String firstname, String lastname, String location, int age,
-				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAge, int prefDistance, int prefLocation) {
+				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -15,7 +16,8 @@ public class User {
         this.prefMale = prefMale;
         this.prefFemale = prefFemale;
         this.prefTrans = prefTrans;
-		this.prefAge = prefAge;
+		this.prefAgeMin = prefAgeMin;
+		this.prefAgeMax = prefAgeMax;
 		this.prefDistance = prefDistance;
 		this.prefLocation = prefLocation;
 	}
@@ -30,7 +32,7 @@ public class User {
 		this.prefMale = doc.getBoolean("prefMale");
 		this.prefFemale = doc.getBoolean("prefFemale");
 		this.prefTrans = doc.getBoolean("prefTrans");
-		this.prefAge = doc.getInteger("prefAge");
+		this.prefAgeMin = doc.getInteger("prefAgeMin");
 		this.prefDistance = doc.getInteger("prefDistance");
 		this.prefLocation = doc.getInteger("prefLocation");
 	}
@@ -44,7 +46,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + ", prefMale=" + prefMale
-				+ ", prefFemale=" + prefFemale + ", prefTrans=" + prefTrans + ", prefAge=" + prefAge + ", prefDistance="
+				+ ", prefFemale=" + prefFemale + ", prefTrans=" + prefTrans + ", prefAgeMin=" + prefAgeMin + ", prefAgeMax=" + prefAgeMax + ", prefDistance="
 				+ prefDistance + ", prefLocation=" + prefLocation + "]";
 	}
 
@@ -59,10 +61,10 @@ public class User {
     private boolean prefMale;
 	private boolean prefFemale;
 	private boolean prefTrans;
-	private int prefAge;
+	private int prefAgeMin;
+	private int prefAgeMax;
 	private int prefDistance;
 	private int prefLocation;
-
 
 	public long getid() {
 		return id;
@@ -136,12 +138,20 @@ public class User {
         this.prefTrans = prefTrans;
     }
 
-	public int getPrefAge() {
-		return prefAge;
+	public int getPrefAgeMin() {
+		return prefAgeMin;
 	}
 
-	public void setPrefAge(int prefAge) {
-		this.prefAge = prefAge;
+	public void setPrefAgeMin(int prefAge) {
+		this.prefAgeMin = prefAge;
+	}
+
+	public int getPrefAgeMax() {
+		return prefAgeMax;
+	}
+
+	public void setPrefAgeMax(int prefAgeMax) {
+		this.prefAgeMax = prefAgeMax;
 	}
 
 	public int getPrefDistance() {
@@ -172,7 +182,7 @@ public class User {
 		if (getPrefMale() != user.getPrefMale()) return false;
 		if (getPrefFemale() != user.getPrefFemale()) return false;
 		if (getPrefTrans() != user.getPrefTrans()) return false;
-		if (getPrefAge() != user.getPrefAge()) return false;
+		if (getPrefAgeMin() != user.getPrefAgeMin()) return false;
 		if (getPrefDistance() != user.getPrefDistance()) return false;
 		if (getPrefLocation() != user.getPrefLocation()) return false;
 		if (!getEmail().equals(user.getEmail())) return false;
@@ -193,7 +203,7 @@ public class User {
 		result = 31 * result + (getPrefMale() ? 1 : 0);
 		result = 31 * result + (getPrefFemale() ? 1 : 0);
 		result = 31 * result + (getPrefTrans() ? 1 : 0);
-		result = 31 * result + getPrefAge();
+		result = 31 * result + getPrefAgeMin();
 		result = 31 * result + getPrefDistance();
 		result = 31 * result + getPrefLocation();
 		return result;

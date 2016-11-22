@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -34,7 +33,8 @@ public class UsersController {
             currentUser.setPrefMale(user.getPrefMale());
             currentUser.setPrefFemale(user.getPrefFemale());
             currentUser.setPrefTrans(user.getPrefTrans());
-            currentUser.setPrefAge(user.getPrefAge());
+            currentUser.setPrefAgeMin(user.getPrefAgeMin());
+            currentUser.setPrefAgeMax(user.getPrefAgeMax());
             currentUser.setPrefDistance(user.getPrefDistance());
             currentUser.setPrefLocation(user.getPrefLocation());
 
