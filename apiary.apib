@@ -1,80 +1,140 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://studyfindr.herokuapp.com
 
 # ScrumMojito
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+ScrumMojito is a simple API allowing students to find matches.
 
-## Questions Collection [/questions]
+## Facebook Authentication [/auth/facebook]
 
-### List All Questions [GET]
+### Login to Facebook profile [GET /auth/facebook{?code}]
+
+Login to a Facebook profile with the authentication code from Facebook.
+The server will process this and gets the information from your profile (on first login).
+
++ Parameters
+    + code (string, required) - Authentication Code from Facebook
 
 + Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                "AccessToken": "testAccessToken",
+                "id": 10123456789
+            }
+
+    + Schema
+    
+            {
+                "AccessToken": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "long"
+                }
+            }
+
+### Logout from Facebook profile [GET /auth/facebook/logout{?accessToken,id}]
+
+Logout from the current Facebook profile.
+
++ Parameters
+    + accessToken (string, required) - Access Code from Facebook
+    + id (long, required) - User Facebook id
+
++ Response 200 (application/json)
+    
+    + Body
+        
+            {
+                "message": "Succesfully logged out"
+            }
+        
+    + Schema
+    
+            {
+                "message": {
+                    "type": "string"
                     }
-                ]
+            }
+
+## School [/school]
+
+### Get schools [GET /school{?name}]
+
+Get all schools or the school with a given name.
+
++ Parameters
+    + name (string) - Name of the required school (if NULL, all schools get returned)
+    
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                {
+                    "id": 1,
+                    "name": "Technologiecampus Odisee",
+                    "address": "Gebroeders De Smedtstraat 1, 9000 Gent"
+                },
+                {
+                    "id": 2,
+                    "name": "HoGent",
+                    "address": "Valentin Vaerwyckweg, 9000 Gent"
+                }
+            }
+            
+    + Schema
+    
+            {
+                {
+                    "id": {
+                        "type": "int"
+                        },
+                    "name": {
+                        "type": "string"
+                        },
+                    "address" : {
+                        "type": "string"
+                        }
+                }
+            }
+            
+## User [/user]
+
+### Get info [GET /user/{?id}/info]
+
+Get the info about the user with the given id.
+
++ Parameters
+    + id (long, required) - Access Code from Facebook
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "10123456789",
+                "email": "test@gmail.com",
+                "firstname": "Jos",
+                "lastname": "De Bakker",
+                "location": "Gent",
+                "age": 20,
+                "prefMale": false,
+                "prefFemale": true,
+                "prefTrans": false,
+                "prefAge": 20,
+                "prefDistance": 25,
+                "prefLocation": 1
+            }
+            
+    + Schema
+    
+            {
+                "id": {
+                    "type": "int"
+                    },
+                
+                
             }
