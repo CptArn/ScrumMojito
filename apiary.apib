@@ -169,3 +169,70 @@ Get the info about the user with the given id.
                     "type": "int"
                 }
             }
+### Get current user info [GET /user/getmyinfo{?accessToken,id}]
+
+Get the info of the user that is currently logged in.
+
++ Parameters
+    + accessToken (string, required) - Access Code from Facebook
+    + id (long, required) - User Facebook id
+    
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "10123456789",
+                "email": "test@gmail.com",
+                "firstname": "Jos",
+                "lastname": "De Bakker",
+                "location": "Gent",
+                "age": 20,
+                "prefMale": false,
+                "prefFemale": true,
+                "prefTrans": false,
+                "prefAge": 20,
+                "prefDistance": 25,
+                "prefLocation": 1
+            }
+            
+    + Schema
+    
+            {
+                "id": {
+                    "type": "int"
+                    },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                    },
+                "lastname": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                    },
+                "age": {
+                    "type": "int"
+                },
+                "prefMale": {
+                    "type": "boolean"
+                    },
+                "prefFemale": {
+                    "type": "boolean"
+                },
+                "prefTrans": {
+                    "type": "boolean"
+                },
+                "prefAge": {
+                    "type": "int"
+                    },
+                "prefDistance": {
+                    "type": "int"
+                },
+                "prefLocation": {
+                    "type": "int"
+                }
+            }
