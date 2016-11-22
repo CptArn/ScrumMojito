@@ -11,6 +11,21 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class UsersController {
     Data dataLayer = new Data();
+    private FacebookLogic fb;
+
+    public UsersController(){
+        fb = new FacebookLogic();
+    }
+
+    @RequestMapping("user/getmyinfo")
+    public ResponseEntity<User> getMyInfo(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
+        be.studyfindr.entities.User s = fb.getMyInfoFromBackend(accessToken, id);
+        if(s == null){
+            throw new IllegalArgumentException("Invalid login");
+        }
+        return new ResponseEntity<be.studyfindr.entities.User>(s, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/user/{id}/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUserInfo(@PathVariable("id") long id) {
         User user = dataLayer.getUser(id);

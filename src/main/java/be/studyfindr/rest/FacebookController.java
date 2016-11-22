@@ -1,13 +1,10 @@
 package be.studyfindr.rest;
 
-import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
-import be.studyfindr.entities.ErrorResponse;
 import be.studyfindr.entities.LoginResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -40,7 +37,7 @@ public class FacebookController {
 	  	try{
 		  	return fb.startAuthentication(session);
 	  	}catch(Exception ex){
-			return new RedirectView();
+			throw new IllegalArgumentException("Something went wrong @/auth/facebook.");
 	  	}
   	}
 
@@ -61,28 +58,14 @@ public class FacebookController {
 	 * @param accessToken access token to invalidate.
 	 * @param id id associated with the token.
 	 * @return status code and message.
-	 * @throws RestException when user input is invalid.
 	 */
 	@RequestMapping("/facebook/logout")
-	public HashMap<String, String> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws RestException {
-		if (!fb.userIsValid(accessToken, id)) throw new RestException("Invalid login");
+	public HashMap<String, String> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
+		if (!fb.userIsValid(accessToken, id)) throw new IllegalArgumentException("Invalid id - access token combination.");
 		boolean state = fb.logout(accessToken, id);
+		if (!state) throw new IllegalArgumentException("Something went wrong @/facebook/logout.");
 		HashMap<String, String> status = new HashMap<String, String>();
-		status.put("code", state ? "200" : "500");
-		status.put("mesage", state ? "successfully logged out" : "cannot logout current user");
+		status.put("mesage", "successfully logged out");
 		return status;
-	}
-
-	/**
-	 * Handles an exception associated with a Facebook operation.
-	 * @param ex exception descriptor.
-	 * @return error message.
-	 */
-	@ExceptionHandler(RestException.class)
-	public ResponseEntity<ErrorResponse> exceptionHandler(Exception ex) {
-		ErrorResponse error = new ErrorResponse();
-		error.setErrorCode(HttpStatus.UNAUTHORIZED.value());
-		error.setMessage(ex.getMessage());
-		return new ResponseEntity<ErrorResponse>(error, HttpStatus.OK);
 	}
 }

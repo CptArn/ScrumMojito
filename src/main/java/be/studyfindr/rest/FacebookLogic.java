@@ -82,9 +82,8 @@ public class FacebookLogic {
      * Starts the authentication process with Facebook by exchanging  the auth. token with an access token.
      * @param session user request containing the auth. token.
      * @return redirect request to Facebook.
-     * @throws Exception if the process fails.
      */
-    public RedirectView startAuthentication(HttpSession session) throws Exception {
+    public RedirectView startAuthentication(HttpSession session) {
         String state = UUID.randomUUID().toString();
         session.setAttribute(STATE, state);
         OAuth2Operations oauthOperations = facebookConnectionFactory.getOAuthOperations();
