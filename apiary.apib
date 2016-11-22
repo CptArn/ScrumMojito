@@ -59,14 +59,14 @@ Logout from the current Facebook profile.
                     }
             }
 
-## School [/school]
+## School [/schools]
 
-### Get schools [GET /school{?name}]
+### Get schools [GET /schools{?name}]
 
 Get all schools or the school with a given name.
 
 + Parameters
-    + name (string) - Name of the required school (if NULL, all schools get returned)
+    + name (string, optional) - Name of the required school (if NULL, all schools get returned)
     
 + Response 200 (application/json)
 
@@ -103,7 +103,7 @@ Get all schools or the school with a given name.
             
 ## User [/user]
 
-### Get info [GET /user/{?id}/info]
+### Get user info [GET /user/{id}/info]
 
 Get the info about the user with the given id.
 
