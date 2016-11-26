@@ -1,14 +1,20 @@
 package be.studyfindr;
 
 import be.studyfindr.entities.Data;
+import be.studyfindr.entities.Message;
 import be.studyfindr.entities.User;
 import be.studyfindr.rest.FacebookController;
 import be.studyfindr.rest.UsersController;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.util.JSON;
 import org.bson.Document;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -59,7 +65,16 @@ public class UsersControllerClass {
     }
 
     @Test
-    public void test2GetMyInfoWithSuccess() {
+    public void test2GetInfo() {
+        try {
+            this.mockMvc.perform(get("/user/-1/info?accessToken=testtoken")).andExpect(status().is4xxClientError());
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void test3GetMyInfoWithSuccess() {
         try {
             MvcResult result = this.mockMvc.perform(
                     get("/user/getmyinfo?accessToken=testtoken&id=" + u1.getid())
@@ -72,7 +87,7 @@ public class UsersControllerClass {
     }
 
     @Test
-    public void test3GetMyInfoFail() {
+    public void test4GetMyInfoFail() {
         try {
             MvcResult result = this.mockMvc.perform(
                     get("/user/getmyinfo?accessToken=INVALID&id=" + u1.getid())
@@ -82,7 +97,16 @@ public class UsersControllerClass {
         }
     }
 
-
+    @Test
+    public void test5GetMyInfoFail() {
+        try {
+            MvcResult result = this.mockMvc.perform(
+                    get("/user/getmyinfo?accessToken=testtoken&id=-1")
+            ).andExpect(status().is4xxClientError()).andReturn();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /*@Test
     public void test1PutInfo() {

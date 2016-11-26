@@ -257,4 +257,9 @@ public class User {
 		result = 31 * result + getPrefLocation();
 		return result;
 	}
+
+	public User clone(){
+		return new User(this.id, this.email, this.firstname, this.lastname, this.location, this.age,
+		this.prefMale, this.prefFemale, this.prefTrans, this.prefAgeMin, this.prefAgeMax, this.prefDistance, this.prefLocation, this.male, this.female);
+	}
 }

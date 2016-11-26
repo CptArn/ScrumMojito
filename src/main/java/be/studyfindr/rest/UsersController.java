@@ -23,7 +23,12 @@ public class UsersController {
     @RequestMapping("user/getmyinfo")
     public ResponseEntity<User> getMyInfo(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
-        be.studyfindr.entities.User s = fb.getMyInfoFromBackend(accessToken, id);
+        be.studyfindr.entities.User s;
+        try {
+            s = fb.getMyInfoFromBackend(accessToken, id);
+        }catch(Exception ex) {
+            s = null;
+        }
         if(s == null){
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
@@ -45,14 +50,14 @@ public class UsersController {
     @RequestMapping(path = "/user/{id}/update", method = RequestMethod.POST)
     public ResponseEntity<User> updateUserInfo(@PathVariable("id") long id, @RequestParam("accessToken") String accessToken, @RequestBody User user) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
-        User currentUser;
+        User updated;
         try{
-            currentUser = dataLayer.getUser(id);
             dataLayer.updateUser(user);
+            updated = dataLayer.getUser(id);
         }catch(Exception ex){
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<User>(currentUser, HttpStatus.OK);
+        return new ResponseEntity<User>(updated, HttpStatus.OK);
 
     }
 
