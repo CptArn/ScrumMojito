@@ -21,8 +21,8 @@ public class DatabaseTest {
 	public static void setUp() {
 		dataLayer = new Data();
 		// dataLayer.deleteAllUsers();
-		u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, false, 18, 35, 10, 1);
-		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21, true, false, false, 20, 25, 15, 2);
+		u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, false, 18, 35, 10, 1, false, false);
+		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21, true, false, false, 20, 25, 15, 2, false, false);
 		s1 = new School("UGent", "St. Pietersnieuwstraat 33, 9000 Gent");
 		s2 = new School("UAntwerpen", "Prinsstraat 13, 2000 Antwerpen");
 	}
@@ -55,7 +55,7 @@ public class DatabaseTest {
 		assert(return1.equals(u1) && return2.equals(u2));
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void test4DeleteUsers() {
 		dataLayer.deleteUser(u1);
 		dataLayer.deleteUser(u2);

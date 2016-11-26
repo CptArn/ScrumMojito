@@ -4,7 +4,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import be.studyfindr.entities.LoginResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -13,6 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
  * @version 1.1
  */
 @RestController
+@CrossOrigin
 public class FacebookController {
  	// connection to the logic
 	private FacebookLogic fb;
@@ -59,7 +59,7 @@ public class FacebookController {
 	 * @param id id associated with the token.
 	 * @return status code and message.
 	 */
-	@RequestMapping("/facebook/logout")
+	@RequestMapping(path = "/facebook/logout", method = RequestMethod.POST)
 	public HashMap<String, String> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
 		if (!fb.userIsValid(accessToken, id)) throw new IllegalArgumentException("Invalid id - access token combination.");
 		boolean state = fb.logout(accessToken, id);

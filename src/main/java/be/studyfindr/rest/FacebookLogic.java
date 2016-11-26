@@ -3,6 +3,7 @@ import java.util.Properties;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import be.studyfindr.entities.Data;
+import be.studyfindr.entities.Enums;
 import be.studyfindr.entities.LoginResponse;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -132,6 +133,7 @@ public class FacebookLogic {
             return true;
         }catch(NullPointerException ex){
             // create a new user
+            String g = user.getGender();
             be.studyfindr.entities.User newUser = new be.studyfindr.entities.User(
                     Long.parseLong(user.getId()),
                     user.getEmail(),
@@ -145,7 +147,9 @@ public class FacebookLogic {
                     18,
                     35,
                     25,
-                    1
+                    1,
+                    g.toLowerCase().contains("male"),
+                    g.toLowerCase().contains("female")
             );
             backend.addUser(newUser);
             return true;

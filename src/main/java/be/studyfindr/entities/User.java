@@ -2,10 +2,15 @@ package be.studyfindr.entities;
 
 import org.bson.Document;
 
+import java.util.IllegalFormatException;
+
 public class User {
+	public final int DEFAULT_PREF_AGE_MIN = 18;
+	public final int DEFAULT_PREF_AGE_MAX = 35;
+	public final int DEFAULT_PREF_DISTANCE = 100;
 
 	public User(long id, String email, String firstname, String lastname, String location, int age,
-				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation) {
+				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation, boolean isMale, boolean isFemale) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -20,21 +25,27 @@ public class User {
 		this.prefAgeMax = prefAgeMax;
 		this.prefDistance = prefDistance;
 		this.prefLocation = prefLocation;
+		this.female = isFemale;
+		this.male = isMale;
 	}
 
 	public User(Document doc) {
+		if (doc == null) throw new IllegalArgumentException("The document cannot be 'null'.");
 		this.id = doc.getLong("_id");
 		this.email = doc.getString("email");
 		this.firstname = doc.getString("firstname");
 		this.lastname = doc.getString("lastname");
 		this.location = doc.getString("location");
 		this.age = doc.getInteger("age");
-		this.prefMale = doc.getBoolean("prefMale");
-		this.prefFemale = doc.getBoolean("prefFemale");
-		this.prefTrans = doc.getBoolean("prefTrans");
-		this.prefAgeMin = doc.getInteger("prefAgeMin");
-		this.prefDistance = doc.getInteger("prefDistance");
+		this.prefMale = doc.getBoolean("prefMale", true);
+		this.prefFemale = doc.getBoolean("prefFemale", true);
+		this.prefTrans = doc.getBoolean("prefTrans", true);
+		this.prefAgeMin = doc.getInteger("prefAgeMin", DEFAULT_PREF_AGE_MIN);
+		this.prefAgeMax = doc.getInteger("prefAgeMax", DEFAULT_PREF_AGE_MAX);
+		this.prefDistance = doc.getInteger("prefDistance", DEFAULT_PREF_DISTANCE);
 		this.prefLocation = doc.getInteger("prefLocation");
+		this.male = doc.getBoolean("male");
+		this.female = doc.getBoolean("female");
 	}
 
 	// dummy constructor
@@ -56,6 +67,8 @@ public class User {
 	private String lastname;
 	private String location;
 	private int age;
+	private boolean male;
+	private boolean female;
 
 	// preferences
     private boolean prefMale;
@@ -65,6 +78,33 @@ public class User {
 	private int prefAgeMax;
 	private int prefDistance;
 	private int prefLocation;
+
+	public boolean getIsMale(){
+		return this.male && !this.female;
+	}
+
+	public boolean getIsFemale(){
+		return female && !male;
+	}
+
+	public boolean getIsTrans(){
+		return male && female;
+	}
+
+	public void setIsMale(){
+		this.female = false;
+		this.male = true;
+	}
+
+	public void setIsFemale(){
+		this.female = true;
+		this.male = false;
+	}
+
+	public void setIsTrans(){
+		this.female = true;
+		this.male = true;
+	}
 
 	public long getid() {
 		return id;
@@ -188,6 +228,9 @@ public class User {
 		if (!getEmail().equals(user.getEmail())) return false;
 		if (!getFirstname().equals(user.getFirstname())) return false;
 		if (!getLastname().equals(user.getLastname())) return false;
+		if (getIsFemale() != user.getIsFemale()) return false;
+		if (getIsMale() != user.getIsMale()) return false;
+		if (getIsTrans() != user.getIsTrans()) return false;
 		return getLocation().equals(user.getLocation());
 
 	}
