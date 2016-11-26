@@ -1,8 +1,6 @@
 package be.studyfindr.entities;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
+import com.mongodb.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -40,7 +38,9 @@ public class Data {
 					.append("prefAgeMin", u.getPrefAgeMin())
 					.append("prefAgeMax", u.getPrefAgeMax())
 					.append("prefDistance", u.getPrefDistance())
-					.append("prefLocation", u.getPrefLocation());
+					.append("prefLocation", u.getPrefLocation())
+					.append("male", u.getIsMale())
+					.append("female", u.getIsFemale());
 			coll.insertOne(d);
 		}
 	}
@@ -118,7 +118,9 @@ public class Data {
 				.append("prefAgeMin", u.getPrefAgeMin())
 				.append("prefAgeMax", u.getPrefAgeMax())
 				.append("prefDistance", u.getPrefDistance())
-				.append("prefLocation", u.getPrefLocation());
+				.append("prefLocation", u.getPrefLocation())
+				.append("male", u.getIsMale())
+				.append("female", u.getIsFemale());
 		Bson updateOperationDocument = new Document("$set", newValue);
 		coll.updateOne(filter, updateOperationDocument);
 	}
@@ -131,7 +133,12 @@ public class Data {
 
 	public User getUser(long id) {
 		Bson filter = new Document("_id", id);
-		Document doc = db.getCollection("users").find(filter).first();
+		Document doc;
+		try{
+			doc = db.getCollection("users").find(filter).first();
+		}catch(Exception ex){
+			throw new IllegalArgumentException("Invalid ID.");
+		}
 		return new User(doc);
 	}
 
