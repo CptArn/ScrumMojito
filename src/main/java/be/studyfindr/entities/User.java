@@ -10,7 +10,7 @@ public class User {
 	public final int DEFAULT_PREF_DISTANCE = 100;
 
 	public User(long id, String email, String firstname, String lastname, String location, int age,
-				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation, boolean isMale, boolean isFemale) {
+				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation, boolean male, boolean female) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -25,13 +25,19 @@ public class User {
 		this.prefAgeMax = prefAgeMax;
 		this.prefDistance = prefDistance;
 		this.prefLocation = prefLocation;
-		this.female = isFemale;
-		this.male = isMale;
+		this.female = female;
+		this.male = male;
 	}
 
 	public User(Document doc) {
 		if (doc == null) throw new IllegalArgumentException("The document cannot be 'null'.");
-		this.id = doc.getLong("_id");
+		Object idFromDoc = doc.getOrDefault("_id", "");
+		if (idFromDoc instanceof Integer){
+			this.id = (long) doc.getInteger("_id");
+		}
+		else{
+			this.id = doc.getLong("_id");
+		}
 		this.email = doc.getString("email");
 		this.firstname = doc.getString("firstname");
 		this.lastname = doc.getString("lastname");
@@ -44,8 +50,8 @@ public class User {
 		this.prefAgeMax = doc.getInteger("prefAgeMax", DEFAULT_PREF_AGE_MAX);
 		this.prefDistance = doc.getInteger("prefDistance", DEFAULT_PREF_DISTANCE);
 		this.prefLocation = doc.getInteger("prefLocation");
-		this.male = doc.getBoolean("male");
-		this.female = doc.getBoolean("female");
+		this.male = doc.getBoolean("male", false);
+		this.female = doc.getBoolean("female", false);
 	}
 
 	// dummy constructor
@@ -55,7 +61,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", firstname=" + firstname
+		return "User [_id=" + id + ", email=" + email + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + ", prefMale=" + prefMale
 				+ ", prefFemale=" + prefFemale + ", prefTrans=" + prefTrans + ", prefAgeMin=" + prefAgeMin + ", prefAgeMax=" + prefAgeMax + ", prefDistance="
 				+ prefDistance + ", prefLocation=" + prefLocation + "]";

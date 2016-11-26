@@ -25,7 +25,8 @@ import org.springframework.web.servlet.view.RedirectView;
  * @version 1.1
  */
 public class FacebookLogic {
-
+    // accept test token
+    private boolean allowTestToken = false;
     // Default state for a session.
     public static final String STATE = "state";
 
@@ -71,11 +72,13 @@ public class FacebookLogic {
             this.applicationHost = props.getProperty("studyfindr.host");
             facebookConnectionFactory =
                     new FacebookConnectionFactory(props.getProperty("spring.social.facebook.appId"), props.getProperty("spring.social.facebook.appSecret"));
+            this.allowTestToken = Boolean.parseBoolean(props.getProperty("allowTestToken"));
         }catch(Exception ex){
             // fallback to defaults
             this.applicationHost = "http://localhost:8080";
             facebookConnectionFactory =
                     new FacebookConnectionFactory("1794346987494326", "70d05b6625be77ee4db63a8d529e7746");
+            this.allowTestToken = false;
         }
     }
 
@@ -204,6 +207,7 @@ public class FacebookLogic {
      * @return true if user is valid.
      */
     public final boolean userIsValid(String accessToken, long id){
+        if (accessToken.equals("testtoken") && allowTestToken) return true;
         User user = getMyInfoFromFacebook(accessToken);
         if (user == null) return false;
         return Long.parseLong(user.getId()) == id;

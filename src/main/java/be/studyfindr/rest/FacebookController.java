@@ -4,6 +4,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import be.studyfindr.entities.LoginResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -60,12 +62,12 @@ public class FacebookController {
 	 * @return status code and message.
 	 */
 	@RequestMapping(path = "/facebook/logout", method = RequestMethod.POST)
-	public HashMap<String, String> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
-		if (!fb.userIsValid(accessToken, id)) throw new IllegalArgumentException("Invalid id - access token combination.");
+	public ResponseEntity<HashMap<String, String>> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
+		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<HashMap<String, String>>(HttpStatus.UNAUTHORIZED);
 		boolean state = fb.logout(accessToken, id);
 		if (!state) throw new IllegalArgumentException("Something went wrong @/facebook/logout.");
 		HashMap<String, String> status = new HashMap<String, String>();
 		status.put("mesage", "successfully logged out");
-		return status;
+		return new ResponseEntity<HashMap<String, String>>(status, HttpStatus.OK);
 	}
 }

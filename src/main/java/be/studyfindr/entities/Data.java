@@ -10,6 +10,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mongodb.client.model.Filters.eq;
 
 
 public class Data {
@@ -104,25 +105,23 @@ public class Data {
 	}
 
 	public void updateUser(User u) {
-		MongoCollection<Document> coll = db.getCollection("users");
-		Bson filter = new Document("_id", u.getid());
-		Bson newValue = new Document("_id", u.getid())
-				.append("email", u.getEmail())
-				.append("firstname", u.getFirstname())
-				.append("lastname", u.getLastname())
-				.append("location", u.getLocation())
-				.append("age", u.getAge())
-				.append("prefMale", u.getPrefMale())
-				.append("prefFemale", u.getPrefFemale())
-				.append("prefTrans", u.getPrefTrans())
-				.append("prefAgeMin", u.getPrefAgeMin())
-				.append("prefAgeMax", u.getPrefAgeMax())
-				.append("prefDistance", u.getPrefDistance())
-				.append("prefLocation", u.getPrefLocation())
-				.append("male", u.getIsMale())
-				.append("female", u.getIsFemale());
-		Bson updateOperationDocument = new Document("$set", newValue);
-		coll.updateOne(filter, updateOperationDocument);
+		MongoCollection<Document> collection = db.getCollection("users");
+		collection.updateOne(eq("_id", u.getid()), new Document("$set",
+				new Document("email", u.getEmail())
+						.append("firstname", u.getFirstname())
+						.append("lastname", u.getLastname())
+						.append("location", u.getLocation())
+						.append("age", u.getAge())
+						.append("prefMale", u.getPrefMale())
+						.append("prefFemale", u.getPrefFemale())
+						.append("prefTrans", u.getPrefTrans())
+						.append("prefAgeMin", u.getPrefAgeMin())
+						.append("prefAgeMax", u.getPrefAgeMax())
+						.append("prefDistance", u.getPrefDistance())
+						.append("prefLocation", u.getPrefLocation())
+						.append("male", u.getIsMale())
+						.append("female", u.getIsFemale())
+		));
 	}
 
 	public void deleteUser(User u) {

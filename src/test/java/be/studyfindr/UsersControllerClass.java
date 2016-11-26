@@ -50,13 +50,39 @@ public class UsersControllerClass {
     @Test
     public void test1GetInfo() {
         try {
-            MvcResult result = this.mockMvc.perform(get("/user/1/info")).andExpect(status().isOk()).andReturn();
+            MvcResult result = this.mockMvc.perform(get("/user/1/info?accessToken=testtoken")).andExpect(status().isOk()).andReturn();
             User user = new User(Document.parse(result.getResponse().getContentAsString()));
             assert(user.equals(u1));
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    public void test2GetMyInfoWithSuccess() {
+        try {
+            MvcResult result = this.mockMvc.perform(
+                    get("/user/getmyinfo?accessToken=testtoken&id=" + u1.getid())
+            ).andExpect(status().isOk()).andReturn();
+            User user = new User(Document.parse(result.getResponse().getContentAsString()));
+            assert(user.equals(u1));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void test3GetMyInfoFail() {
+        try {
+            MvcResult result = this.mockMvc.perform(
+                    get("/user/getmyinfo?accessToken=INVALID&id=" + u1.getid())
+            ).andExpect(status().is4xxClientError()).andReturn();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
     /*@Test
     public void test1PutInfo() {
