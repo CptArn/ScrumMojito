@@ -7,6 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @CrossOrigin
 public class UsersController {
@@ -56,5 +59,12 @@ public class UsersController {
             dataLayer.updateUser(currentUser);
             return new ResponseEntity<User>(currentUser, HttpStatus.OK);
         }
+    }
+
+    @RequestMapping("user/getmyqueue")
+    public ResponseEntity<List<User>> getQueue() {
+
+
+        return new ResponseEntity<List<User>>(new ArrayList<>(), HttpStatus.OK);
     }
 }

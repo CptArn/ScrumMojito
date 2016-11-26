@@ -16,6 +16,7 @@ public class DatabaseTest {
 	static User u2;
 	static School s1;
 	static School s2;
+	static Like l;
 
 	@BeforeClass
 	public static void setUp() {
@@ -25,6 +26,7 @@ public class DatabaseTest {
 		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21, true, false, false, 20, 25, 15, 2);
 		s1 = new School("UGent", "St. Pietersnieuwstraat 33, 9000 Gent");
 		s2 = new School("UAntwerpen", "Prinsstraat 13, 2000 Antwerpen");
+		l = new Like(1, 2);
 	}
 
 	@Test
@@ -99,4 +101,22 @@ public class DatabaseTest {
 		School school = dataLayer.getSchool(s1.getName());
 		fail(school.getName());
 	}
+
+	@Test
+	public void test09AddLike() {
+		dataLayer.addLike(l);
+		Like found = dataLayer.getLike((long)1, (long)2);
+		assert(found.getLiker_Id() == 1);
+		assert(found.getLikee_Id() == 2);
+	}
+
+	@Test
+	public  void test10DeleteLike() {
+		Like found = dataLayer.getLike((long)1, (long)2);
+		dataLayer.deleteLike(found);
+		found = dataLayer.getLike((long)1, (long)2);
+		assert(found.getLiker_Id() == 0);
+		assert(found.getLikee_Id() == 0);
+	}
+
 }

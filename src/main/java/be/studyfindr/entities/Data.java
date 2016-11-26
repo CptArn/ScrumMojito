@@ -71,6 +71,19 @@ public class Data {
 		coll.insertOne(d);
 	}
 
+	public void addLike(Like l) {
+		Bson filter = new Document("liker_id", l.getLiker_Id())
+				.append("likee_id", l.getLikee_Id());
+		Document found = db.getCollection("likes").find(filter).first();
+		if (found == null && l.getLikee_Id() != l.getLiker_Id()) {
+			MongoCollection<Document> coll = db.getCollection("likes");
+			Document d = new Document("liker_id", l.getLiker_Id())
+					.append("likee_id", l.getLikee_Id())
+					.append("_id", coll.count());
+			coll.insertOne(d);
+		}
+	}
+
 	public void addSchool(School s) {
 		MongoCollection<Document> coll = db.getCollection("schools");
 		Bson filter = new Document("name", s.getName());
@@ -156,6 +169,28 @@ public class Data {
 	public void deleteSchool(School school) {
 		MongoCollection<Document> coll = db.getCollection("schools");
 		Bson filter = new Document("name", school.getName());
+		coll.deleteOne(filter);
+	}
+
+	public Like getLike(Long liker_id, Long likee_id) {
+		Like found;
+		Bson filter = new Document("liker_id", liker_id).append("likee_id", likee_id);
+		Document objectFound = db.getCollection("likes").find(filter).first();
+		found = new Like(objectFound);
+		return found;
+	}
+
+	public void getLikesByLiker() {
+
+	}
+
+	public void getLikesByLikee() {
+
+	}
+
+	public void deleteLike(Like l) {
+		MongoCollection<Document> coll = db.getCollection("likes");
+		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
 		coll.deleteOne(filter);
 	}
 }
