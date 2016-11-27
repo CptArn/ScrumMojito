@@ -2,6 +2,7 @@ package be.studyfindr;
 
 import static org.junit.Assert.*;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -110,7 +111,7 @@ public class DatabaseTest {
 		assert(found.getLikee_Id() == 2);
 	}
 
-	@Test
+	@Test(expected= IllegalArgumentException.class)
 	public  void test10DeleteLike() {
 		Like found = dataLayer.getLike((long)1, (long)2);
 		dataLayer.deleteLike(found);

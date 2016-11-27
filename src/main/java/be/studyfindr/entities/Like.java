@@ -3,6 +3,12 @@ package be.studyfindr.entities;
 import org.bson.Document;
 
 public class Like {
+
+    /**
+     * Create a new like
+     * @param user1_Id id of the liker
+     * @param user2_Id id of the likee
+     */
     public Like(long user1_Id, long user2_Id) {
         super();
         this.liker_id = user1_Id;
@@ -12,11 +18,9 @@ public class Like {
 
     public Like(Document doc) {
         super();
-        if (doc != null) {
-            this.liker_id = doc.getLong("liker_id");
-            this.likee_id = doc.getLong("likee_id");
-        }
-
+        if (doc == null) throw new IllegalArgumentException("doc cannot be null");
+        this.liker_id = doc.getLong("liker_id");
+        this.likee_id = doc.getLong("likee_id");
     }
 
     private long liker_id;

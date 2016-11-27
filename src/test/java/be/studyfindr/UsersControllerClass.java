@@ -1,6 +1,7 @@
 package be.studyfindr;
 
 import be.studyfindr.entities.Data;
+import be.studyfindr.entities.Like;
 import be.studyfindr.entities.User;
 import be.studyfindr.rest.UsersController;
 import org.bson.Document;
@@ -33,6 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UsersControllerClass {
     static User u1;
+    static User u2;
     static Data dataLayer;
     static MockMvc mockMvc;
 
@@ -47,8 +49,10 @@ public class UsersControllerClass {
     @BeforeClass
     public static void setUp() {
         u1 = new User(1, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, true, 18, 35, 25, 1, false, false);
+        u2 = new User(2, "email2@email.com", "Silke", "Yolo", "Gentj", 22, false, true, false, 18, 35, 25, 1, false, false);
         dataLayer = new Data();
         dataLayer.addUser(u1);
+        dataLayer.addUser(u2);
     }
 
     @Before
@@ -154,6 +158,36 @@ public class UsersControllerClass {
         }
     }
 
+    @Test
+    public void test8LikeNotFound() {
+        try {
+            mockMvc.perform(post("/user/-1/like")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("accessToken", "testtoken")
+                    .param("id", u1.getid() + "")
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isNotFound());
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void test9LikeSuccess() {
+        try {
+            mockMvc.perform(post("/user/2/like")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("accessToken", "testtoken")
+                    .param("id", u1.getid() + "")
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            Like like = dataLayer.getLike(u1.getid(), u2.getid());
+            assert((like.getLikee_Id() + like.getLiker_Id()) == (u1.getid() + u2.getid()));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
         this.mappingJackson2HttpMessageConverter.write(
@@ -164,5 +198,7 @@ public class UsersControllerClass {
     @AfterClass
     public static void tearDown() {
         dataLayer.deleteUser(u1);
+        dataLayer.deleteUser(u2);
+        dataLayer.deleteLike(new Like(u1.getid(), u2.getid()));
     }
 }
