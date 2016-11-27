@@ -9,7 +9,7 @@ public class LoginResponse {
     private String AccessToken;
     private long Id;
 
-    public LoginResponse(){}
+    public LoginResponse(){};
 
     public LoginResponse(String AccessToken, long id){
         this.AccessToken = AccessToken;
@@ -22,5 +22,13 @@ public class LoginResponse {
 
     public long getId(){
         return this.Id;
+    }
+
+    public void setAccessToken(String accessToken){
+        this.AccessToken = accessToken;
+    }
+
+    public void setId(long id){
+        this.Id = id;
     }
 }

@@ -1,5 +1,6 @@
 package be.studyfindr;
 
+import be.studyfindr.entities.LoginResponse;
 import be.studyfindr.rest.FacebookController;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +36,20 @@ public class FacebookControllerTest {
         this.mockMvc.perform(get("/auth/facebook"))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrlPattern("https://www.facebook.com/**/*"));
+    }
+
+    @Test
+    public void test2LoginResponse(){
+        LoginResponse l = new LoginResponse("testtoken", 123);
+        assert(l.getAccessToken().equals("testtoken") && (l.getId() == 123));
+    }
+
+    @Test
+    public void test3LoginResponse(){
+        LoginResponse l = new LoginResponse();
+        l.setAccessToken("testtoken");
+        l.setId(123);
+        assert(l.getAccessToken().equals("testtoken") && (l.getId() == 123));
     }
 }
 

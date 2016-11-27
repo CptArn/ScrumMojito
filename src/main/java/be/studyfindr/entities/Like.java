@@ -3,7 +3,6 @@ package be.studyfindr.entities;
 import org.bson.Document;
 
 public class Like {
-
     /**
      * Create a new like
      * @param user1_Id id of the liker
