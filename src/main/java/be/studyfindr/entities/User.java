@@ -2,8 +2,6 @@ package be.studyfindr.entities;
 
 import org.bson.Document;
 
-import java.util.IllegalFormatException;
-
 public class User {
 	public final int DEFAULT_PREF_AGE_MIN = 18;
 	public final int DEFAULT_PREF_AGE_MAX = 35;
