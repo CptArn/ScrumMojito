@@ -69,7 +69,7 @@ public class UsersController {
         try{
             // test id to like
             userToLike = dataLayer.getUser(id_to_like);
-            dataLayer.addLike(new Like(myId, id_to_like));
+            dataLayer.addLike(new Like(myId, id_to_like, true, false));
         }catch(Exception ex){
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
@@ -80,6 +80,6 @@ public class UsersController {
     public ResponseEntity<List<User>> getQueue(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
 
-        return new ResponseEntity<List<User>>(new ArrayList<>(), HttpStatus.OK);
+        return new ResponseEntity<List<User>>(dataLayer.getLikesByLikee(id), HttpStatus.OK);
     }
 }

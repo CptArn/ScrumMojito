@@ -26,7 +26,7 @@ public class DatabaseTest {
 		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", "Gentj", 21, true, false, false, 20, 25, 15, 2, false, false);
 		s1 = new School("UGent", "St. Pietersnieuwstraat 33, 9000 Gent");
 		s2 = new School("UAntwerpen", "Prinsstraat 13, 2000 Antwerpen");
-		l = new Like(1, 2);
+		l = new Like(1, 2, true, false);
 	}
 
 	@Test
@@ -110,8 +110,17 @@ public class DatabaseTest {
 		assert(found.getLikee_Id() == 2);
 	}
 
+	@Test
+	public void test10UpdateLike() {
+		l.setStatus(true);
+		dataLayer.updateLike(l);
+		Like found = dataLayer.getLike((long)1, (long)2);
+		assert(found.getStatus() == true);
+
+	}
+
 	@Test(expected=IllegalArgumentException.class)
-	public  void test10DeleteLike() {
+	public  void test11DeleteLike() {
 		Like found = dataLayer.getLike((long)1, (long)2);
 		dataLayer.deleteLike(found);
 		found = dataLayer.getLike((long)1, (long)2);

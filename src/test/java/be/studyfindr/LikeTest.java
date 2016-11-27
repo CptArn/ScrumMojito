@@ -18,7 +18,7 @@ public class LikeTest {
 
     @Test
     public void test1CreateLike() {
-        Like like = new Like(u1.getid(), u2.getid());
+        Like like = new Like(u1.getid(), u2.getid(), true, false);
         assert(like.getLikee_Id() == u2.getid());
         assert(like.getLiker_Id() == u1.getid());
     }

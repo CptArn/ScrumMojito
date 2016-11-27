@@ -80,7 +80,9 @@ public class Data {
 			MongoCollection<Document> coll = db.getCollection("likes");
 			Document d = new Document("liker_id", l.getLiker_Id())
 					.append("likee_id", l.getLikee_Id())
-					.append("_id", coll.count());
+					.append("_id", coll.count())
+					.append("confirmed", l.getStatus())
+					.append("like", l.getLike());
 			coll.insertOne(d);
 		}
 	}
@@ -182,12 +184,31 @@ public class Data {
 		return found;
 	}
 
+	public void updateLike(Like l) {
+		MongoCollection<Document> coll = db.getCollection("likes");
+		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
+		Bson newValue = new Document("liker_id", l.getLiker_Id())
+				.append("likee_id", l.getLikee_Id())
+				.append("confirmed", l.getStatus())
+				.append("like", l.getLike());
+		Bson updateOperationDocument = new Document("$set", newValue);
+		coll.updateOne(filter, updateOperationDocument);
+	}
+
 	public void getLikesByLiker() {
 
 	}
 
-	public void getLikesByLikee() {
-
+	public List<User> getLikesByLikee(Long user_id) {
+		Bson filter = new Document("likee_id", user_id)
+				.append("confirmed", false)
+				.append("like", true);
+		FindIterable<Document> documents = db.getCollection("likes").find(filter);
+		List<User> foundUsers = new ArrayList<>();
+		for(Document doc : documents) {
+			foundUsers.add(getUser(doc.getLong("liker_id")));
+		}
+		return foundUsers;
 	}
 
 	public void deleteLike(Like l) {

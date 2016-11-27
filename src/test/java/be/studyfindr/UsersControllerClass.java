@@ -199,6 +199,6 @@ public class UsersControllerClass {
     public static void tearDown() {
         dataLayer.deleteUser(u1);
         dataLayer.deleteUser(u2);
-        dataLayer.deleteLike(new Like(u1.getid(), u2.getid()));
+        dataLayer.deleteLike(new Like(u1.getid(), u2.getid(), true, false));
     }
 }
