@@ -133,11 +133,7 @@ public class Data {
 	public User getUser(long id) {
 		Bson filter = new Document("_id", id);
 		Document doc;
-		try{
-			doc = db.getCollection("users").find(filter).first();
-		}catch(Exception ex){
-			throw new IllegalArgumentException("Invalid ID.");
-		}
+		doc = db.getCollection("users").find(filter).first();
 		return new User(doc);
 	}
 

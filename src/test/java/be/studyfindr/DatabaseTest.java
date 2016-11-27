@@ -119,4 +119,8 @@ public class DatabaseTest {
 		assert(found.getLikee_Id() == 0);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public  void test11InvalidUser() {
+		assert(dataLayer.getUser(-1) == null);
+	}
 }
