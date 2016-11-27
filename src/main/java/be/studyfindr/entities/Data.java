@@ -203,7 +203,7 @@ public class Data {
 		Bson filter = new Document("likee_id", user_id)
 				.append("confirmed", false)
 				.append("like", true);
-		FindIterable<Document> documents = db.getCollection("likes").find(filter);
+		FindIterable<Document> documents = db.getCollection("likes").find(filter).sort(new Document("_id", -1));
 		List<User> foundUsers = new ArrayList<>();
 		for(Document doc : documents) {
 			foundUsers.add(getUser(doc.getLong("liker_id")));
