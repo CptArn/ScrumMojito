@@ -144,12 +144,12 @@ public class DatabaseTest {
 		assert(allUsers.contains(u1) && allUsers.contains(u2));
 	}
 
-	@Test
+	/*@Test
 	public  void test13AddMessage() {
 		Message m = new Message(1, "message", new Date(), false, 1, 2);
 		dataLayer.addMessage(m);
 		List<Message> messages = dataLayer.getMessages(2);
 		assert(messages.contains(m));
 		dataLayer.deleteMessage(1);
-	}
+	}*/
 }

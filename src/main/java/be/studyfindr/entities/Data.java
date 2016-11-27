@@ -65,7 +65,7 @@ public class Data {
 
 	public List<Message> getMessages(int id){
 		List<Message> messages = new ArrayList<Message>();
-		db.getCollection("messages").find().forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));//.forEach((Block<? super Document>) (e) -> e.equals(messages.add(new Message(e))));
+		db.getCollection("messages").find().forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));
 		return messages;
 	}
 
