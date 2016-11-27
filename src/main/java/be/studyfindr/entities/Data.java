@@ -57,6 +57,18 @@ public class Data {
 		coll.insertOne(d);
 	}
 
+	public void deleteMessage(long id){
+		MongoCollection<Document> coll = db.getCollection("messages");
+		Bson filter = new Document("id", id);
+		coll.deleteOne(filter);
+	}
+
+	public List<Message> getMessages(int id){
+		List<Message> messages = new ArrayList<Message>();
+		db.getCollection("messages").find().forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));//.forEach((Block<? super Document>) (e) -> e.equals(messages.add(new Message(e))));
+		return messages;
+	}
+
 	public void addPhoto(Photo p) {
 		MongoCollection<Document> coll = db.getCollection("photos");
 		Document d = new Document("_id", coll.count() + 1)
@@ -137,6 +149,13 @@ public class Data {
 		Document doc;
 		doc = db.getCollection("users").find(filter).first();
 		return new User(doc);
+	}
+
+	public List<User> getAllUsers() {
+		MongoCollection<Document> doc = db.getCollection("users");
+		List<User> users = new ArrayList<User>();
+		db.getCollection("users").find().forEach((Block<? super Document>) (e) -> e.equals(users.add(new User(e))));
+		return users;
 	}
 
 	public void deleteAllUsers() {

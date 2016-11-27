@@ -7,6 +7,7 @@ import org.junit.runners.MethodSorters;
 
 import be.studyfindr.entities.*;
 
+import java.util.Date;
 import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -131,5 +132,24 @@ public class DatabaseTest {
 	@Test(expected=IllegalArgumentException.class)
 	public  void test11InvalidUser() {
 		assert(dataLayer.getUser(-1) == null);
+	}
+
+	@Test
+	public  void test12GetAllUsers() {
+		dataLayer.addUser(u1);
+		dataLayer.addUser(u2);
+		List<User> allUsers = dataLayer.getAllUsers();
+		dataLayer.deleteUser(u1);
+		dataLayer.deleteUser(u2);
+		assert(allUsers.contains(u1) && allUsers.contains(u2));
+	}
+
+	@Test
+	public  void test13AddMessage() {
+		Message m = new Message(1, "message", new Date(), false, 1, 2);
+		dataLayer.addMessage(m);
+		List<Message> messages = dataLayer.getMessages(2);
+		assert(messages.contains(m));
+		dataLayer.deleteMessage(1);
 	}
 }
