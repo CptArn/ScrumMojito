@@ -130,12 +130,13 @@ public class FacebookLogic {
      * @param user user to add to the database.
      * @return true on success, false if something went wrong.
      */
-    private boolean newUserHandler(User user){
+    public boolean newUserHandler(User user){
+        if (user == null || (user.getId() == "")) return false;
         try{
             backend.getUser(Long.parseLong(user.getId()));
             // TODO update user data in DB if data on FB changes.
             return true;
-        }catch(Exception ex){
+        }catch(Exception ex) {
             // create a new user
             String g = user.getGender();
             be.studyfindr.entities.User newUser = new be.studyfindr.entities.User(
@@ -157,9 +158,7 @@ public class FacebookLogic {
             );
             backend.addUser(newUser);
             return true;
-        }/*catch(Exception ex){
-            return false;
-        }*/
+        }
     }
 
     /**

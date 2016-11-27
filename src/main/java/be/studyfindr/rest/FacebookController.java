@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import be.studyfindr.entities.LoginResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.social.facebook.api.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -69,5 +70,19 @@ public class FacebookController {
 		HashMap<String, String> status = new HashMap<String, String>();
 		status.put("mesage", "successfully logged out");
 		return new ResponseEntity<HashMap<String, String>>(status, HttpStatus.OK);
+	}
+
+	/**
+	 * Handles a Facebook logout by invalidating the access token.
+	 * @param accessToken access token to invalidate.
+	 * @param id id associated with the token.
+	 * @return status code and message.
+	 */
+	@RequestMapping(path = "/facebook/login", method = RequestMethod.POST)
+	public ResponseEntity<LoginResponse> login(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
+		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
+		User me = fb.getMyInfoFromFacebook(accessToken);
+		if (!fb.newUserHandler(me)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<LoginResponse>(new LoginResponse(accessToken, id), HttpStatus.OK);
 	}
 }
