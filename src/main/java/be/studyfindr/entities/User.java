@@ -29,12 +29,20 @@ public class User {
 
 	public User(Document doc) {
 		if (doc == null) throw new IllegalArgumentException("The document cannot be 'null'.");
-		Object idFromDoc = doc.getOrDefault("_id", "");
+		String idFieldName;
+		if (doc.containsKey("_id")){
+			idFieldName = "_id";
+		}else if (doc.containsKey("id")){
+			idFieldName = "id";
+		}else{
+			throw new IllegalArgumentException("Cannot find the id.");
+		}
+		Object idFromDoc = doc.getOrDefault(idFieldName, "");
 		if (idFromDoc instanceof Integer){
-			this.id = (long) doc.getInteger("_id");
+			this.id = (long) doc.getInteger(idFieldName);
 		}
 		else{
-			this.id = doc.getLong("_id");
+			this.id = doc.getLong(idFieldName);
 		}
 		this.email = doc.getString("email");
 		this.firstname = doc.getString("firstname");

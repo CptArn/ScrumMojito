@@ -4,7 +4,10 @@ import be.studyfindr.entities.Data;
 import be.studyfindr.entities.Like;
 import be.studyfindr.entities.User;
 import be.studyfindr.rest.UsersController;
+import org.apache.tomcat.util.digester.ArrayStack;
 import org.bson.Document;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -21,7 +24,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,6 +40,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UsersControllerClass {
     static User u1;
     static User u2;
+    static User u3;
+    static Like l1;
+    static Like l2;
     static Data dataLayer;
     static MockMvc mockMvc;
 
@@ -50,9 +58,15 @@ public class UsersControllerClass {
     public static void setUp() {
         u1 = new User(1, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, true, 18, 35, 25, 1, false, false);
         u2 = new User(2, "email2@email.com", "Silke", "Yolo", "Gentj", 22, false, true, false, 18, 35, 25, 1, false, false);
+        u3 = new User(3, "email3@email.com", "sander", "maes", "Gentj", 22, false, true, false, 18, 35, 25, 1, false, false);
+        l1 = new Like(2, 3, true, false);
+        l2 = new Like(1, 3, true, false);
         dataLayer = new Data();
         dataLayer.addUser(u1);
         dataLayer.addUser(u2);
+        dataLayer.addUser(u3);
+        dataLayer.addLike(l1);
+        dataLayer.addLike(l2);
     }
 
     @Before
@@ -175,6 +189,7 @@ public class UsersControllerClass {
     @Test
     public void test9LikeSuccess() {
         try {
+
             mockMvc.perform(post("/user/2/like")
                     .contentType(MediaType.APPLICATION_JSON)
                     .param("accessToken", "testtoken")
@@ -183,6 +198,27 @@ public class UsersControllerClass {
             ).andExpect(status().isOk());
             Like like = dataLayer.getLike(u1.getid(), u2.getid());
             assert((like.getLikee_Id() + like.getLiker_Id()) == (u1.getid() + u2.getid()));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void test10getmyqueue() {
+        String resString;
+        try {
+            MvcResult result = mockMvc.perform(get("/user/getmyqueue")
+                    .param("accessToken", "testtoken")
+                    .param("id", u3.getid() + "")
+                    .accept(MediaType.APPLICATION_JSON_UTF8)
+            ).andExpect(status().isOk()).andReturn();
+            resString = result.getResponse().getContentAsString();
+            JSONArray jsonarray = new JSONArray(resString);
+            List<User> users = new ArrayList<User>();
+            for (int i = 0; i < jsonarray.length(); i++) {
+                users.add(new User(Document.parse(jsonarray.get(i).toString())));
+            }
+            assert(users.contains(u1) && users.contains(u2));
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
@@ -199,6 +235,9 @@ public class UsersControllerClass {
     public static void tearDown() {
         dataLayer.deleteUser(u1);
         dataLayer.deleteUser(u2);
+        dataLayer.deleteUser(u3);
         dataLayer.deleteLike(new Like(u1.getid(), u2.getid(), true, false));
+        dataLayer.deleteLike(l1);
+        dataLayer.deleteLike(l2);
     }
 }
