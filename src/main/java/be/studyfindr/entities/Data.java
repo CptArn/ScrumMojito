@@ -47,19 +47,23 @@ public class Data {
 	}
 
 	public void addMessage(Message m) {
-		MongoCollection<Document> coll = db.getCollection("messages");
-		Document d = new Document("_id", coll.count() + 1)
-				.append("message", m.getMessage())
-				.append("date", m.getDate())
-				.append("status", m.getStatus())
-				.append("sender_Id", m.getSender_Id())
-				.append("receiver_Id", m.getReceiver_Id());
-		coll.insertOne(d);
+		Bson filter = new Document("_id", m.getId());
+		Document found = db.getCollection("messages").find(filter).first();
+		if (found == null) {
+			MongoCollection<Document> coll = db.getCollection("messages");
+			Document d = new Document("_id", m.getId())
+					.append("message", m.getMessage())
+					.append("date", m.getDate())
+					.append("status", m.getStatus())
+					.append("sender_Id", m.getSender_Id())
+					.append("receiver_Id", m.getReceiver_Id());
+			coll.insertOne(d);
+		}
 	}
 
 	public void deleteMessage(long id){
 		MongoCollection<Document> coll = db.getCollection("messages");
-		Bson filter = new Document("id", id);
+		Bson filter = new Document("_id", id);
 		coll.deleteOne(filter);
 	}
 
@@ -212,10 +216,6 @@ public class Data {
 				.append("like", l.getLike());
 		Bson updateOperationDocument = new Document("$set", newValue);
 		coll.updateOne(filter, updateOperationDocument);
-	}
-
-	public void getLikesByLiker() {
-
 	}
 
 	public List<User> getLikesByLikee(Long user_id) {

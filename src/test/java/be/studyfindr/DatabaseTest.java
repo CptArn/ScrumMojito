@@ -144,12 +144,24 @@ public class DatabaseTest {
 		assert(allUsers.contains(u1) && allUsers.contains(u2));
 	}
 
-	/*@Test
-	public  void test13AddMessage() {
+	@Test
+	public  void test13RemoveAllUsers() {
+		List<User> allUsers = dataLayer.getAllUsers();
+		dataLayer.deleteAllUsers();
+		List<User> emptyList = dataLayer.getAllUsers();
+		for (User u:allUsers
+			 ) {
+			dataLayer.addUser(u);
+		}
+		assert(emptyList != null && emptyList.size() == 0);
+	}
+
+	@Test
+	public  void test14AddMessage() {
 		Message m = new Message(1, "message", new Date(), false, 1, 2);
 		dataLayer.addMessage(m);
 		List<Message> messages = dataLayer.getMessages(2);
 		assert(messages.contains(m));
 		dataLayer.deleteMessage(1);
-	}*/
+	}
 }
