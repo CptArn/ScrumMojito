@@ -16,6 +16,7 @@ import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
  * FacebookLogic contains all logic operations to interact with Facebook.
  * @version 1.1
  */
+@CrossOrigin
 public class FacebookLogic {
     // accept test token
     private boolean allowTestToken = false;
@@ -133,7 +135,7 @@ public class FacebookLogic {
             backend.getUser(Long.parseLong(user.getId()));
             // TODO update user data in DB if data on FB changes.
             return true;
-        }catch(NullPointerException ex){
+        }catch(Exception ex){
             // create a new user
             String g = user.getGender();
             be.studyfindr.entities.User newUser = new be.studyfindr.entities.User(
@@ -155,9 +157,9 @@ public class FacebookLogic {
             );
             backend.addUser(newUser);
             return true;
-        }catch(Exception ex){
+        }/*catch(Exception ex){
             return false;
-        }
+        }*/
     }
 
     /**
