@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://studyfindr.herokuapp.com
+HOST: https://studyfindr.herokuapp.com/
 
 # ScrumMojito
 
@@ -7,9 +7,10 @@ ScrumMojito is a simple API allowing students to find matches.
 
 ## Facebook Authentication [/auth/facebook]
 
-### Login to Facebook profile [GET /auth/facebook{?code}]
+### Login to Facebook profile -DEPRECATED-  [GET /auth/facebook{?code}]
 
-Login to a Facebook profile with the authentication code from Facebook.
+(deprecated - use /facebook/login)
+ Login to a Facebook profile with the authentication code from Facebook.
 The server will process this and gets the information from your profile (on first login).
 
 + Parameters
@@ -34,8 +35,36 @@ The server will process this and gets the information from your profile (on firs
                     "type": "long"
                 }
             }
+            
+### Login to Facebook profile [POST /facebook/login{?accessToken,id}]
 
-### Logout from Facebook profile [GET /auth/facebook/logout{?accessToken,id}]
+Provide our service with a valid access token and accompanying id. The service will add the user when it's the first time the user logs into our service.
+
++ Parameters
+    + accessToken (string, required) - Access token from Facebook
+    + id (long, required) - Access token from Facebook
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "AccessToken": "testAccessToken",
+                "id": 10123456789
+            }
+
+    + Schema
+    
+            {
+                "AccessToken": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "long"
+                }
+            }            
+
+### Logout from Facebook profile [POST /facebook/logout{?accessToken,id}]
 
 Logout from the current Facebook profile.
 
@@ -103,12 +132,14 @@ Get all schools or the school with a given name.
             
 ## User [/user]
 
-### Get user info [GET /user/{id}/info]
+### Get user info [GET /user/{target_id}/info{?accessToken,id}]
 
 Get the info about the user with the given id.
 
 + Parameters
-    + id (long, required) - Access Code from Facebook
+    + target_id (long, required) - Id of the target user to get the info from
+    + accessToken (long, required) - Access Code from Facebook
+    + id (long, required) - Own id
 
 + Response 200 (application/json)
 
@@ -176,6 +207,184 @@ Get the info of the user that is currently logged in.
 + Parameters
     + accessToken (string, required) - Access Code from Facebook
     + id (long, required) - User Facebook id
+    
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "10123456789",
+                "email": "test@gmail.com",
+                "firstname": "Jos",
+                "lastname": "De Bakker",
+                "location": "Gent",
+                "age": 20,
+                "prefMale": false,
+                "prefFemale": true,
+                "prefTrans": false,
+                "prefAge": 20,
+                "prefDistance": 25,
+                "prefLocation": 1
+            }
+            
+    + Schema
+    
+            {
+                "id": {
+                    "type": "int"
+                    },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                    },
+                "lastname": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                    },
+                "age": {
+                    "type": "int"
+                },
+                "prefMale": {
+                    "type": "boolean"
+                    },
+                "prefFemale": {
+                    "type": "boolean"
+                },
+                "prefTrans": {
+                    "type": "boolean"
+                },
+                "prefAge": {
+                    "type": "int"
+                    },
+                "prefDistance": {
+                    "type": "int"
+                },
+                "prefLocation": {
+                    "type": "int"
+                }
+            }
+            
+### Update current user info [POST /user/{?id}/update{?accessToken,User}]
+
+Update the info of the own user and return the updated user object.
+
++ Request (application/json)
+
+        {
+                "id": {
+                    "type": "int"
+                    },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                    },
+                "lastname": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                    },
+                "age": {
+                    "type": "int"
+                },
+                "prefMale": {
+                    "type": "boolean"
+                    },
+                "prefFemale": {
+                    "type": "boolean"
+                },
+                "prefTrans": {
+                    "type": "boolean"
+                },
+                "prefAge": {
+                    "type": "int"
+                    },
+                "prefDistance": {
+                    "type": "int"
+                },
+                "prefLocation": {
+                    "type": "int"
+                }
+            }
+
++ Parameters
+    + id (long, required) - User Facebook id
+    + accessToken (string, required) - Access Code from Facebook
+    
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "10123456789",
+                "email": "test@gmail.com",
+                "firstname": "Jos",
+                "lastname": "De Bakker",
+                "location": "Gent",
+                "age": 20,
+                "prefMale": false,
+                "prefFemale": true,
+                "prefTrans": false,
+                "prefAge": 20,
+                "prefDistance": 25,
+                "prefLocation": 1
+            }
+            
+    + Schema
+    
+            {
+                "id": {
+                    "type": "int"
+                    },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                    },
+                "lastname": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                    },
+                "age": {
+                    "type": "int"
+                },
+                "prefMale": {
+                    "type": "boolean"
+                    },
+                "prefFemale": {
+                    "type": "boolean"
+                },
+                "prefTrans": {
+                    "type": "boolean"
+                },
+                "prefAge": {
+                    "type": "int"
+                    },
+                "prefDistance": {
+                    "type": "int"
+                },
+                "prefLocation": {
+                    "type": "int"
+                }
+            }
+            
+### Like a user [POST /user/{?id_to_like}/like{?accessToken,id}]
+
+Like a user.
+
++ Parameters
+    + id_to_like (long, required) - Id of the user you want to like
+    + accessToken (string, required) - Access Code from Facebook
+    + id (long, required) - Own id
     
 + Response 200 (application/json)
 
