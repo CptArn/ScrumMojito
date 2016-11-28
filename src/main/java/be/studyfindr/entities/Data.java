@@ -281,6 +281,7 @@ public class Data {
 				System.out.println(ex.getMessage());
 			}
 		});
+		if (foundUsers.contains(current_user)) foundUsers.remove(current_user);
 
 		/*for(Document doc : documents) {
 			Like l = getLike(current_user.getid(), doc.getLong("_id"));
