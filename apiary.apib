@@ -138,7 +138,7 @@ Get the info about the user with the given id.
 
 + Parameters
     + target_id (long, required) - Id of the target user to get the info from
-    + accessToken (long, required) - Access Code from Facebook
+    + accessToken (string, required) - Access Code from Facebook
     + id (long, required) - Own id
 
 + Response 200 (application/json)
@@ -268,7 +268,7 @@ Get the info of the user that is currently logged in.
                 }
             }
             
-### Update current user info [POST /user/{?id}/update{?accessToken,User}]
+### Update current user info [POST /user/{id}/update{?accessToken}]
 
 Update the info of the own user and return the updated user object.
 
@@ -377,7 +377,7 @@ Update the info of the own user and return the updated user object.
                 }
             }
             
-### Like a user [POST /user/{?id_to_like}/like{?accessToken,id}]
+### Like a user [POST /user/{id_to_like}/like{?accessToken,id}]
 
 Like a user and returns the liked user object.
 
