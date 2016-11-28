@@ -125,8 +125,9 @@ public class DatabaseTest {
 		Like found = dataLayer.getLike((long)1, (long)2);
 		dataLayer.deleteLike(found);
 		found = dataLayer.getLike((long)1, (long)2);
-		assert(found.getLiker_Id() == 0);
-		assert(found.getLikee_Id() == 0);
+		assert(found == null);
+		//assert(found.getLiker_Id() == 0);
+		//assert(found.getLikee_Id() == 0);
 	}
 
 	@Test(expected=IllegalArgumentException.class)

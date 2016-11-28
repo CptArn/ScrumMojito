@@ -165,6 +165,7 @@ public class Data {
 				eq("male", user_pref.getPrefMale()),
 				eq("female", user_pref.getPrefFemale())
 		)).first();
+		if (doc == null) return null;
 		return new User(doc);
 	}
 
@@ -216,7 +217,11 @@ public class Data {
 		Like found;
 		Bson filter = new Document("liker_id", liker_id).append("likee_id", likee_id);
 		Document objectFound = db.getCollection("likes").find(filter).first();
-		found = new Like(objectFound);
+		try {
+			found = new Like(objectFound);
+		}catch(Exception ex){
+			throw ex;
+		}
 		return found;
 	}
 
@@ -235,21 +240,49 @@ public class Data {
 		Bson filter = new Document("likee_id", current_user.getid())
 				.append("confirmed", false)
 				.append("like", true);
-		FindIterable<Document> documents = db.getCollection("likes").find(filter).sort(new Document("_id", -1));
+		FindIterable<Document> documents = db.getCollection("likes").find(filter);
 		List<User> foundUsers = new ArrayList<>();
-		for(Document doc : documents) {
+		documents.forEach((Block<? super Document>) (e) -> {
+			try{
+				foundUsers.add(getUser(e.getLong("liker_id"), current_user));
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
+		});
+		/*for(Document doc : documents) {
 			User u = getUser(doc.getLong("liker_id"), current_user);
 			if (u != null) {
 				foundUsers.add(u);
 			}
-		}
+		}*/
 		return foundUsers;
 	}
 
 	public List<User> getNotLikedUsers(User current_user) {
-		FindIterable<Document> documents = db.getCollection("likes").find().sort(new Document("_id", -1));
+		Bson filter = new Document("liker_id", current_user.getid())
+				.append("like", true);
+		FindIterable<Document> likes_docs = db.getCollection("likes").find(filter).sort(new Document("_id", -1));
+		List<Long> likees = new ArrayList<>();
+		likes_docs.forEach((Block<? super Document>) (like_doc) -> {
+			try{
+				likees.add(like_doc.getLong("likee_id"));
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
+		});
+
+		FindIterable<Document> users = db.getCollection("users").find().sort(new Document("_id", -1));
 		List<User> foundUsers = new ArrayList<>();
-		for(Document doc : documents) {
+		users.forEach((Block<? super Document>) (user_doc) -> {
+			try{
+				String q = user_doc.containsKey("_id") ? "_id" : "id";
+				if (!likees.contains(user_doc.getLong(q))) foundUsers.add(new User(user_doc));
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
+		});
+
+		/*for(Document doc : documents) {
 			Like l = getLike(current_user.getid(), doc.getLong("_id"));
 			if (l == null) {
 				User u = getUser(doc.getLong("_id"), current_user);
@@ -257,7 +290,7 @@ public class Data {
 					foundUsers.add(u);
 				}
 			}
-		}
+		}*/
 		return foundUsers;
 	}
 

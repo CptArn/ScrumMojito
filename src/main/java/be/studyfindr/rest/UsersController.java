@@ -21,7 +21,7 @@ public class UsersController {
         fb = new FacebookLogic();
     }
 
-    @RequestMapping("user/getmyinfo")
+    @RequestMapping("/user/getmyinfo")
     public ResponseEntity<User> getMyInfo(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         be.studyfindr.entities.User s;
@@ -76,7 +76,7 @@ public class UsersController {
         return new ResponseEntity<User>(userToLike, HttpStatus.OK);
     }
 
-    @RequestMapping("user/getmyqueue")
+    @RequestMapping("/user/getmyqueue")
     public ResponseEntity<List<User>> getQueue(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
         List<User> users = dataLayer.getQueue(id);
