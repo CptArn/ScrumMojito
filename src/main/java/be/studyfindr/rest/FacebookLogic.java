@@ -208,9 +208,14 @@ public class FacebookLogic {
      */
     public final boolean userIsValid(String accessToken, long id){
         if (accessToken.equals("testtoken") && allowTestToken) return true;
-        User user = getMyInfoFromFacebook(accessToken);
-        if (user == null) return false;
-        return Long.parseLong(user.getId()) == id;
+        try{
+            User user = getMyInfoFromFacebook(accessToken);
+            if (user == null) return false;
+            Data d = new Data();
+            return (Long.parseLong(user.getId()) == id) && d.getUser(id) != null;
+        }catch(Exception ex){
+            return false;
+        }
     }
 
     /**

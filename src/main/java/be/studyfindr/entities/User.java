@@ -127,7 +127,7 @@ public class User {
 	}
 
 	public String getEmail() {
-		return email;
+		return email == null ? "" : email;
 	}
 
 	public void setEmail(String email) {
@@ -151,7 +151,7 @@ public class User {
 	}
 
 	public String getLocation() {
-		return location;
+		return location == null ? "" : location;
 	}
 
 	public void setLocation(String location) {
