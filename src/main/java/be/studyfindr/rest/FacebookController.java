@@ -52,8 +52,13 @@ public class FacebookController {
 	 * @return Login response, will contain the access token and user ID on success.
 	 */
   	@RequestMapping("/auth/facebook/callback")
-  	public LoginResponse callBack(@RequestParam("code") String code, @RequestParam("state") String state, HttpSession session) {
-	  	return fb.callBack(code, state, session);
+  	public ResponseEntity<LoginResponse> callBack(@RequestParam("code") String code, @RequestParam("state") String state, HttpSession session) {
+	  	try{
+			return new ResponseEntity<LoginResponse>(fb.callBack(code, state, session), HttpStatus.OK);
+		}catch(Exception ex){
+			return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
+		}
+
   	}
 
 	/**
@@ -63,23 +68,18 @@ public class FacebookController {
 	 * @return status code and message.
 	 */
 	@RequestMapping(path = "/facebook/logout", method = RequestMethod.POST)
-	public ResponseEntity<HashMap<String, String>> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
+	public ResponseEntity<HashMap<String, String>> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
 		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<HashMap<String, String>>(HttpStatus.UNAUTHORIZED);
 		boolean state = fb.logout(accessToken, id);
-		if (!state) throw new IllegalArgumentException("Something went wrong @/facebook/logout.");
+		if (!state) return new ResponseEntity<HashMap<String, String>>(HttpStatus.BAD_REQUEST);
 		HashMap<String, String> status = new HashMap<String, String>();
 		status.put("mesage", "successfully logged out");
 		return new ResponseEntity<HashMap<String, String>>(status, HttpStatus.OK);
 	}
 
-	/**
-	 * Handles a Facebook logout by invalidating the access token.
-	 * @param accessToken access token to invalidate.
-	 * @param id id associated with the token.
-	 * @return status code and message.
-	 */
+
 	@RequestMapping(path = "/facebook/login", method = RequestMethod.POST)
-	public ResponseEntity<LoginResponse> login(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
+	public ResponseEntity<LoginResponse> login(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
 		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
 		User me = fb.getMyInfoFromFacebook(accessToken);
 		if (!fb.newUserHandler(me)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);

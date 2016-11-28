@@ -83,7 +83,7 @@ public class UsersControllerClass {
     @Test
     public void test1GetInfo() {
         try {
-            MvcResult result = this.mockMvc.perform(get("/user/1/info?accessToken=testtoken")).andExpect(status().isOk()).andReturn();
+            MvcResult result = this.mockMvc.perform(get("/user/1/info?accessToken=testtoken&id=1")).andExpect(status().isOk()).andReturn();
             User user = new User(Document.parse(result.getResponse().getContentAsString()));
             assert(user.equals(u1));
         } catch(Exception e) {

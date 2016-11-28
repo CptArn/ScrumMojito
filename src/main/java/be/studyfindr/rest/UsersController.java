@@ -22,7 +22,7 @@ public class UsersController {
     }
 
     @RequestMapping("user/getmyinfo")
-    public ResponseEntity<User> getMyInfo(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) throws IllegalArgumentException {
+    public ResponseEntity<User> getMyInfo(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         be.studyfindr.entities.User s;
         try {
@@ -36,12 +36,12 @@ public class UsersController {
         return new ResponseEntity<be.studyfindr.entities.User>(s, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/{id}/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUserInfo(@PathVariable("id") long id, @RequestParam("accessToken") String accessToken) {
+    @RequestMapping(value = "/user/{target_id}/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getUserInfo(@PathVariable("target_id") long target_id, @RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         User user;
         try{
-            user = dataLayer.getUser(id);
+            user = dataLayer.getUser(target_id);
         }catch(Exception ex) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
