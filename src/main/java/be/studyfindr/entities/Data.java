@@ -10,7 +10,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 
 
 public class Data {
@@ -155,6 +155,19 @@ public class Data {
 		return new User(doc);
 	}
 
+	public User getUser(long id, User user_pref) {
+		Bson filter = new Document("_id", id);
+		Document doc;
+		doc = db.getCollection("users").find(and(
+				eq("_id", id),
+				lte("age", user_pref.getPrefAgeMax()),
+				gte("age", user_pref.getPrefAgeMin()),
+				eq("male", user_pref.getPrefMale()),
+				eq("female", user_pref.getPrefFemale())
+		)).first();
+		return new User(doc);
+	}
+
 	public List<User> getAllUsers() {
 		MongoCollection<Document> doc = db.getCollection("users");
 		List<User> users = new ArrayList<User>();
@@ -218,25 +231,31 @@ public class Data {
 		coll.updateOne(filter, updateOperationDocument);
 	}
 
-	public List<User> getLikesByLikee(Long user_id) {
-		Bson filter = new Document("likee_id", user_id)
+	public List<User> getLikesByLikee(User current_user) {
+		Bson filter = new Document("likee_id", current_user.getid())
 				.append("confirmed", false)
 				.append("like", true);
 		FindIterable<Document> documents = db.getCollection("likes").find(filter).sort(new Document("_id", -1));
 		List<User> foundUsers = new ArrayList<>();
 		for(Document doc : documents) {
-			foundUsers.add(getUser(doc.getLong("liker_id")));
+			User u = getUser(doc.getLong("liker_id"), current_user);
+			if (u != null) {
+				foundUsers.add(u);
+			}
 		}
 		return foundUsers;
 	}
 
-	public List<User> getNotLikedUsers(Long user_id) {
+	public List<User> getNotLikedUsers(User current_user) {
 		FindIterable<Document> documents = db.getCollection("likes").find().sort(new Document("_id", -1));
 		List<User> foundUsers = new ArrayList<>();
 		for(Document doc : documents) {
-			Like l = getLike(user_id, doc.getLong("_id"));
+			Like l = getLike(current_user.getid(), doc.getLong("_id"));
 			if (l == null) {
-				foundUsers.add(getUser(doc.getLong("_id")));
+				User u = getUser(doc.getLong("_id"), current_user);
+				if (u != null) {
+					foundUsers.add(u);
+				}
 			}
 		}
 		return foundUsers;
@@ -249,9 +268,10 @@ public class Data {
 	}
 
 	public List<User> getQueue(Long user_id) {
+		User current_user = getUser(user_id);
 		List<User> queue = new ArrayList<>();
-		queue.addAll(getLikesByLikee(user_id));
-		queue.addAll(getNotLikedUsers(user_id));
+		queue.addAll(getLikesByLikee(current_user));
+		queue.addAll(getNotLikedUsers(current_user));
 		return queue;
 	}
 }
