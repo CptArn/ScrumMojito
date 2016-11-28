@@ -379,7 +379,7 @@ Update the info of the own user and return the updated user object.
             
 ### Like a user [POST /user/{?id_to_like}/like{?accessToken,id}]
 
-Like a user.
+Like a user and returns the liked user object.
 
 + Parameters
     + id_to_like (long, required) - Id of the user you want to like
@@ -445,3 +445,36 @@ Like a user.
                     "type": "int"
                 }
             }
+            
+### Get your queue [GET /user/getmyqueue{?accessToken,id}]
+
+Get a list of candidates.
+
++ Parameters
+    + accessToken (string, required) - Access Code from Facebook
+    + id (long, required) - Own id
+    
++ Response 200 (application/json)
+    + Attributes
+        - data (array[User])
+# Data Structures
+## User (object)
+- DEFAULT_PREF_AGE_MIN: 18 (number, optional) 
+- DEFAULT_PREF_AGE_MAX: 35 (number, optional) 
+- DEFAULT_PREF_DISTANCE: 100 (number, optional) 
+- id: 10210990000960326 (number, required) 
+- email: mail@mail.com (string, optional) 
+- firstname: "name" (string, optional) 
+- lastname: "name" (string, optional) 
+- location: "" (string, optional)
+- age: 21 (number, optional)
+- prefMale: false (boolean, optional)
+- prefFemale: false (boolean, optional)
+- prefTrans: false (boolean, optional)
+- prefAgeMin: 18 (number, optional)
+- prefAgeMax: 35 (number, optional)
+- prefDistance: 25 (number, optional)
+- prefLocation: 1 (number, optional)
+- isMale: true (boolean, optional)
+- isFemale: false (boolean, optional)
+- isTrans: false (boolean, optional)
