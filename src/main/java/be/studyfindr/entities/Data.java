@@ -230,9 +230,28 @@ public class Data {
 		return foundUsers;
 	}
 
+	public List<User> getNotLikedUsers(Long user_id) {
+		FindIterable<Document> documents = db.getCollection("likes").find().sort(new Document("_id", -1));
+		List<User> foundUsers = new ArrayList<>();
+		for(Document doc : documents) {
+			Like l = getLike(user_id, doc.getLong("_id"));
+			if (l == null) {
+				foundUsers.add(getUser(doc.getLong("_id")));
+			}
+		}
+		return foundUsers;
+	}
+
 	public void deleteLike(Like l) {
 		MongoCollection<Document> coll = db.getCollection("likes");
 		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
 		coll.deleteOne(filter);
+	}
+
+	public List<User> getQueue(Long user_id) {
+		List<User> queue = new ArrayList<>();
+		queue.addAll(getLikesByLikee(user_id));
+		queue.addAll(getNotLikedUsers(user_id));
+		return queue;
 	}
 }

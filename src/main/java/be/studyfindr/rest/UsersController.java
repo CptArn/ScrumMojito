@@ -79,7 +79,7 @@ public class UsersController {
     @RequestMapping("user/getmyqueue")
     public ResponseEntity<List<User>> getQueue(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
-        List<User> users = dataLayer.getLikesByLikee(id);
+        List<User> users = dataLayer.getQueue(id);
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 }
