@@ -180,7 +180,7 @@ public class UsersControllerClass {
                     .param("accessToken", "testtoken")
                     .param("id", u1.getid() + "")
                     .accept(MediaType.APPLICATION_JSON)
-            ).andExpect(status().isNotFound());
+            ).andExpect(status().isBadRequest());
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }

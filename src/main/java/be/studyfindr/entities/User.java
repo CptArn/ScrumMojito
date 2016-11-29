@@ -1,12 +1,44 @@
 package be.studyfindr.entities;
 
 import org.bson.Document;
-//TODO add lat lon to constructor
+
+/**
+ * Represents a user
+ */
 public class User {
+	/**
+	 * The default preferred min. age
+	 */
 	public final int DEFAULT_PREF_AGE_MIN = 18;
+
+	/**
+	 * The default preferred max age
+	 */
 	public final int DEFAULT_PREF_AGE_MAX = 35;
+
+	/**
+	 * The default preferred distance
+	 */
 	public final int DEFAULT_PREF_DISTANCE = 100;
 
+	/**
+	 * Creates a new User.
+	 * @param id id of the user obtained from Facebook (facebook user id)
+	 * @param email mail of the user
+	 * @param firstname first name of the user
+	 * @param lastname last name of the user
+	 * @param location location of the user
+	 * @param age age of the user
+	 * @param prefMale wants to find male
+	 * @param prefFemale wants to find female
+	 * @param prefTrans wants to find trans.
+	 * @param prefAgeMin preferred min. age
+	 * @param prefAgeMax preferred max. age
+ 	 * @param prefDistance preferred max. distance
+	 * @param prefLocation preferred location
+	 * @param male preferred male
+	 * @param female preferred female
+	 */
 	public User(long id, String email, String firstname, String lastname, String location, int age,
 				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation, boolean male, boolean female) {
 		super();
@@ -25,8 +57,13 @@ public class User {
 		this.prefLocation = prefLocation;
 		this.female = female;
 		this.male = male;
+		//TODO add lat lon to constructor
 	}
 
+	/**
+	 * Parses a user document into a user
+	 * @param doc user document
+	 */
 	public User(Document doc) {
 		if (doc == null) throw new IllegalArgumentException("The document cannot be 'null'.");
 		String idFieldName;
@@ -60,11 +97,17 @@ public class User {
 		this.female = doc.getBoolean("female", false);
 	}
 
-	// dummy constructor
+	/**
+	 * Default constructor.
+	 */
 	public User() {
 
 	}
 
+	/**
+	 * Returns the string representation of the user.
+	 * @return
+	 */
 	@Override
 	public String toString() {
 		return "User [_id=" + id + ", email=" + email + ", firstname=" + firstname
@@ -73,6 +116,7 @@ public class User {
 				+ prefDistance + ", prefLocation=" + prefLocation + "]";
 	}
 
+	// user vars.
 	private long id;
 	private String email;
 	private String firstname;
@@ -93,41 +137,74 @@ public class User {
 	private int prefDistance;
 	private int prefLocation;
 
+	/**
+	 * True if male
+	 * @return
+	 */
 	public boolean getIsMale(){
 		return this.male && !this.female;
 	}
 
+	/**
+	 * True if female
+	 * @return
+	 */
 	public boolean getIsFemale(){
 		return female && !male;
 	}
 
+	/**
+	 * True if trans.
+	 * @return
+	 */
 	public boolean getIsTrans(){
 		return male && female;
 	}
 
+	/**
+	 * Makes the user male
+	 */
 	public void setIsMale(){
 		this.female = false;
 		this.male = true;
 	}
 
+	/**
+	 * Makes the user female
+	 */
 	public void setIsFemale(){
 		this.female = true;
 		this.male = false;
 	}
 
+	/**
+	 * Makes the user trans
+	 */
 	public void setIsTrans(){
 		this.female = true;
 		this.male = true;
 	}
 
+	/**
+	 * Returns the id of the user
+	 * @return id of the user
+	 */
 	public long getid() {
 		return id;
 	}
 
+	/**
+	 * Sets the Facebook id of the user
+	 * @param id new id
+	 */
 	public void setid(long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Returns the email of the user.
+	 * @return email of the user
+	 */
 	public String getEmail() {
 		return email == null ? "" : email;
 	}

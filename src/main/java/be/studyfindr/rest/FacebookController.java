@@ -83,7 +83,7 @@ public class FacebookController {
 	 */
 	@RequestMapping(path = "/facebook/login", method = RequestMethod.POST)
 	public ResponseEntity<LoginResponse> login(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
-		//if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
+		// TODO check user access token - id combo without using fb.isUserValid()
 		User me = fb.getMyInfoFromFacebook(accessToken);
 		if (!fb.newUserHandler(me)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<LoginResponse>(new LoginResponse(accessToken, id), HttpStatus.OK);

@@ -126,6 +126,7 @@ public class DatabaseTest {
 		dataLayer.deleteLike(found);
 		found = dataLayer.getLike((long)1, (long)2);
 		assert(found == null);
+		// older version Test
 		//assert(found.getLiker_Id() == 0);
 		//assert(found.getLikee_Id() == 0);
 	}
@@ -165,4 +166,29 @@ public class DatabaseTest {
 		assert(messages.contains(m));
 		dataLayer.deleteMessage(1);
 	}
+
+	@Test
+	public void test15MatchTestNoMatches(){
+		dataLayer.addUser(u1);
+		dataLayer.addUser(u2);
+		assert(dataLayer.getMatches(u1.getid()).size() == 0);
+		dataLayer.deleteUser(u1);
+		dataLayer.deleteUser(u2);
+	}
+
+	@Test
+	public void test16MatchTestOneMatch(){
+		dataLayer.addUser(u1);
+		dataLayer.addUser(u2);
+		Like l1 = new Like(u1.getid(), u2.getid(), true, true);
+		Like l2 = new Like(u2.getid(), u1.getid(), true, true);
+		dataLayer.addLike(l1);
+		dataLayer.addLike(l2);
+		assert(dataLayer.getMatches(u1.getid()).size() == 1);
+		dataLayer.deleteUser(u1);
+		dataLayer.deleteUser(u2);
+		dataLayer.deleteLike(l1);
+		dataLayer.deleteLike(l2);
+	}
+
 }

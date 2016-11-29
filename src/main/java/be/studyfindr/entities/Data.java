@@ -13,16 +13,29 @@ import java.util.List;
 
 import static com.mongodb.client.model.Filters.*;
 
-
+/**
+ * Data is the interface between the logic and the StudyFinder database.
+ */
 public class Data {
+
+	// MongoDB client
 	private MongoClient client;
+
+	// MongoDB database interface
 	private MongoDatabase db;
 
+	/**
+	 * Creates an instance of the database interface.
+	 */
 	public Data() {
 		client = new MongoClient(new MongoClientURI("mongodb://admin:scrum@ds147497.mlab.com:47497/mojito"));
 		db = client.getDatabase("mojito");
 	}
 
+	/**
+	 * Adds a new user to the database.
+	 * @param u the user to add
+	 */
 	public void addUser(User u) {
 		Bson filter = new Document("_id", u.getid());
 		Document found = db.getCollection("users").find(filter).first();
@@ -47,6 +60,10 @@ public class Data {
 		}
 	}
 
+	/**
+	 * Adds a new message to the database
+	 * @param m message to add
+	 */
 	public void addMessage(Message m) {
 		Bson filter = new Document("_id", m.getId());
 		Document found = db.getCollection("messages").find(filter).first();
@@ -62,6 +79,10 @@ public class Data {
 		}
 	}
 
+	/**
+	 * Deletes a message from the database based on the message id.
+	 * @param id id of the message to remove.
+	 */
 	public void deleteMessage(long id){
 		MongoCollection<Document> coll = db.getCollection("messages");
 		Bson filter = new Document("_id", id);
@@ -313,5 +334,27 @@ public class Data {
 		if (temp.size() > 0) queue.addAll(temp);
 		queue.removeAll(Collections.singleton(null));
 		return queue;
+	}
+
+	public List<Like> getLikesByLiker(long id){
+		List<Like> likes = new ArrayList<>();
+		Bson filter = new Document("liker_id", id);
+		db.getCollection("likes").find(filter).forEach((Block<? super Document>) (e) -> likes.add(new Like(e)));
+		return likes;
+	}
+
+	public List<User> getMatches(long id){
+		List<User> matches = new ArrayList<>();
+		List<Like> likes = getLikesByLiker(id);
+		likes.forEach((like) -> {
+			try{
+				// get inverse like (IF is optional but nice to have)			and add likee to collection
+				if (getLike(like.getLikee_Id(), like.getLiker_Id()) != null) matches.add(getUser(like.getLikee_Id()));
+
+			}catch(Exception ex){
+				// no inverse like
+			}
+		});
+		return matches;
 	}
 }

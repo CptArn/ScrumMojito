@@ -65,7 +65,7 @@ public class UsersController {
     }
 
     @RequestMapping(path = "/user/{id_to_like}/like", method = RequestMethod.POST)
-    public ResponseEntity<User> updateUserInfo(@PathVariable("id_to_like") long id_to_like, @RequestParam("accessToken") String accessToken, @RequestParam("id") long myId) {
+    public ResponseEntity<User> updateLikeUser(@PathVariable("id_to_like") long id_to_like, @RequestParam("accessToken") String accessToken, @RequestParam("id") long myId) {
         if (!fb.userIsValid(accessToken, myId)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         User userToLike;
         try{
@@ -73,7 +73,7 @@ public class UsersController {
             userToLike = dataLayer.getUser(id_to_like);
             dataLayer.addLike(new Like(myId, id_to_like, true, false));
         }catch(Exception ex){
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<User>(userToLike, HttpStatus.OK);
     }
@@ -83,5 +83,15 @@ public class UsersController {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
         List<User> users = dataLayer.getQueue(id);
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    }
+
+    @RequestMapping("/user/getmatches")
+    public ResponseEntity<List<User>> getMatches(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
+        try{
+            return new ResponseEntity<List<User>>(dataLayer.getMatches(id), HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<List<User>>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
