@@ -8,6 +8,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.*;
@@ -310,6 +311,7 @@ public class Data {
 		if (temp.size() > 0) queue.addAll(temp);
 		temp = getNotLikedUsers(current_user);
 		if (temp.size() > 0) queue.addAll(temp);
+		queue.removeAll(Collections.singleton(null));
 		return queue;
 	}
 }
