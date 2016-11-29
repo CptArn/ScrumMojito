@@ -306,7 +306,7 @@ public class Data {
 	public List<User> getQueue(Long user_id) {
 		User current_user = getUser(user_id);
 		List<User> queue = new ArrayList<>();
-		List<User> temp = getLikesByLikee(current_user)
+		List<User> temp = getLikesByLikee(current_user);
 		if (temp.size() > 0) queue.addAll(temp);
 		temp = getNotLikedUsers(current_user);
 		if (temp.size() > 0) queue.addAll(temp);
