@@ -7,8 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import be.studyfindr.rest.RestResponseEntityExceptionHandler;
 import java.util.List;
 
 @RestController
@@ -22,7 +21,7 @@ public class UsersController {
     }
 
     @RequestMapping("/user/getmyinfo")
-    public ResponseEntity<User> getMyInfo(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
+    public ResponseEntity<User> getMyInfo(@RequestParam("accessToken") String accessToken, @RequestParam("id") Long id) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         be.studyfindr.entities.User s;
         try {

@@ -1,7 +1,7 @@
 package be.studyfindr.entities;
 
 import org.bson.Document;
-
+//TODO add lat lon to constructor
 public class User {
 	public final int DEFAULT_PREF_AGE_MIN = 18;
 	public final int DEFAULT_PREF_AGE_MAX = 35;
@@ -81,6 +81,8 @@ public class User {
 	private int age;
 	private boolean male;
 	private boolean female;
+	private long lat;
+	private long lon;
 
 	// preferences
     private boolean prefMale;
@@ -220,6 +222,22 @@ public class User {
 
 	public void setPrefLocation(int prefLocation) {
 		this.prefLocation = prefLocation;
+	}
+
+	public void setLat(long lat){
+		this.lat = lat;
+	}
+
+	public void setLon(long lon){
+		this.lon = lon;
+	}
+
+	public long getLat(){
+		return this.lat;
+	}
+
+	public long getLon(){
+		return this.lon;
 	}
 
 	@Override
