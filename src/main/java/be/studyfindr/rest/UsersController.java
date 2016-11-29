@@ -16,6 +16,9 @@ public class UsersController {
     Data dataLayer = new Data();
     private FacebookLogic fb;
 
+    /**
+     * Inits. the UserController
+     */
     public UsersController(){
         fb = new FacebookLogic();
     }

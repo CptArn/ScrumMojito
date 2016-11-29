@@ -27,8 +27,6 @@ public class FacebookController {
 		fb = new FacebookLogic();
   	}
 
-  	//https://www.facebook.com/dialog/oauth?client_id=1794346987494326&redirect_uri=http://localhost:8080/auth/facebook
-
 	/**
 	 * Handles a Facebook login by accepting an authentication token and returning an access token and user ID.
 	 * This method expects following usage: http://myhost.com/auth/facebook?code=<Auth. token>
@@ -77,10 +75,15 @@ public class FacebookController {
 		return new ResponseEntity<HashMap<String, String>>(status, HttpStatus.OK);
 	}
 
-
+	/**
+	 * An alternative login method based on an access token.
+	 * @param accessToken valid access token for the user
+	 * @param id id of the user
+	 * @return returns a login response with access token and user id
+	 */
 	@RequestMapping(path = "/facebook/login", method = RequestMethod.POST)
 	public ResponseEntity<LoginResponse> login(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
-		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
+		//if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
 		User me = fb.getMyInfoFromFacebook(accessToken);
 		if (!fb.newUserHandler(me)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<LoginResponse>(new LoginResponse(accessToken, id), HttpStatus.OK);
