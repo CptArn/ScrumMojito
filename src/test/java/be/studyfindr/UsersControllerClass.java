@@ -179,6 +179,7 @@ public class UsersControllerClass {
                     .contentType(MediaType.APPLICATION_JSON)
                     .param("accessToken", "testtoken")
                     .param("id", u1.getid() + "")
+                    .param("like", "true")
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isBadRequest());
         } catch(Exception e) {
@@ -194,6 +195,7 @@ public class UsersControllerClass {
                     .contentType(MediaType.APPLICATION_JSON)
                     .param("accessToken", "testtoken")
                     .param("id", u1.getid() + "")
+                    .param("like", "true")
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk());
             Like like = dataLayer.getLike(u1.getid(), u2.getid());

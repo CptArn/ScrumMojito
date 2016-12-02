@@ -5,13 +5,13 @@ import org.bson.Document;
 public class Like {
     /**
      * Create a new like
-     * @param user1_Id id of the liker
-     * @param user2_Id id of the likee
+     * @param liker_Id id of the liker
+     * @param likee_id id of the likee
      */
-    public Like(long user1_Id, long user2_Id, boolean like, boolean confirmed) {
+    public Like(long liker_Id, long likee_id, boolean like, boolean confirmed) {
         super();
-        this.liker_id = user1_Id;
-        this.likee_id = user2_Id;
+        this.liker_id = liker_Id;
+        this.likee_id = likee_id;
         this.like = like;
         this.confirmed = confirmed;
     }

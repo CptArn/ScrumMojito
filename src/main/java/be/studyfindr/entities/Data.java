@@ -105,9 +105,16 @@ public class Data {
 
 	public void addMatch(Match m) {
 		MongoCollection<Document> coll = db.getCollection("matches");
-		Document d = new Document("user1_Id", m.getUser1_Id())
-				.append("user2_Id", m.getUser2_Id());
+		Document d = new Document("liker_Id", m.getLiker_Id())
+				.append("likee_Id", m.getLikee_Id());
 		coll.insertOne(d);
+	}
+
+	public void deleteMatch(Match m){
+		MongoCollection<Document> coll = db.getCollection("matches");
+		Bson filter = new Document("liker_Id", m.getLiker_Id())
+				.append("likee_Id", m.getLikee_Id());
+		coll.deleteOne(filter);
 	}
 
 	public void addLike(Like l) {
@@ -242,6 +249,7 @@ public class Data {
 		try {
 			found = new Like(objectFound);
 		}catch(Exception ex){
+			//found = null;
 			throw ex;
 		}
 		return found;
@@ -349,8 +357,9 @@ public class Data {
 		likes.forEach((like) -> {
 			try{
 				// get inverse like (IF is optional but nice to have)			and add likee to collection
-				if (getLike(like.getLikee_Id(), like.getLiker_Id()) != null) matches.add(getUser(like.getLikee_Id()));
-
+				if (getLike(like.getLikee_Id(), like.getLiker_Id()) != null) {
+					matches.add(getUser(like.getLikee_Id()));
+				}
 			}catch(Exception ex){
 				// no inverse like
 			}
