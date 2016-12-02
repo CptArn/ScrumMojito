@@ -377,7 +377,7 @@ Update the info of the own user and return the updated user object.
                 }
             }
             
-### Like a user [POST /user/{id_to_like}/like{?accessToken,id}]
+### Like a user [POST /user/{id_to_like}/like{?accessToken,id,like}]
 
 Like a user and returns the liked user object.
 
@@ -385,6 +385,7 @@ Like a user and returns the liked user object.
     + id_to_like (long, required) - Id of the user you want to like
     + accessToken (string, required) - Access Code from Facebook
     + id (long, required) - Own id
+    + like (boolean, required) - like or dislike
     
 + Response 200 (application/json)
 
