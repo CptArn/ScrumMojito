@@ -1,5 +1,6 @@
 package be.studyfindr.entities;
 
+import be.studyfindr.rest.Util;
 import com.mongodb.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -7,9 +8,8 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -55,7 +55,9 @@ public class Data {
 					.append("prefDistance", u.getPrefDistance())
 					.append("prefLocation", u.getPrefLocation())
 					.append("male", u.getIsMale())
-					.append("female", u.getIsFemale());
+					.append("female", u.getIsFemale())
+					.append("lat", u.getLat())
+					.append("lon", u.getLon());
 			coll.insertOne(d);
 		}
 	}
@@ -201,7 +203,7 @@ public class Data {
 	public List<User> getAllUsers() {
 		MongoCollection<Document> doc = db.getCollection("users");
 		List<User> users = new ArrayList<User>();
-		db.getCollection("users").find().forEach((Block<? super Document>) (e) -> e.equals(users.add(new User(e))));
+		db.getCollection("users").find().forEach((Block<? super Document>) (e) -> users.add(new User(e)));
 		return users;
 	}
 
@@ -341,6 +343,34 @@ public class Data {
 		if (temp.size() > 0) queue.addAll(temp);
 		queue.removeAll(Collections.singleton(null));
 		return queue;
+	}
+
+	public List<User> getQueueFast(Long user_id){
+		// TODO check the other way around
+		User current_user = getUser(user_id);
+		Set<User> candidates = new HashSet<>();
+		getNotLikedUsers(getUser(user_id)).forEach((user) -> candidates.add(user));
+		return candidates.stream()
+				.filter((user) -> {
+					// filter age
+					if (user == null || user.equals(current_user)) return false;
+					if (user.getAge() >= current_user.getPrefAgeMin() && user.getAge() <= current_user.getPrefAgeMax()){
+						return true;
+					}
+					return false;
+				})
+				.filter((user) -> {
+					// filter gender
+					return (
+							(user.getIsFemale() && current_user.getPrefFemale()) ||
+									(user.getIsMale() && current_user.getPrefMale()) ||
+									(user.getIsTrans() && current_user.getPrefTrans())
+					);
+				})
+				.filter((user) -> {
+					// filter distance
+					return new Util().usersAreInRange(current_user, user);
+				}).collect(Collectors.toList());
 	}
 
 	public List<Like> getLikesByLiker(long id){

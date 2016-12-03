@@ -27,7 +27,6 @@ public class User {
 	 * @param email mail of the user
 	 * @param firstname first name of the user
 	 * @param lastname last name of the user
-	 * @param location location of the user
 	 * @param age age of the user
 	 * @param prefMale wants to find male
 	 * @param prefFemale wants to find female
@@ -38,9 +37,11 @@ public class User {
 	 * @param prefLocation preferred location
 	 * @param male preferred male
 	 * @param female preferred female
+	 * @param lat latidude of the user
+	 * @param lon longitude of the user
 	 */
-	public User(long id, String email, String firstname, String lastname, String location, int age,
-				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation, boolean male, boolean female) {
+	public User(long id, String email, String firstname, String lastname, int age,
+				boolean prefMale, boolean prefFemale, boolean prefTrans, int prefAgeMin, int prefAgeMax, int prefDistance, int prefLocation, boolean male, boolean female, double lat, double lon, String location) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -57,7 +58,9 @@ public class User {
 		this.prefLocation = prefLocation;
 		this.female = female;
 		this.male = male;
-		//TODO add lat lon to constructor
+		this.lat = lat;
+		this.lon = lon;
+		this.location = location;
 	}
 
 	/**
@@ -95,6 +98,8 @@ public class User {
 		this.prefLocation = doc.getInteger("prefLocation");
 		this.male = doc.getBoolean("male", false);
 		this.female = doc.getBoolean("female", false);
+		this.lat = doc.containsKey("lat")? doc.getDouble("lat") : 0.0;
+		this.lon = doc.containsKey("lon")? doc.getDouble("lon") : 0.0;
 	}
 
 	/**
@@ -113,7 +118,7 @@ public class User {
 		return "User [_id=" + id + ", email=" + email + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + ", prefMale=" + prefMale
 				+ ", prefFemale=" + prefFemale + ", prefTrans=" + prefTrans + ", prefAgeMin=" + prefAgeMin + ", prefAgeMax=" + prefAgeMax + ", prefDistance="
-				+ prefDistance + ", prefLocation=" + prefLocation + "]";
+				+ prefDistance + ", prefLocation=" + prefLocation + ", Lat=" + lat + ", Lon=" + lon + "]";
 	}
 
 	// user vars.
@@ -125,8 +130,8 @@ public class User {
 	private int age;
 	private boolean male;
 	private boolean female;
-	private long lat;
-	private long lon;
+	private double lat;
+	private double lon;
 
 	// preferences
     private boolean prefMale;
@@ -309,11 +314,11 @@ public class User {
 		this.lon = lon;
 	}
 
-	public long getLat(){
+	public double getLat(){
 		return this.lat;
 	}
 
-	public long getLon(){
+	public double getLon(){
 		return this.lon;
 	}
 
@@ -338,7 +343,9 @@ public class User {
 		if (getIsFemale() != user.getIsFemale()) return false;
 		if (getIsMale() != user.getIsMale()) return false;
 		if (getIsTrans() != user.getIsTrans()) return false;
-		return getLocation().equals(user.getLocation());
+		if (!getLocation().equals(user.getLocation())) return false;
+		if (getLon() != user.getLon()) return false;
+		return getLat() == user.getLat();
 
 	}
 
@@ -360,7 +367,7 @@ public class User {
 	}
 
 	public User clone(){
-		return new User(this.id, this.email, this.firstname, this.lastname, this.location, this.age,
-		this.prefMale, this.prefFemale, this.prefTrans, this.prefAgeMin, this.prefAgeMax, this.prefDistance, this.prefLocation, this.male, this.female);
+		return new User(this.id, this.email, this.firstname, this.lastname, this.age,
+		this.prefMale, this.prefFemale, this.prefTrans, this.prefAgeMin, this.prefAgeMax, this.prefDistance, this.prefLocation, this.male, this.female, this.lat, this.lon, this.location);
 	}
 }

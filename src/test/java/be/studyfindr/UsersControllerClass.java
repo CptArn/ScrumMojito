@@ -56,9 +56,9 @@ public class UsersControllerClass {
 
     @BeforeClass
     public static void setUp() {
-        u1 = new User(1, "email@email.com", "Jan", "Peeters", "Oiljst", 18, true, false, true, 18, 35, 25, 1, false, false);
-        u2 = new User(2, "email2@email.com", "Silke", "Yolo", "Gentj", 22, false, true, false, 18, 35, 25, 1, false, false);
-        u3 = new User(3, "email3@email.com", "sander", "maes", "Gentj", 22, false, true, false, 18, 35, 25, 1, false, false);
+        u1 = new User(1, "email@email.com", "Jan", "Peeters", 18, true, false, true, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
+        u2 = new User(2, "email2@email.com", "Silke", "Yolo", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
+        u3 = new User(3, "email3@email.com", "sander", "maes", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
         l1 = new Like(2, 3, true, false);
         l2 = new Like(1, 3, true, false);
         dataLayer = new Data();
@@ -225,6 +225,36 @@ public class UsersControllerClass {
             System.out.println(e.getMessage());
         }
     }
+
+    /*@Test
+    public void test11getmyqueuefast() {
+        User uu1 = new User(50, "email1@email.com", "Jan", "Peeters", 18, false, true, false, 16, 35, 20, 1, true, false, 50.902440, 4.005659, "haaltert");
+        User uu2 = new User(51, "email2@email.com", "Nele", "Mertens", 18, true, false, false, 16, 35, 20, 1, false, true, 50.884612, 4.076022, "denderleeuw");
+        User uu3 = new User(52, "email3@email.com", "Bart", "Jansens", 18, true, false, true, 18, 35, 25, 1, false, false, 51.215430, 2.928656, "oostende");
+        dataLayer.addUser(uu1);
+        dataLayer.addUser(uu2);
+        dataLayer.addUser(uu3);
+        String resString;
+        try {
+            MvcResult result = mockMvc.perform(get("/user/getmyqueue")
+                    .param("accessToken", "testtoken")
+                    .param("id", "50")
+                    .accept(MediaType.APPLICATION_JSON_UTF8)
+            ).andExpect(status().isOk()).andReturn();
+            resString = result.getResponse().getContentAsString();
+            JSONArray jsonarray = new JSONArray(resString);
+            List<User> users = new ArrayList<User>();
+            for (int i = 0; i < jsonarray.length(); i++) {
+                users.add(new User(Document.parse(jsonarray.get(i).toString())));
+            }
+            assert(users.contains(u1) && users.contains(u2));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        dataLayer.deleteUser(uu1);
+        dataLayer.deleteUser(uu2);
+        dataLayer.deleteUser(uu3);
+    }*/
 
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();

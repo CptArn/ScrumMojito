@@ -12,8 +12,8 @@ public class LikeTest {
 
     @BeforeClass
     public static void setUp() {
-        u1 = new User(19650, "email@email.com", "Jan", "Peeters", "Oiljst", 18, false, false, false, 16, 50, 30, 1, false, false);
-        u2 = new User(19651, "email@email.com", "Jan", "Peeters", "Oiljst", 18, false, false, false, 16, 50, 30, 1, false, false);
+        u1 = new User(19650, "email@email.com", "Jan", "Peeters", 18, false, false, false, 16, 50, 30, 1, false, false, 0.0, 0.0, "gent");
+        u2 = new User(19651, "email@email.com", "Jan", "Peeters", 18, false, false, false, 16, 50, 30, 1, false, false, 0.0, 0.0, "gent");
     }
 
     @Test

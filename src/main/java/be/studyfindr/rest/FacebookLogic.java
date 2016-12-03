@@ -144,7 +144,6 @@ public class FacebookLogic {
                     user.getEmail(),
                     user.getFirstName(),
                     user.getLastName(),
-                    null,
                     user.getAgeRange().getMin(),
                     false,
                     false,
@@ -154,7 +153,10 @@ public class FacebookLogic {
                     25,
                     1,
                     g.toLowerCase().contains("male"),
-                    g.toLowerCase().contains("female")
+                    g.toLowerCase().contains("female"),
+                    0.0,
+                    0.0,
+                    "Gent"
             );
             backend.addUser(newUser);
             return true;
