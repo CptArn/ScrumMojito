@@ -446,7 +446,18 @@ Like a user and returns the liked user object.
                     "type": "int"
                 }
             }
-            
+### Get matches of user [GET /user/getmatches{?accessToken,id}]
+
+Get matches of user and return user list.
+
++ Parameters
+    + accessToken (string, required) - Access Code from Facebook
+    + id (long, required) - Own id
+    
++ Response 200 (application/json)
+    + Attributes
+        - data (array[User])
+                    
 ### Get your queue [GET /user/getmyqueue{?accessToken,id}]
 
 Get a list of candidates.
