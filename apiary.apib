@@ -479,3 +479,36 @@ Get a list of candidates.
 - isMale: true (boolean, optional)
 - isFemale: false (boolean, optional)
 - isTrans: false (boolean, optional)
+
+### Get matches of user [POST /user/getmatches{?accessToken,id}]
+
+Get matches of user and return user list.
+
++ Parameters
+    + accessToken (string, required) - Access Code from Facebook
+    + id (long, required) - Own id
+    
++ Response 200 (application/json)
+    + Attributes
+        - data (array[User])
+# Data Structures
+## User (object)
+- DEFAULT_PREF_AGE_MIN: 18 (number, optional) 
+- DEFAULT_PREF_AGE_MAX: 35 (number, optional) 
+- DEFAULT_PREF_DISTANCE: 100 (number, optional) 
+- id: 10210990000960326 (number, required) 
+- email: mail@mail.com (string, optional) 
+- firstname: "name" (string, optional) 
+- lastname: "name" (string, optional) 
+- location: "" (string, optional)
+- age: 21 (number, optional)
+- prefMale: false (boolean, optional)
+- prefFemale: false (boolean, optional)
+- prefTrans: false (boolean, optional)
+- prefAgeMin: 18 (number, optional)
+- prefAgeMax: 35 (number, optional)
+- prefDistance: 25 (number, optional)
+- prefLocation: 1 (number, optional)
+- isMale: true (boolean, optional)
+- isFemale: false (boolean, optional)
+- isTrans: false (boolean, optional)
