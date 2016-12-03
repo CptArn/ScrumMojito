@@ -177,7 +177,7 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void test16MatchTestOneMatch(){
+	public void test16MatchLikeLike(){
 		dataLayer.addUser(u1);
 		dataLayer.addUser(u2);
 		Like l1 = new Like(u1.getid(), u2.getid(), true, true);
@@ -191,4 +191,37 @@ public class DatabaseTest {
 		dataLayer.deleteLike(l2);
 	}
 
+	@Test
+	public void test17MatchLikeDislike() {
+		dataLayer.addUser(u1);
+		dataLayer.addUser(u2);
+		Like l1 = new Like(u1.getid(), u2.getid(), true, true);
+		Like l2 = new Like(u2.getid(), u1.getid(), false, true);
+		dataLayer.addLike(l1);
+		dataLayer.addLike(l2);
+		System.out.println(dataLayer.getMatches(u1.getid()));
+		assert(dataLayer.getMatches(u1.getid()).size() == 0);
+		dataLayer.deleteUser(u1);
+		dataLayer.deleteUser(u2);
+		dataLayer.deleteLike(l1);
+		dataLayer.deleteLike(l2);
+	}
+
+    @Test
+    public void test18MatchLikeChanged() {
+        dataLayer.addUser(u1);
+        dataLayer.addUser(u2);
+        Like l1 = new Like(u1.getid(), u2.getid(), true, true);
+        Like l2 = new Like(u2.getid(), u1.getid(), true, true);
+        dataLayer.addLike(l1);
+        dataLayer.addLike(l2);
+        assert(dataLayer.getMatches(u1.getid()).size() == 1);
+        l2 = new Like(u2.getid(), u1.getid(), false, true);
+        dataLayer.updateLike(l2);
+        assert(dataLayer.getMatches(u1.getid()).size() == 0);
+        dataLayer.deleteUser(u1);
+        dataLayer.deleteUser(u2);
+        dataLayer.deleteLike(l1);
+        dataLayer.deleteLike(l2);
+    }
 }

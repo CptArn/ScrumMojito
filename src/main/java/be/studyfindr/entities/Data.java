@@ -249,7 +249,6 @@ public class Data {
 		try {
 			found = new Like(objectFound);
 		}catch(Exception ex){
-			//found = null;
 			throw ex;
 		}
 		return found;
@@ -355,9 +354,13 @@ public class Data {
 		List<User> matches = new ArrayList<>();
 		List<Like> likes = getLikesByLiker(id);
 		likes.forEach((like) -> {
+            Like like1, like2;
 			try{
 				// get inverse like (IF is optional but nice to have)			and add likee to collection
-				if (getLike(like.getLikee_Id(), like.getLiker_Id()) != null) {
+                like1 = getLike(like.getLikee_Id(), like.getLiker_Id());
+                like2 = getLike(like.getLiker_Id(), like.getLikee_Id());
+				if (like1 != null && like2 != null &&
+                    like1.getLike() && like2.getLike()) {
 					matches.add(getUser(like.getLikee_Id()));
 				}
 			}catch(Exception ex){
