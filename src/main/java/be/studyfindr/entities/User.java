@@ -1,5 +1,6 @@
 package be.studyfindr.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.Document;
 
 /**
@@ -146,6 +147,7 @@ public class User {
 	 * True if male
 	 * @return
 	 */
+	@JsonProperty("male")
 	public boolean getIsMale(){
 		return this.male && !this.female;
 	}
@@ -154,6 +156,7 @@ public class User {
 	 * True if female
 	 * @return
 	 */
+	@JsonProperty("female")
 	public boolean getIsFemale(){
 		return female && !male;
 	}
@@ -162,6 +165,7 @@ public class User {
 	 * True if trans.
 	 * @return
 	 */
+	@JsonProperty("trans")
 	public boolean getIsTrans(){
 		return male && female;
 	}
