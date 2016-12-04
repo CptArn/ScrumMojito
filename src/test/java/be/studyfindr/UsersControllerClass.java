@@ -205,32 +205,11 @@ public class UsersControllerClass {
         }
     }
 
-    /*@Test
-    public void test10getmyqueue() {
-        String resString;
-        try {
-            MvcResult result = mockMvc.perform(get("/user/getmyqueue")
-                    .param("accessToken", "testtoken")
-                    .param("id", u3.getid() + "")
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
-            ).andExpect(status().isOk()).andReturn();
-            resString = result.getResponse().getContentAsString();
-            JSONArray jsonarray = new JSONArray(resString);
-            List<User> users = new ArrayList<User>();
-            for (int i = 0; i < jsonarray.length(); i++) {
-                users.add(new User(Document.parse(jsonarray.get(i).toString())));
-            }
-            assert(users.contains(u1) && users.contains(u2));
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
-
     @Test
-    public void test11getmyqueuefast() {
+    public void test10getmyqueue() {
         User uu1 = new User(50, "email1@email.com", "Jan", "Peeters", 18, false, true, false, 16, 35, 20, 1, true, false, 50.902440, 4.005659, "haaltert");
         User uu2 = new User(51, "email2@email.com", "Nele", "Mertens", 18, true, false, false, 16, 35, 20, 1, false, true, 50.884612, 4.076022, "denderleeuw");
-        User uu3 = new User(52, "email3@email.com", "Bart", "Jansens", 18, true, false, true, 18, 35, 25, 1, false, false, 51.215430, 2.928656, "oostende");
+        User uu3 = new User(52, "email3@email.com", "Bart", "Jansens", 18, false, true, true, 18, 35, 25, 1, false, false, 50.884612, 4.076022, "denderleeuw");
         dataLayer.addUser(uu1);
         dataLayer.addUser(uu2);
         dataLayer.addUser(uu3);
@@ -247,7 +226,7 @@ public class UsersControllerClass {
             for (int i = 0; i < jsonarray.length(); i++) {
                 users.add(new User(Document.parse(jsonarray.get(i).toString())));
             }
-            assert(users.contains(uu2));
+            assert(users.contains(uu2) && !users.contains(uu3));
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
@@ -259,17 +238,17 @@ public class UsersControllerClass {
     @Test
     public void test12Dislike() {
         try {
+            dataLayer.deleteLike(dataLayer.getLike(u1.getid(), u2.getid()));
+        }catch(Exception ex){}
+        try {
             // add new dislike
             mockMvc.perform(post("/user/2/like")
                     .contentType(MediaType.APPLICATION_JSON)
                     .param("accessToken", "testtoken")
                     .param("id", u1.getid() + "")
-                    .param("like", "true")
+                    .param("like", "false")
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk());
-            Like like = dataLayer.getLike(u1.getid(), u2.getid());
-            assert((like.getLikee_Id() + like.getLiker_Id()) == (u1.getid() + u2.getid()));
-
 
         } catch(Exception e) {
             System.out.println(e.getMessage());

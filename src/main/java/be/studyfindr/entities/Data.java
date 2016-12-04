@@ -280,12 +280,6 @@ public class Data {
 				System.out.println(ex.getMessage());
 			}
 		});
-		/*for(Document doc : documents) {
-			User u = getUser(doc.getLong("liker_id"), current_user);
-			if (u != null) {
-				foundUsers.add(u);
-			}
-		}*/
 		return foundUsers;
 	}
 
@@ -315,16 +309,6 @@ public class Data {
 		if (foundUsers.contains(current_user)) {
 			foundUsers.remove(current_user);
 		}
-
-		/*for(Document doc : documents) {
-			Like l = getLike(current_user.getid(), doc.getLong("_id"));
-			if (l == null) {
-				User u = getUser(doc.getLong("_id"), current_user);
-				if (u != null) {
-					foundUsers.add(u);
-				}
-			}
-		}*/
 		return foundUsers;
 	}
 
@@ -334,19 +318,7 @@ public class Data {
 		coll.deleteOne(filter);
 	}
 
-	public List<User> getQueue(Long user_id) {
-		User current_user = getUser(user_id);
-		List<User> queue = new ArrayList<>();
-		List<User> temp = getLikesByLikee(current_user);
-		if (temp.size() > 0) queue.addAll(temp);
-		temp = getNotLikedUsers(current_user);
-		if (temp.size() > 0) queue.addAll(temp);
-		queue.removeAll(Collections.singleton(null));
-		return queue;
-	}
-
-	public List<User> getQueueFast(Long user_id){
-		// TODO check the other way around
+	public List<User> getQueue(Long user_id){
 		User current_user = getUser(user_id);
 		Set<User> candidates = new HashSet<>();
 		getNotLikedUsers(getUser(user_id)).forEach((user) -> candidates.add(user));
@@ -354,20 +326,26 @@ public class Data {
 				.filter((user) -> {
 					// filter age
 					if (user == null || user.equals(current_user)) return false;
+					// check first direction
 					if (user.getAge() >= current_user.getPrefAgeMin() && user.getAge() <= current_user.getPrefAgeMax()){
-						return true;
+						// check inverse
+						boolean s = (current_user.getAge() >= user.getPrefAgeMin()) && (current_user.getAge() <= user.getPrefAgeMax());
+						return s;
 					}
 					return false;
 				})
 				.filter((user) -> {
 					// filter gender
-					boolean s = (user.getIsFemale() && current_user.getPrefFemale()) ||
+					boolean s1 = (user.getIsFemale() && current_user.getPrefFemale()) ||
 							(user.getIsMale() && current_user.getPrefMale()) ||
 							(user.getIsTrans() && current_user.getPrefTrans());
-					return s;
+					boolean s2 = (current_user.getIsFemale() && user.getPrefFemale()) ||
+							(current_user.getIsMale() && user.getPrefMale()) ||
+							(current_user.getIsTrans() && user.getPrefTrans());
+					return s1 && s2;
 				})
 				.filter((user) -> {
-					// filter distance
+					// filter distance (one direction)
 					boolean s = new Util().usersAreInRange(current_user, user);
 					return s;
 				}).collect(Collectors.toList());
