@@ -361,15 +361,15 @@ public class Data {
 				})
 				.filter((user) -> {
 					// filter gender
-					return (
-							(user.getIsFemale() && current_user.getPrefFemale()) ||
-									(user.getIsMale() && current_user.getPrefMale()) ||
-									(user.getIsTrans() && current_user.getPrefTrans())
-					);
+					boolean s = (user.getIsFemale() && current_user.getPrefFemale()) ||
+							(user.getIsMale() && current_user.getPrefMale()) ||
+							(user.getIsTrans() && current_user.getPrefTrans());
+					return s;
 				})
 				.filter((user) -> {
 					// filter distance
-					return new Util().usersAreInRange(current_user, user);
+					boolean s = new Util().usersAreInRange(current_user, user);
+					return s;
 				}).collect(Collectors.toList());
 	}
 

@@ -205,7 +205,7 @@ public class UsersControllerClass {
         }
     }
 
-    @Test
+    /*@Test
     public void test10getmyqueue() {
         String resString;
         try {
@@ -224,9 +224,9 @@ public class UsersControllerClass {
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
-    /*@Test
+    @Test
     public void test11getmyqueuefast() {
         User uu1 = new User(50, "email1@email.com", "Jan", "Peeters", 18, false, true, false, 16, 35, 20, 1, true, false, 50.902440, 4.005659, "haaltert");
         User uu2 = new User(51, "email2@email.com", "Nele", "Mertens", 18, true, false, false, 16, 35, 20, 1, false, true, 50.884612, 4.076022, "denderleeuw");
@@ -247,14 +247,34 @@ public class UsersControllerClass {
             for (int i = 0; i < jsonarray.length(); i++) {
                 users.add(new User(Document.parse(jsonarray.get(i).toString())));
             }
-            assert(users.contains(u1) && users.contains(u2));
+            assert(users.contains(uu2));
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
         dataLayer.deleteUser(uu1);
         dataLayer.deleteUser(uu2);
         dataLayer.deleteUser(uu3);
-    }*/
+    }
+
+    @Test
+    public void test12Dislike() {
+        try {
+            // add new dislike
+            mockMvc.perform(post("/user/2/like")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("accessToken", "testtoken")
+                    .param("id", u1.getid() + "")
+                    .param("like", "true")
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            Like like = dataLayer.getLike(u1.getid(), u2.getid());
+            assert((like.getLikee_Id() + like.getLiker_Id()) == (u1.getid() + u2.getid()));
+
+
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();

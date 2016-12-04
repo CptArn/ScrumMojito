@@ -118,7 +118,7 @@ public class User {
 		return "User [_id=" + id + ", email=" + email + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", location=" + location + ", age=" + age + ", prefMale=" + prefMale
 				+ ", prefFemale=" + prefFemale + ", prefTrans=" + prefTrans + ", prefAgeMin=" + prefAgeMin + ", prefAgeMax=" + prefAgeMax + ", prefDistance="
-				+ prefDistance + ", prefLocation=" + prefLocation + ", Lat=" + lat + ", Lon=" + lon + "]";
+				+ prefDistance + ", prefLocation=" + prefLocation + ", Lat=" + lat + ", Lon=" + lon + ", male=" + male + ", female=" + female + "]";
 	}
 
 	// user vars.
