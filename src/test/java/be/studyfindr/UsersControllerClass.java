@@ -236,23 +236,36 @@ public class UsersControllerClass {
     }
 
     @Test
-    public void test12Dislike() {
+    public void test11Dislike() {
+        User uu1 = new User(50, "email1@email.com", "Jan", "Peeters", 18, false, true, false, 16, 35, 20, 1, true, false, 50.902440, 4.005659, "haaltert");
+        User uu2 = new User(51, "email2@email.com", "Nele", "Mertens", 18, true, false, false, 16, 35, 20, 1, false, true, 50.884612, 4.076022, "denderleeuw");
+        User uu3 = new User(52, "email3@email.com", "Bart", "Jansens", 18, false, true, true, 18, 35, 25, 1, false, false, 50.884612, 4.076022, "denderleeuw");
+        dataLayer.addUser(uu1);
+        dataLayer.addUser(uu2);
+        dataLayer.addUser(uu3);
+        Like like = new Like(uu1.getid(), uu2.getid(), false, false);
+        dataLayer.addLike(like);
+        String resString;
         try {
-            dataLayer.deleteLike(dataLayer.getLike(u1.getid(), u2.getid()));
-        }catch(Exception ex){}
-        try {
-            // add new dislike
-            mockMvc.perform(post("/user/2/like")
-                    .contentType(MediaType.APPLICATION_JSON)
+            MvcResult result = mockMvc.perform(get("/user/getmyqueue")
                     .param("accessToken", "testtoken")
-                    .param("id", u1.getid() + "")
-                    .param("like", "false")
-                    .accept(MediaType.APPLICATION_JSON)
-            ).andExpect(status().isOk());
-
+                    .param("id", uu1.getid() + "")
+                    .accept(MediaType.APPLICATION_JSON_UTF8)
+            ).andExpect(status().isOk()).andReturn();
+            resString = result.getResponse().getContentAsString();
+            JSONArray jsonarray = new JSONArray(resString);
+            List<User> users = new ArrayList<User>();
+            for (int i = 0; i < jsonarray.length(); i++) {
+                users.add(new User(Document.parse(jsonarray.get(i).toString())));
+            }
+            assert(!users.contains(uu2) && !users.contains(uu3));
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
+        dataLayer.deleteUser(uu1);
+        dataLayer.deleteUser(uu2);
+        dataLayer.deleteUser(uu3);
+        dataLayer.deleteLike(like);
     }
 
     protected String json(Object o) throws IOException {

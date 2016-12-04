@@ -312,6 +312,21 @@ public class Data {
 		return foundUsers;
 	}
 
+	public List<Long> getDislikedIds(User current_user){
+		Bson filter = new Document("liker_id", current_user.getid())
+				.append("like", false);
+		FindIterable<Document> disliked_docs = db.getCollection("likes").find(filter).sort(new Document("_id", -1));
+		List<Long> disliked_users = new ArrayList<>();
+		disliked_docs.forEach((Block<? super Document>) (like_doc) -> {
+			try{
+				disliked_users.add(like_doc.getLong("likee_id"));
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
+		});
+		return disliked_users;
+	}
+
 	public void deleteLike(Like l) {
 		MongoCollection<Document> coll = db.getCollection("likes");
 		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
@@ -319,6 +334,7 @@ public class Data {
 	}
 
 	public List<User> getQueue(Long user_id){
+		List<Long> disliked = getDislikedIds(getUser(user_id));
 		User current_user = getUser(user_id);
 		Set<User> candidates = new HashSet<>();
 		getNotLikedUsers(getUser(user_id)).forEach((user) -> candidates.add(user));
@@ -348,7 +364,13 @@ public class Data {
 					// filter distance (one direction)
 					boolean s = new Util().usersAreInRange(current_user, user);
 					return s;
-				}).collect(Collectors.toList());
+				})
+				.filter((user) -> {
+					// remove disliked users
+					boolean s = !disliked.contains(user.getid());
+					return s;
+				})
+				.collect(Collectors.toList());
 	}
 
 	public List<Like> getLikesByLiker(long id){
