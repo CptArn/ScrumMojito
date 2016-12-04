@@ -160,11 +160,11 @@ public class DatabaseTest {
 
 	@Test
 	public  void test14AddMessage() {
-		Message m = new Message(1, "message", new Date(), false, 1, 2);
-		dataLayer.addMessage(m);
-		List<Message> messages = dataLayer.getMessages(2);
-		assert(messages.contains(m));
-		dataLayer.deleteMessage(1);
+		Message m = new Message("message", new Date(), 1, 2);
+		long messId = dataLayer.addMessage(m);
+		Message message = dataLayer.getMessage(messId);
+		assert(m.equals(message));
+		dataLayer.deleteMessage(messId);
 	}
 
 	@Test

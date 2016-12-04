@@ -66,19 +66,24 @@ public class Data {
 	 * Adds a new message to the database
 	 * @param m message to add
 	 */
-	public void addMessage(Message m) {
-		Bson filter = new Document("_id", m.getId());
-		Document found = db.getCollection("messages").find(filter).first();
-		if (found == null) {
-			MongoCollection<Document> coll = db.getCollection("messages");
-			Document d = new Document("_id", m.getId())
-					.append("message", m.getMessage())
-					.append("date", m.getDate())
-					.append("status", m.getStatus())
-					.append("sender_Id", m.getSender_Id())
-					.append("receiver_Id", m.getReceiver_Id());
-			coll.insertOne(d);
+	public long addMessage(Message m) {
+		try{
+			getMessage(m);
+			// message exists
+			throw new IllegalArgumentException("Same message with same timestamp already exists");
+		}catch(Exception ex){
+
 		}
+		long id;
+		MongoCollection<Document> coll = db.getCollection("messages");
+		id = coll.count();
+		Document d = new Document("_id", coll.count())
+				.append("message", m.getMessage())
+				.append("date", m.getDate())
+				.append("sender_Id", m.getSender_Id())
+				.append("receiver_Id", m.getReceiver_Id());
+		coll.insertOne(d);
+		return id;
 	}
 
 	/**
@@ -91,10 +96,31 @@ public class Data {
 		coll.deleteOne(filter);
 	}
 
-	public List<Message> getMessages(int id){
+	public List<Message> getAllMessages(){
 		List<Message> messages = new ArrayList<Message>();
 		db.getCollection("messages").find().forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));
 		return messages;
+	}
+	public List<Message> getMessages(long my_id, long other_id){
+		List<Message> messages = new ArrayList<Message>();
+		Bson f1 = new Document("sender_Id", my_id).append("receiver_Id", other_id);
+		Bson f2 = new Document("sender_Id", other_id).append("receiver_Id", my_id);
+		db.getCollection("messages").find(or(f1, f2)).sort(new BasicDBObject("_id",-1)).forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));
+		return messages;
+	}
+
+	public Message getMessage(long id){
+		List<Message> messages = new ArrayList<Message>();
+		Bson f1 = new Document("_id", id);
+		Document doc = db.getCollection("messages").find(f1).first();
+		return new Message(doc);
+	}
+
+	public Message getMessage(Message message){
+		List<Message> messages = new ArrayList<Message>();
+		Bson f1 = new Document("message", message.getMessage()).append("date", message.getDate()).append("sender_Id", message.getSender_Id()).append("receiver_Id", message.getReceiver_Id());
+		Document doc = db.getCollection("messages").find(f1).first();
+		return new Message(doc);
 	}
 
 	public void addPhoto(Photo p) {
@@ -398,5 +424,16 @@ public class Data {
 			}
 		});
 		return matches;
+	}
+
+	public boolean usersHaveMatch(long user1_id, long user2_id){
+		try{
+			// if no match one of these will fail
+			Like l1 = getLike(user1_id, user2_id);
+			Like l2 = getLike(user2_id, user1_id);
+			return (l1 != null && l2 != null);
+		}catch(Exception ex){
+			return false;
+		}
 	}
 }
