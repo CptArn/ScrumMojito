@@ -143,18 +143,6 @@ public class Data {
 	}
 
 	/**
-	 * Adds a picture
-	 * @param p picture to add
-	 */
-	public void addPhoto(Photo p) {
-		MongoCollection<Document> coll = db.getCollection("photos");
-		Document d = new Document("_id", coll.count() + 1)
-				.append("user_Id", p.getUser_id())
-				.append("path", p.getPath());
-		coll.insertOne(d);
-	}
-
-	/**
 	 * Adds a match to the database
 	 * @param m match to add
 	 */
