@@ -2,6 +2,7 @@ language: java
 sudo: false
 before_install:
  - chmod +x gradlew
+ - sleep 4m
 addons:
   apt:
     packages:
