@@ -466,6 +466,10 @@ public class User {
 
 	}
 
+	/**
+	 * Generates a unique hash for this object
+	 * @return hash
+	 */
 	@Override
 	public int hashCode() {
 		int result = (int) (id ^ (id >>> 32));
@@ -483,6 +487,10 @@ public class User {
 		return result;
 	}
 
+	/**
+	 * Clones the user.
+	 * @return clone of object
+	 */
 	public User clone(){
 		return new User(this.id, this.email, this.firstname, this.lastname, this.age,
 		this.prefMale, this.prefFemale, this.prefTrans, this.prefAgeMin, this.prefAgeMax, this.prefDistance, this.prefLocation, this.male, this.female, this.lat, this.lon, this.location);
