@@ -96,11 +96,22 @@ public class Data {
 		coll.deleteOne(filter);
 	}
 
+	/**
+	 * Returns all messages in database
+	 * @return all messages
+	 */
 	public List<Message> getAllMessages(){
 		List<Message> messages = new ArrayList<Message>();
 		db.getCollection("messages").find().forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));
 		return messages;
 	}
+
+	/**
+	 * Returns all messages between 2 users
+	 * @param my_id own id
+	 * @param other_id other id
+	 * @return messages between users
+	 */
 	public List<Message> getMessages(long my_id, long other_id){
 		List<Message> messages = new ArrayList<Message>();
 		Bson f1 = new Document("sender_Id", my_id).append("receiver_Id", other_id);
@@ -109,20 +120,32 @@ public class Data {
 		return messages;
 	}
 
+	/**
+	 * Gets a message based on message id
+	 * @param id message id
+	 * @return message
+	 */
 	public Message getMessage(long id){
-		List<Message> messages = new ArrayList<Message>();
 		Bson f1 = new Document("_id", id);
 		Document doc = db.getCollection("messages").find(f1).first();
 		return new Message(doc);
 	}
 
+	/**
+	 * Reloads a message from database
+	 * @param message message to find
+	 * @return message from database
+	 */
 	public Message getMessage(Message message){
-		List<Message> messages = new ArrayList<Message>();
 		Bson f1 = new Document("message", message.getMessage()).append("date", message.getDate()).append("sender_Id", message.getSender_Id()).append("receiver_Id", message.getReceiver_Id());
 		Document doc = db.getCollection("messages").find(f1).first();
 		return new Message(doc);
 	}
 
+	/**
+	 * Adds a picture
+	 * @param p picture to add
+	 */
 	public void addPhoto(Photo p) {
 		MongoCollection<Document> coll = db.getCollection("photos");
 		Document d = new Document("_id", coll.count() + 1)
@@ -131,6 +154,10 @@ public class Data {
 		coll.insertOne(d);
 	}
 
+	/**
+	 * Adds a match to the database
+	 * @param m match to add
+	 */
 	public void addMatch(Match m) {
 		MongoCollection<Document> coll = db.getCollection("matches");
 		Document d = new Document("liker_Id", m.getLiker_Id())
@@ -138,6 +165,10 @@ public class Data {
 		coll.insertOne(d);
 	}
 
+	/**
+	 * Deletes a match from database
+	 * @param m match to delete
+	 */
 	public void deleteMatch(Match m){
 		MongoCollection<Document> coll = db.getCollection("matches");
 		Bson filter = new Document("liker_Id", m.getLiker_Id())
@@ -145,6 +176,10 @@ public class Data {
 		coll.deleteOne(filter);
 	}
 
+	/**
+	 * Adds a like to the database
+	 * @param l like to add
+	 */
 	public void addLike(Like l) {
 		Bson filter = new Document("liker_id", l.getLiker_Id())
 				.append("likee_id", l.getLikee_Id());
@@ -160,6 +195,10 @@ public class Data {
 		}
 	}
 
+	/**
+	 * Adds a school to the database
+	 * @param s school to add
+	 */
 	public void addSchool(School s) {
 		MongoCollection<Document> coll = db.getCollection("schools");
 		Bson filter = new Document("name", s.getName());
@@ -172,6 +211,11 @@ public class Data {
 		}
 	}
 
+	/**
+	 * Gets a list of documents, named 'collection' based on a collection name
+	 * @param collection collection name
+	 * @return collection
+	 */
 	public List<Document> getCollectionDocuments(String collection) {
 		MongoCollection<Document> coll = db.getCollection(collection);
 		List<Document> documents = (List<Document>) coll.find().into(
@@ -179,6 +223,10 @@ public class Data {
 		return documents;
 	}
 
+	/**
+	 * Updates a user in database
+	 * @param u user object with new information
+	 */
 	public void updateUser(User u) {
 		MongoCollection<Document> collection = db.getCollection("users");
 		collection.updateOne(eq("_id", u.getid()), new Document("$set",
@@ -199,12 +247,21 @@ public class Data {
 		));
 	}
 
+	/**
+	 * Deletes a user from database based on the user object
+	 * @param u user object to remove
+	 */
 	public void deleteUser(User u) {
 		MongoCollection<Document> coll = db.getCollection("users");
 		Bson filter = new Document("_id", u.getid());
 		coll.deleteOne(filter);
 	}
 
+	/**
+	 * Returns a user from database based on the user id
+	 * @param id user id to find
+	 * @return the found user
+	 */
 	public User getUser(long id) {
 		Bson filter = new Document("_id", id);
 		Document doc;
@@ -212,8 +269,13 @@ public class Data {
 		return new User(doc);
 	}
 
+	/**
+	 * Returns a user from database based on the id of the user and a user object without user id.
+	 * @param id user id to find
+	 * @param user_pref object containing preferences
+	 * @return the found user, null if not present
+	 */
 	public User getUser(long id, User user_pref) {
-		Bson filter = new Document("_id", id);
 		Document doc;
 		doc = db.getCollection("users").find(and(
 				eq("_id", id),
@@ -226,6 +288,10 @@ public class Data {
 		return new User(doc);
 	}
 
+	/**
+	 * Returns all users from database
+	 * @return
+	 */
 	public List<User> getAllUsers() {
 		MongoCollection<Document> doc = db.getCollection("users");
 		List<User> users = new ArrayList<User>();
@@ -233,10 +299,17 @@ public class Data {
 		return users;
 	}
 
+	/**
+	 * Deletes all users in database
+	 */
 	public void deleteAllUsers() {
 		db.getCollection("users").deleteMany(new BasicDBObject());
 	}
 
+	/**
+	 * Returns all schools from database
+	 * @return all schools from database
+	 */
 	public List<School> getAllSchools() {
 		List<School> found = new ArrayList<School>();
 		FindIterable<Document> returnedSchools = db.getCollection("schools").find();
@@ -246,6 +319,11 @@ public class Data {
 		return found;
 	}
 
+	/**
+	 * Gets a school from database by name
+	 * @param schoolName name of school to find
+	 * @return school from database
+	 */
 	public School getSchool(String schoolName) {
 		School found;
 		Bson filter = new Document("name", schoolName);
@@ -254,6 +332,10 @@ public class Data {
 		return found;
 	}
 
+	/**
+	 * Updates a school in database
+	 * @param s school to update
+	 */
 	public void updateSchool(School s) {
 		MongoCollection<Document> coll = db.getCollection("schools");
 		Bson filter = new Document("_id", s.getId());
@@ -264,12 +346,22 @@ public class Data {
 		coll.updateOne(filter, updateOperationDocument);
 	}
 
+	/**
+	 * Deletes a school from database
+	 * @param school school to remove
+	 */
 	public void deleteSchool(School school) {
 		MongoCollection<Document> coll = db.getCollection("schools");
 		Bson filter = new Document("name", school.getName());
 		coll.deleteOne(filter);
 	}
 
+	/**
+	 * Returns a like from database based on liker & likee id
+	 * @param liker_id liker id
+	 * @param likee_id likee id
+	 * @return found like
+	 */
 	public Like getLike(Long liker_id, Long likee_id) {
 		Like found;
 		Bson filter = new Document("liker_id", liker_id).append("likee_id", likee_id);
@@ -282,6 +374,10 @@ public class Data {
 		return found;
 	}
 
+	/**
+	 * Update an existing like in database
+	 * @param l like to update
+	 */
 	public void updateLike(Like l) {
 		MongoCollection<Document> coll = db.getCollection("likes");
 		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
@@ -293,6 +389,11 @@ public class Data {
 		coll.updateOne(filter, updateOperationDocument);
 	}
 
+	/**
+	 * Returns all likes based on likee
+	 * @param current_user likee
+	 * @return list of found likes
+	 */
 	public List<User> getLikesByLikee(User current_user) {
 		Bson filter = new Document("likee_id", current_user.getid())
 				.append("confirmed", false)
@@ -309,6 +410,11 @@ public class Data {
 		return foundUsers;
 	}
 
+	/**
+	 * Returns a list of not liked user for a certain user
+	 * @param current_user the user for which we search the not liked users
+	 * @return list of not liked users
+	 */
 	public List<User> getNotLikedUsers(User current_user) {
 		Bson filter = new Document("liker_id", current_user.getid())
 				.append("like", true);
@@ -338,6 +444,11 @@ public class Data {
 		return foundUsers;
 	}
 
+	/**
+	 * Gets a list of disliked user ids
+	 * @param current_user own user
+	 * @return list of disliked user ids
+	 */
 	public List<Long> getDislikedIds(User current_user){
 		Bson filter = new Document("liker_id", current_user.getid())
 				.append("like", false);
@@ -353,12 +464,21 @@ public class Data {
 		return disliked_users;
 	}
 
+	/**
+	 * Deletes a like from database based on the like
+	 * @param l like to remove
+	 */
 	public void deleteLike(Like l) {
 		MongoCollection<Document> coll = db.getCollection("likes");
 		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
 		coll.deleteOne(filter);
 	}
 
+	/**
+	 * Returns a list of candidates for a user
+	 * @param user_id user
+	 * @return list of candidates
+	 */
 	public List<User> getQueue(Long user_id){
 		List<Long> disliked = getDislikedIds(getUser(user_id));
 		User current_user = getUser(user_id);
@@ -399,6 +519,11 @@ public class Data {
 				.collect(Collectors.toList());
 	}
 
+	/**
+	 * Gets a likes for by liker
+	 * @param id liker id
+	 * @return all likes for likers
+	 */
 	public List<Like> getLikesByLiker(long id){
 		List<Like> likes = new ArrayList<>();
 		Bson filter = new Document("liker_id", id);
@@ -406,6 +531,11 @@ public class Data {
 		return likes;
 	}
 
+	/**
+	 * Returns all matches for a user.
+	 * @param id user id
+	 * @return list of matches
+	 */
 	public List<User> getMatches(long id){
 		List<User> matches = new ArrayList<>();
 		List<Like> likes = getLikesByLiker(id);
@@ -426,6 +556,12 @@ public class Data {
 		return matches;
 	}
 
+	/**
+	 * Checks if users have a match
+	 * @param user1_id user id 1
+	 * @param user2_id user id 2
+	 * @return true if there is a match, false if there is no match
+	 */
 	public boolean usersHaveMatch(long user1_id, long user2_id){
 		try{
 			// if no match one of these will fail

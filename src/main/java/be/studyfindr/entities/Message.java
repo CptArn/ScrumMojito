@@ -4,7 +4,18 @@ import org.bson.Document;
 
 import java.util.Date;
 
+/**
+ * Represents a message
+ */
 public class Message {
+
+    /**
+     * Creates a new message instance
+     * @param message message content
+     * @param date moment the message was received
+     * @param sender_Id sender id
+     * @param receiver_Id receiver id
+     */
     public Message(String message, Date date, long sender_Id, long receiver_Id) {
         super();
         this.message = message;
@@ -13,6 +24,11 @@ public class Message {
         this.receiver_Id = receiver_Id;
     }
 
+    /**
+     * Parses a doc and creates a new message object
+     * @param doc document to parse
+     * @throws ClassCastException if parsing fails
+     */
     public Message(Document doc) throws ClassCastException {
         if (doc == null) throw new IllegalArgumentException("The document cannot be 'null'.");
         String idFieldName;
@@ -43,6 +59,7 @@ public class Message {
         }
     }
 
+    //
     private long id;
     private String message;
     private Date date;
