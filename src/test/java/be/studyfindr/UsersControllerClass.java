@@ -2,6 +2,7 @@ package be.studyfindr;
 
 import be.studyfindr.entities.Data;
 import be.studyfindr.entities.Like;
+import be.studyfindr.entities.Match;
 import be.studyfindr.entities.User;
 import be.studyfindr.rest.UsersController;
 import org.apache.tomcat.util.digester.ArrayStack;
@@ -269,6 +270,32 @@ public class UsersControllerClass {
         this.mappingJackson2HttpMessageConverter.write(
                 o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
         return mockHttpOutputMessage.getBodyAsString();
+    }
+
+    @Test
+    public void test12GetMatches() {
+        Like l1 = new Like(3, 1, true, false);
+        Like l2 = new Like(3, 2, true, false);
+        dataLayer.addLike(l1);
+        dataLayer.addLike(l2);
+        try {
+            MvcResult result = mockMvc.perform(post("/user/getmatches")
+                    .param("accessToken", "testtoken")
+                    .param("id", "3")
+                    .accept(MediaType.APPLICATION_JSON_UTF8)
+            ).andExpect(status().isOk()).andReturn();
+            String res = result.getResponse().getContentAsString();
+            JSONArray jsonarray = new JSONArray(res);
+            List<User> users = new ArrayList<User>();
+            for (int i = 0; i < jsonarray.length(); i++) {
+                users.add(new User(Document.parse(jsonarray.get(i).toString())));
+            }
+            assert(users.contains(u1) && users.contains(u2));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        dataLayer.deleteLike(l1);
+        dataLayer.deleteLike(l2);
     }
 
     @AfterClass
