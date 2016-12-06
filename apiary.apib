@@ -457,7 +457,7 @@ Get matches of user and return user list.
 + Response 200 (application/json)
     + Attributes
         - data (array[User])
-                    
+    
 ### Get your queue [GET /user/getmyqueue{?accessToken,id}]
 
 Get a list of candidates.
@@ -469,6 +469,38 @@ Get a list of candidates.
 + Response 200 (application/json)
     + Attributes
         - data (array[User])
+
+## Messages [/messages]
+
+### get conversation  [GET /messages/getconversation{?accessToken,id,matchid}]
+
+Gets te conversation by match id
++ Parameters
+    + id (int, required) - User id
+    + accessToken (int, required) - Access Token
+    + matchid (int, required) - Match Id
+
++ Response 200 (application/json)
+
+    + Body
+        
+    + Schema
+    
+### Post Message [POST /messages/postmessage{?accessToken,id,matchid,message}]
+
+Post a new message
++ Parameters
+    + id (int, required) - User id
+    + accessToken (int, required) - Access Token
+    + matchid (int, required) - Match Id
+    + message (string, required)
+
++ Response 200 (application/json)
+
+    + Body
+        
+    + Schema
+
 # Data Structures
 ## User (object)
 - DEFAULT_PREF_AGE_MIN: 18 (number, optional) 
@@ -490,23 +522,3 @@ Get a list of candidates.
 - isMale: true (boolean, optional)
 - isFemale: false (boolean, optional)
 - isTrans: false (boolean, optional)
-
-## Messages [/messages]
-
-### get conversation  [GET /messages/getconversation{?accessToken, id, match_id}]
-
-Gets te conversation by match id
-+ Parameters
-    + id (int, required) - User id
-    + accesToken (int, required) - Access Token
-    + match_id (int, required) - Match Id
-
-+ Response 200 (application/json)
-
-    + Body
-        
-    + Schema
-    
-### Post Message [POST /messages/postmessage]
-
-Post a new message
