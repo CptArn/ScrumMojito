@@ -78,7 +78,7 @@ public class UsersController {
      */
     @RequestMapping(path = "/user/{id}/update", method = RequestMethod.POST)
     public ResponseEntity<User> updateUserInfo(@PathVariable("id") long id, @RequestParam("accessToken") String accessToken, @RequestBody User user) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
         User updated;
         try{
             dataLayer.updateUser(user);
