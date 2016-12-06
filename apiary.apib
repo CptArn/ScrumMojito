@@ -490,3 +490,23 @@ Get a list of candidates.
 - isMale: true (boolean, optional)
 - isFemale: false (boolean, optional)
 - isTrans: false (boolean, optional)
+
+## Messages [/messages]
+
+### get conversation  [GET /messages/getconversation{?accessToken, id, match_id}]
+
+Gets te conversation by match id
++ Parameters
+    + id (int, required) - User id
+    + accesToken (int, required) - Access Token
+    + match_id (int, required) - Match Id
+
++ Response 200 (application/json)
+
+    + Body
+        
+    + Schema
+    
+### Post Message [POST /messages/postmessage]
+
+Post a new message
