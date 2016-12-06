@@ -218,114 +218,227 @@ public class User {
 		return email == null ? "" : email;
 	}
 
+	/**
+	 * Sets the email property
+	 * @param email new email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Returns the first name
+	 * @return first name
+	 */
 	public String getFirstname() {
 		return firstname;
 	}
 
+	/**
+	 * Sets the first name
+	 * @param firstname new first name
+	 */
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
 
+	/**
+	 * Returns the last name
+	 * @return last name
+	 */
 	public String getLastname() {
 		return lastname;
 	}
 
+	/**
+	 * Sets the last name
+	 * @param lastname new last name
+	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
 
+	/**
+	 * Returns the location of the user
+	 * @return location of the user
+	 */
 	public String getLocation() {
 		return location == null ? "" : location;
 	}
 
+	/**
+	 * Sets the location of the user
+	 * @param location new location
+	 */
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
+	/**
+	 * Returns the age of the user
+	 * @return age of user
+	 */
 	public int getAge() {
 		return age;
 	}
 
+	/**
+	 * Sets the age of the user
+	 * @param age new age
+	 */
 	public void setAge(int age) {
 		this.age = age;
 	}
 
+	/**
+	 * True if the user prefers male candidates
+	 * @return prefers male candidates
+	 */
     public boolean getPrefMale() {
         return prefMale;
     }
 
-    public void setPrefMale(boolean preferenceMale) {
+	/**
+	 * Sets the gender preference accordingly
+	 * @param preferenceMale user preference
+	 */
+	public void setPrefMale(boolean preferenceMale) {
         this.prefMale = preferenceMale;
     }
 
-    public boolean getPrefFemale() {
+	/**
+	 * True if the user prefers female candidates
+	 * @return prefers female
+	 */
+	public boolean getPrefFemale() {
         return prefFemale;
     }
 
-    public void setPrefFemale(boolean prefFemale) {
+	/**
+	 * Sets the gender preference accordingly
+	 * @param prefFemale user preference
+	 */
+	public void setPrefFemale(boolean prefFemale) {
         this.prefFemale = prefFemale;
     }
 
-    public boolean getPrefTrans() {
+	/**
+	 * True if the user prefers trans. candidates
+	 * @return prefers trans. candidates
+	 */
+	public boolean getPrefTrans() {
         return prefTrans;
     }
 
-    public void setPrefTrans(boolean prefTrans) {
+	/**
+	 * Sets the gender preference accordingly
+	 * @param prefTrans user preference
+	 */
+	public void setPrefTrans(boolean prefTrans) {
         this.prefTrans = prefTrans;
     }
 
+	/**
+	 * Returns the min. preferred age for candidates
+	 * @return min. preferred age
+	 */
 	public int getPrefAgeMin() {
 		return prefAgeMin;
 	}
 
+	/**
+	 * Sets the max. preferred age for candidates
+	 * @param prefAge max. preferred age
+	 */
 	public void setPrefAgeMin(int prefAge) {
 		this.prefAgeMin = prefAge;
 	}
 
+	/**
+	 *Returns the preferred max. age
+	 * @return preferred max. age
+	 */
 	public int getPrefAgeMax() {
 		return prefAgeMax;
 	}
 
+	/**
+	 * Sets the max. preferred age for candidates
+	 * @param prefAgeMax
+	 */
 	public void setPrefAgeMax(int prefAgeMax) {
 		this.prefAgeMax = prefAgeMax;
 	}
 
+	/**
+	 * Returns the preferred distance to find candidates
+	 * @return preferred distance to find candidates
+	 */
 	public int getPrefDistance() {
 		return prefDistance;
 	}
 
+	/**
+	 * Sets the preferred distance to find candidates
+	 * @param prefDistance preferred distance to find candidates
+	 */
 	public void setPrefDistance(int prefDistance) {
 		this.prefDistance = prefDistance;
 	}
 
+	/**
+	 * Returns the preferred location to find matches
+	 * @return preferred location to find matches
+	 */
 	public int getPrefLocation() {
 		return prefLocation;
 	}
 
+	/**
+	 * Sets the preferred location to find matches
+	 * @param prefLocation preferred location to find matches
+	 */
 	public void setPrefLocation(int prefLocation) {
 		this.prefLocation = prefLocation;
 	}
 
+	/**
+	 * Sets the latitude of the location of the user
+	 * @param lat new latitude
+	 */
 	public void setLat(long lat){
 		this.lat = lat;
 	}
 
+	/**
+	 * Sets the longitude of the location of the user
+	 * @param lon new longitude
+	 */
 	public void setLon(long lon){
 		this.lon = lon;
 	}
 
+	/**
+	 * Returns the latitude of the location of the user
+	 * @return latitude
+	 */
 	public double getLat(){
 		return this.lat;
 	}
 
+	/**
+	 * Returns the longitude of the location of the user
+	 * @return longitude
+	 */
 	public double getLon(){
 		return this.lon;
 	}
 
+	/**
+	 * Compares the current User object with an other object
+	 * @param o other object
+	 * @return true if equal (based on object type and properties)
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
