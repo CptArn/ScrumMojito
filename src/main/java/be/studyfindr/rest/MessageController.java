@@ -4,10 +4,8 @@ import be.studyfindr.entities.Data;
 import be.studyfindr.entities.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +13,8 @@ import java.util.List;
 * The UserController defines the interface for all User operations.
 * @version 1.0
 */
+@RestController
+@CrossOrigin
 public class MessageController {
     Data dataLayer = new Data();
     private FacebookLogic fb;
