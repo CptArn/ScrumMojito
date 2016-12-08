@@ -1,14 +1,19 @@
 package be.studyfindr.rest;
-import java.util.Properties;
-import java.util.UUID;
-import javax.servlet.http.HttpSession;
 import be.studyfindr.entities.Data;
 import be.studyfindr.entities.LoginResponse;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.bson.Document;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.http.MediaType;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionKey;
+import org.springframework.social.facebook.api.AgeRange;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
@@ -19,6 +24,13 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.UUID;
 
 /**
  * FacebookLogic contains all logic operations to interact with Facebook.
@@ -144,7 +156,7 @@ public class FacebookLogic {
                     user.getEmail(),
                     user.getFirstName(),
                     user.getLastName(),
-                    user.getAgeRange().getMin(),
+                    user.getAgeRange() == AgeRange.UNKNOWN ? 0 : user.getAgeRange().getMin(),
                     false,
                     false,
                     false,
@@ -152,11 +164,11 @@ public class FacebookLogic {
                     35,
                     25,
                     1,
-                    g.toLowerCase().contains("male"),
-                    g.toLowerCase().contains("female"),
+                    g == null ? false : g.toLowerCase().contains("male"),
+                    g == null ? false : g.toLowerCase().contains("female"),
                     0.0,
                     0.0,
-                    "Gent"
+                    ""
             );
             backend.addUser(newUser);
             return true;
@@ -199,6 +211,27 @@ public class FacebookLogic {
             return null;
         }
         return facebook.fetchObject("me", User.class, fields);
+    }
+
+    public boolean bootstrap(String accessToken, String pageId){
+        Facebook facebook;
+        try {
+            Connection<Facebook> connection = facebookConnectionFactory.createConnection(new AccessGrant(accessToken));
+            facebook = connection.getApi();
+            String members = facebook.fetchObject("/" + pageId + "/members?limit=5000", String.class);
+            JSONObject membersA = new JSONObject(members);
+            JSONArray actualObj = membersA.getJSONArray("data");
+
+            List<be.studyfindr.entities.User> users = new ArrayList<be.studyfindr.entities.User>();
+            for (int i = 0; i < actualObj.length(); i++) {
+                JSONObject t = new JSONObject(actualObj.get(i).toString());
+                User user = facebook.fetchObject(t.getString("id"), User.class, fields);
+                newUserHandler(user);
+            }
+        }catch(Exception ex) {
+            return false;
+        }
+        return true;
     }
 
     /**

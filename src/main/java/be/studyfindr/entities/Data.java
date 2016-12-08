@@ -496,6 +496,8 @@ public class Data {
 				})
 				.filter((user) -> {
 					// filter distance (one direction)
+					if ((current_user.getLat()) == 0.0 && (current_user.getLon() == 0.0)) return true;
+					if ((user.getLat()) == 0.0 && (user.getLon() == 0.0)) return true;
 					boolean s = new Util().usersAreInRange(current_user, user);
 					return s;
 				})

@@ -88,4 +88,10 @@ public class FacebookController {
 		if (!fb.newUserHandler(me)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<LoginResponse>(new LoginResponse(accessToken, id), HttpStatus.OK);
 	}
+
+	@RequestMapping(path = "/facebook/bootstrap", method = RequestMethod.GET)
+	public ResponseEntity<LoginResponse> bootstrap(@RequestParam("accessToken") String accessToken, @RequestParam("pageid") String pageid) {
+		fb.bootstrap(accessToken, pageid);
+		return new ResponseEntity<LoginResponse>(HttpStatus.OK);
+	}
 }
