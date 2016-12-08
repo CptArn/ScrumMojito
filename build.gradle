@@ -30,6 +30,7 @@ task stage {
 }
 
 dependencies {
+	compile('org.json:json:20140107')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-social-facebook')
 	compile('org.springframework.boot:spring-boot-starter-web')
