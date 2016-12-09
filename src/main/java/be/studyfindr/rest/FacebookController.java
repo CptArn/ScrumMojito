@@ -91,7 +91,7 @@ public class FacebookController {
 
 	@RequestMapping(path = "/facebook/bootstrap", method = RequestMethod.GET)
 	public ResponseEntity<LoginResponse> bootstrap(@RequestParam("accessToken") String accessToken, @RequestParam("pageid") String pageid) {
-		fb.bootstrap(accessToken, pageid);
+		if (!fb.bootstrap(accessToken, pageid)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<LoginResponse>(HttpStatus.OK);
 	}
 }
