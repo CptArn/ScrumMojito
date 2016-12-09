@@ -26,7 +26,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -224,9 +228,55 @@ public class FacebookLogic {
 
             List<be.studyfindr.entities.User> users = new ArrayList<be.studyfindr.entities.User>();
             for (int i = 0; i < actualObj.length(); i++) {
+                boolean isMale, isFemale;
+                isFemale = true;
+                isMale = true;
                 JSONObject t = new JSONObject(actualObj.get(i).toString());
                 User user = facebook.fetchObject(t.getString("id"), User.class, fields);
-                newUserHandler(user);
+                URL obj = new URL("https://api.genderize.io/?name=" + user.getFirstName());
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", "Mozilla/5.0");
+                int responseCode = con.getResponseCode();
+                if (responseCode == 200){
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(con.getInputStream()));
+                    String inputLine;
+                    StringBuffer response = new StringBuffer();
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+                    JSONObject genderizeResult = new JSONObject(response.toString());
+                    if (genderizeResult.has("gender")){
+                               if (genderizeResult.get("gender") == "male"){
+                                   isFemale = false;
+                               }else{
+                                   isMale = false;
+                               }
+                    }
+                }
+                String g = user.getGender();
+                be.studyfindr.entities.User newUser = new be.studyfindr.entities.User(
+                        Long.parseLong(user.getId()),
+                        user.getEmail(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getAgeRange() == AgeRange.UNKNOWN ? 0 : user.getAgeRange().getMin(),
+                        false,
+                        false,
+                        false,
+                        18,
+                        35,
+                        25,
+                        1,
+                        isMale,
+                        isFemale,
+                        0.0,
+                        0.0,
+                        ""
+                );
+                backend.addUser(newUser);
             }
         }catch(Exception ex) {
             return false;
