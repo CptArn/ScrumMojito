@@ -122,6 +122,7 @@ public class MessageControllerTest {
             for (int i = 0; i < jsonarray.length(); i++) {
                 messages.add(new Message(Document.parse(jsonarray.get(i).toString())));
             }
+            dataLayer.deleteConversation(u1.getid(), u2.getid());
             assert(messages.size() > 2);
         } catch(Exception e) {
             System.out.println(e.getMessage());

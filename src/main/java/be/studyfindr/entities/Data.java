@@ -96,6 +96,14 @@ public class Data {
 		coll.deleteOne(filter);
 	}
 
+	public void deleteConversation(long idUser1, long idUser2){
+		MongoCollection<Document> coll = db.getCollection("messages");
+		Bson filter1 = new Document("sender_Id", idUser1).append("receiver_Id", idUser2);
+		Bson filter2 = new Document("sender_Id", idUser2).append("receiver_Id", idUser1);
+		coll.deleteMany(filter1);
+		coll.deleteMany(filter2);
+	}
+
 	/**
 	 * Returns all messages in database
 	 * @return all messages
