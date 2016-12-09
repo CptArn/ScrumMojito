@@ -486,6 +486,14 @@ public class Data {
 				})
 				.filter((user) -> {
 					// filter gender
+					// if gender is unknown
+					if (current_user.getIsGenderUnknown()){
+						return user.getIsGenderUnknown() ||
+								(current_user.getPrefFemale() && user.getIsFemale()) ||
+								(current_user.getPrefMale() && user.getIsMale()) ||
+								(current_user.getPrefTrans() && user.getIsTrans());
+					}
+					// gender is known
 					boolean s1 = (user.getIsFemale() && current_user.getPrefFemale()) ||
 							(user.getIsMale() && current_user.getPrefMale()) ||
 							(user.getIsTrans() && current_user.getPrefTrans());

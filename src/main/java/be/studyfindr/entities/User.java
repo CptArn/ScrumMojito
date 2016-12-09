@@ -170,6 +170,10 @@ public class User {
 		return male && female;
 	}
 
+	public boolean getIsGenderUnknown(){
+		return !male && !female;
+	}
+
 	/**
 	 * Makes the user male
 	 */
