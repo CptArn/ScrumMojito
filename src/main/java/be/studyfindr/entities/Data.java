@@ -494,21 +494,15 @@ public class Data {
 				})
 				.filter((user) -> {
 					// filter gender
-					// if gender is unknown
-					if (current_user.getIsGenderUnknown()){
-						return user.getIsGenderUnknown() ||
-								(current_user.getPrefFemale() && user.getIsFemale()) ||
-								(current_user.getPrefMale() && user.getIsMale()) ||
-								(current_user.getPrefTrans() && user.getIsTrans());
-					}
 					// gender is known
 					boolean s1 = (user.getIsFemale() && current_user.getPrefFemale()) ||
 							(user.getIsMale() && current_user.getPrefMale()) ||
 							(user.getIsTrans() && current_user.getPrefTrans());
-					boolean s2 = (current_user.getIsFemale() && user.getPrefFemale()) ||
-							(current_user.getIsMale() && user.getPrefMale()) ||
-							(current_user.getIsTrans() && user.getPrefTrans());
-					return s1 && s2;
+					if (user.getIsFemale() || user.getIsMale() || user.getIsTrans()) {
+						return s1;
+					} else {
+						return true;
+					}
 				})
 				.filter((user) -> {
 					// filter distance (one direction)
