@@ -185,6 +185,14 @@ public class DatabaseTest {
         dataLayer.deleteLike(l2);
     }
 
+	@Test
+	public void test19BackendHasUser(){
+		dataLayer.addUser(u1);
+		boolean status = dataLayer.backendHasUser(u1.getid());
+		dataLayer.deleteUser(u1);
+		assert(status);
+	}
+
 	/*@Test
 	public void test7PopulateLatLon() {
 		//double test = ThreadLocalRandom.current().nextDouble(50.5, 51.5);

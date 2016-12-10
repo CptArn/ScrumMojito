@@ -22,4 +22,12 @@ public class LikeTest {
         assert(like.getLikee_Id() == u2.getid());
         assert(like.getLiker_Id() == u1.getid());
     }
+
+    @Test
+    public void test2SettersGetters(){
+        Like l = new Like(1, 2, false, false);
+        l.setLike(true);
+        l.setStatus(true);
+        assert(l.getLike() && l.getStatus() && (l.getLikee_Id() == 2) && (l.getLiker_Id() == 1));
+    }
 }

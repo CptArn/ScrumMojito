@@ -185,7 +185,7 @@ public class FacebookLogic {
      * @param authorizationCode auth. token.
      * @return AccessGrant
      */
-    private AccessGrant getAccessGrant(String authorizationCode) {
+    public AccessGrant getAccessGrant(String authorizationCode) {
         OAuth2Operations oauthOperations = facebookConnectionFactory.getOAuthOperations();
         return oauthOperations.exchangeForAccess(authorizationCode, applicationHost + "/auth/facebook/callback", null);
     }

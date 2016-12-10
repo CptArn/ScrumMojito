@@ -105,16 +105,6 @@ public class Data {
 	}
 
 	/**
-	 * Returns all messages in database
-	 * @return all messages
-	 */
-	public List<Message> getAllMessages(){
-		List<Message> messages = new ArrayList<Message>();
-		db.getCollection("messages").find().forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));
-		return messages;
-	}
-
-	/**
 	 * Returns all messages between 2 users
 	 * @param my_id own id
 	 * @param other_id other id
@@ -237,25 +227,6 @@ public class Data {
 	}
 
 	/**
-	 * Returns a user from database based on the id of the user and a user object without user id.
-	 * @param id user id to find
-	 * @param user_pref object containing preferences
-	 * @return the found user, null if not present
-	 */
-	public User getUser(long id, User user_pref) {
-		Document doc;
-		doc = db.getCollection("users").find(and(
-				eq("_id", id),
-				lte("age", user_pref.getPrefAgeMax()),
-				gte("age", user_pref.getPrefAgeMin()),
-				eq("male", user_pref.getPrefMale()),
-				eq("female", user_pref.getPrefFemale())
-		)).first();
-		if (doc == null) return null;
-		return new User(doc);
-	}
-
-	/**
 	 * Returns all users from database
 	 * @return
 	 */
@@ -304,27 +275,6 @@ public class Data {
 				.append("like", l.getLike());
 		Bson updateOperationDocument = new Document("$set", newValue);
 		coll.updateOne(filter, updateOperationDocument);
-	}
-
-	/**
-	 * Returns all likes based on likee
-	 * @param current_user likee
-	 * @return list of found likes
-	 */
-	public List<User> getLikesByLikee(User current_user) {
-		Bson filter = new Document("likee_id", current_user.getid())
-				.append("confirmed", false)
-				.append("like", true);
-		FindIterable<Document> documents = db.getCollection("likes").find(filter);
-		List<User> foundUsers = new ArrayList<>();
-		documents.forEach((Block<? super Document>) (e) -> {
-			try{
-				foundUsers.add(getUser(e.getLong("liker_id"), current_user));
-			}catch(Exception ex){
-				System.out.println(ex.getMessage());
-			}
-		});
-		return foundUsers;
 	}
 
 	/**
