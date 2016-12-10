@@ -24,7 +24,7 @@ public class DatabaseTest {
 		// dataLayer.deleteAllUsers();
 		u1 = new User(19650, "email@email.com", "Jan", "Peeters", 18, true, false, false, 18, 35, 10, 1, false, false, 0.0, 0.0, "gent");
 		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", 21, true, false, false, 20, 25, 15, 2, false, false, 0.0, 0.0, "gent");
-		l = new Like(1, 2, true, false);
+		l = new Like(1, 2, true);
 	}
 
 	@Test
@@ -69,15 +69,6 @@ public class DatabaseTest {
 		Like found = dataLayer.getLike((long)1, (long)2);
 		assert(found.getLiker_Id() == 1);
 		assert(found.getLikee_Id() == 2);
-	}
-
-	@Test
-	public void test10UpdateLike() {
-		l.setStatus(true);
-		dataLayer.updateLike(l);
-		Like found = dataLayer.getLike((long)1, (long)2);
-		assert(found.getStatus() == true);
-
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -140,8 +131,8 @@ public class DatabaseTest {
 	public void test16MatchLikeLike(){
 		dataLayer.addUser(u1);
 		dataLayer.addUser(u2);
-		Like l1 = new Like(u1.getid(), u2.getid(), true, true);
-		Like l2 = new Like(u2.getid(), u1.getid(), true, true);
+		Like l1 = new Like(u1.getid(), u2.getid(), true);
+		Like l2 = new Like(u2.getid(), u1.getid(), true);
 		dataLayer.addLike(l1);
 		dataLayer.addLike(l2);
 		assert(dataLayer.getMatches(u1.getid()).size() == 1);
@@ -155,8 +146,8 @@ public class DatabaseTest {
 	public void test17MatchLikeDislike() {
 		dataLayer.addUser(u1);
 		dataLayer.addUser(u2);
-		Like l1 = new Like(u1.getid(), u2.getid(), true, true);
-		Like l2 = new Like(u2.getid(), u1.getid(), false, true);
+		Like l1 = new Like(u1.getid(), u2.getid(), true);
+		Like l2 = new Like(u2.getid(), u1.getid(), false);
 		dataLayer.addLike(l1);
 		dataLayer.addLike(l2);
 		System.out.println(dataLayer.getMatches(u1.getid()));
@@ -171,12 +162,12 @@ public class DatabaseTest {
     public void test18MatchLikeChanged() {
         dataLayer.addUser(u1);
         dataLayer.addUser(u2);
-        Like l1 = new Like(u1.getid(), u2.getid(), true, true);
-        Like l2 = new Like(u2.getid(), u1.getid(), true, true);
+        Like l1 = new Like(u1.getid(), u2.getid(), true);
+        Like l2 = new Like(u2.getid(), u1.getid(), true);
         dataLayer.addLike(l1);
         dataLayer.addLike(l2);
         assert(dataLayer.getMatches(u1.getid()).size() == 1);
-        l2 = new Like(u2.getid(), u1.getid(), false, true);
+        l2 = new Like(u2.getid(), u1.getid(), false);
         dataLayer.updateLike(l2);
         assert(dataLayer.getMatches(u1.getid()).size() == 0);
         dataLayer.deleteUser(u1);

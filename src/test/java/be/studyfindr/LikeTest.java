@@ -18,16 +18,15 @@ public class LikeTest {
 
     @Test
     public void test1CreateLike() {
-        Like like = new Like(u1.getid(), u2.getid(), true, false);
+        Like like = new Like(u1.getid(), u2.getid(), true);
         assert(like.getLikee_Id() == u2.getid());
         assert(like.getLiker_Id() == u1.getid());
     }
 
     @Test
     public void test2SettersGetters(){
-        Like l = new Like(1, 2, false, false);
+        Like l = new Like(1, 2, false);
         l.setLike(true);
-        l.setStatus(true);
-        assert(l.getLike() && l.getStatus() && (l.getLikee_Id() == 2) && (l.getLiker_Id() == 1));
+        assert(l.getLike() && (l.getLikee_Id() == 2) && (l.getLiker_Id() == 1));
     }
 }

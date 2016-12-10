@@ -49,8 +49,8 @@ public class MessageControllerTest {
         u1 = new User(1, "email@email.com", "Jan", "Peeters", 18, true, false, true, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
         u2 = new User(2, "email2@email.com", "Silke", "Yolo", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
         u3 = new User(3, "email3@email.com", "sander", "maes", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
-        l1 = new Like(u1.getid(), u2.getid(), true, false);
-        l2 = new Like(u2.getid(), u1.getid(), true, false);
+        l1 = new Like(u1.getid(), u2.getid(), true);
+        l2 = new Like(u2.getid(), u1.getid(), true);
         dataLayer = new Data();
         dataLayer.addUser(u1);
         dataLayer.addUser(u2);

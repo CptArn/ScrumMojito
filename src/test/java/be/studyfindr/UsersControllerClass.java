@@ -48,8 +48,8 @@ public class UsersControllerClass {
         u1 = new User(1, "email@email.com", "Jan", "Peeters", 18, true, false, true, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
         u2 = new User(2, "email2@email.com", "Silke", "Yolo", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
         u3 = new User(3, "email3@email.com", "sander", "maes", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
-        l1 = new Like(2, 3, true, false);
-        l2 = new Like(1, 3, true, false);
+        l1 = new Like(2, 3, true);
+        l2 = new Like(1, 3, true);
         dataLayer = new Data();
         dataLayer.addUser(u1);
         dataLayer.addUser(u2);
@@ -232,7 +232,7 @@ public class UsersControllerClass {
         dataLayer.addUser(uu1);
         dataLayer.addUser(uu2);
         dataLayer.addUser(uu3);
-        Like like = new Like(uu1.getid(), uu2.getid(), false, false);
+        Like like = new Like(uu1.getid(), uu2.getid(), false);
         dataLayer.addLike(like);
         String resString;
         try {
@@ -266,8 +266,8 @@ public class UsersControllerClass {
 
     @Test
     public void test12GetMatches() {
-        Like l1 = new Like(3, 1, true, false);
-        Like l2 = new Like(3, 2, true, false);
+        Like l1 = new Like(3, 1, true);
+        Like l2 = new Like(3, 2, true);
         dataLayer.addLike(l1);
         dataLayer.addLike(l2);
         try {
@@ -304,7 +304,7 @@ public class UsersControllerClass {
         dataLayer.deleteUser(u1);
         dataLayer.deleteUser(u2);
         dataLayer.deleteUser(u3);
-        dataLayer.deleteLike(new Like(u1.getid(), u2.getid(), true, false));
+        dataLayer.deleteLike(new Like(u1.getid(), u2.getid(), true));
         dataLayer.deleteLike(l1);
         dataLayer.deleteLike(l2);
     }

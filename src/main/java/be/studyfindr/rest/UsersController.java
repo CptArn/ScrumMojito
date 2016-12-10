@@ -108,7 +108,7 @@ public class UsersController {
                                                @RequestParam("id") long myId, @RequestParam("like") boolean like) {
         if (!fb.userIsValid(accessToken, myId)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         User userToLike;
-        Like likeMyId = new Like(myId, id_to_like, like, false);
+        Like likeMyId = new Like(myId, id_to_like, like);
         Like likeUserToLike;
         try {
             // test id to like
@@ -120,8 +120,6 @@ public class UsersController {
                 likeUserToLike = null;
             }
             if (likeUserToLike != null) {
-                likeMyId.setStatus(true);
-                likeUserToLike.setStatus(true);
                 dataLayer.updateLike(likeUserToLike);
                 // Delete messages if like changed to false
                 if (!like) {

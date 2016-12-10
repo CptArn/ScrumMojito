@@ -153,7 +153,6 @@ public class Data {
 			Document d = new Document("liker_id", l.getLiker_Id())
 					.append("likee_id", l.getLikee_Id())
 					.append("_id", coll.count())
-					.append("confirmed", l.getStatus())
 					.append("like", l.getLike());
 			coll.insertOne(d);
 		}
@@ -271,7 +270,6 @@ public class Data {
 		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
 		Bson newValue = new Document("liker_id", l.getLiker_Id())
 				.append("likee_id", l.getLikee_Id())
-				.append("confirmed", l.getStatus())
 				.append("like", l.getLike());
 		Bson updateOperationDocument = new Document("$set", newValue);
 		coll.updateOne(filter, updateOperationDocument);

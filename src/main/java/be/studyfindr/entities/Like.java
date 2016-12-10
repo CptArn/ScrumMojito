@@ -11,12 +11,11 @@ public class Like {
      * @param liker_Id id of the liker
      * @param likee_id id of the likee
      */
-    public Like(long liker_Id, long likee_id, boolean like, boolean confirmed) {
+    public Like(long liker_Id, long likee_id, boolean like) {
         super();
         this.liker_id = liker_Id;
         this.likee_id = likee_id;
         this.like = like;
-        this.confirmed = confirmed;
     }
 
     /**
@@ -29,14 +28,12 @@ public class Like {
         this.liker_id = doc.getLong("liker_id");
         this.likee_id = doc.getLong("likee_id");
         this.like = doc.getBoolean("like");
-        this.confirmed = doc.getBoolean("confirmed");
     }
 
     // privates
     private long liker_id;
     private long likee_id;
     private boolean like;
-    private boolean confirmed;
 
     /**
      * Returns the liker id
@@ -69,14 +66,4 @@ public class Like {
     public void setLike(boolean like) {
         this.like = like;
     }
-
-
-    public boolean getStatus() {
-        return confirmed;
-    }
-
-    public void setStatus(boolean status) {
-        this.confirmed = status;
-    }
-
 }
