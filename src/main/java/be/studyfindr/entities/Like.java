@@ -2,6 +2,9 @@ package be.studyfindr.entities;
 
 import org.bson.Document;
 
+/**
+ * Represents a like
+ */
 public class Like {
     /**
      * Create a new like
@@ -16,6 +19,10 @@ public class Like {
         this.confirmed = confirmed;
     }
 
+    /**
+     * Parse a like from document
+     * @param doc document to parse
+     */
     public Like(Document doc) {
         super();
         if (doc == null) throw new IllegalArgumentException("doc cannot be null");
@@ -25,26 +32,44 @@ public class Like {
         this.confirmed = doc.getBoolean("confirmed");
     }
 
+    // privates
     private long liker_id;
     private long likee_id;
     private boolean like;
     private boolean confirmed;
 
+    /**
+     * Returns the liker id
+     * @return liker id
+     */
     public long getLiker_Id() {
         return liker_id;
     }
 
+    /**
+     * Returns the likee id
+     * @return likee id
+     */
     public long getLikee_Id() {
         return likee_id;
     }
 
+    /**
+     * Returns the like status
+     * @return like status, true=like / false=dislike
+     */
     public boolean getLike() {
         return like;
     }
 
+    /**
+     * Sets the like status
+     * @param like like status, true=like / false=dislike
+     */
     public void setLike(boolean like) {
         this.like = like;
     }
+
 
     public boolean getStatus() {
         return confirmed;

@@ -121,6 +121,20 @@ public class FacebookControllerTest {
         }
     }
 
+    @Test
+    public void test7Login(){
+        try {
+            mockMvc.perform(post("/facebook/login")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("accessToken", "testtoken")
+                    .param("id", "1")
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isUnauthorized());
+        } catch(Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
     @AfterClass
     public static void tearDown() {
         dataLayer.deleteUser(u1);

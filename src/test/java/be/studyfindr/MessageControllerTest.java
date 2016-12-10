@@ -81,7 +81,7 @@ public class MessageControllerTest {
                     .content(this.json("TEST"))
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isUnauthorized());
-        } catch(Exception e) {
+        }catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -130,7 +130,16 @@ public class MessageControllerTest {
         }
     }
 
-
+    @Test
+    public void test03GetChatSessionFailNoMatch() {
+        try {
+            this.mockMvc.perform(
+                    get("/messages/getconversation?id=" + u1.getid() + "&accessToken=testtoken&matchid=-1")
+            ).andExpect(status().isBadRequest());
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /*@Test
     public void test03RemoveMessages() {

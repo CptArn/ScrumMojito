@@ -37,9 +37,10 @@ public class MessageController {
     public ResponseEntity<List<Message>> getConversation(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken, @RequestParam("matchid") long matchId) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<Message>>(HttpStatus.UNAUTHORIZED);
         try{
+            if (!dataLayer.usersHaveMatch(id, matchId)) return new ResponseEntity<List<Message>>(HttpStatus.BAD_REQUEST);
             return new ResponseEntity<List<Message>>(dataLayer.getMessages(id, matchId), HttpStatus.OK);
         }catch(Exception ex){
-            return new ResponseEntity<List<Message>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<List<Message>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

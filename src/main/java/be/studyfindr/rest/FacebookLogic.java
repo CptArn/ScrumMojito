@@ -1,16 +1,10 @@
 package be.studyfindr.rest;
 import be.studyfindr.entities.Data;
 import be.studyfindr.entities.LoginResponse;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.nashorn.internal.parser.JSONParser;
-import net.minidev.json.JSONArray;
-import org.bson.Document;
 import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.http.MediaType;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.facebook.api.AgeRange;
@@ -27,8 +21,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -308,6 +300,16 @@ public class FacebookLogic {
             if (user == null) return false;
             Data d = new Data();
             return (Long.parseLong(user.getId()) == id) && d.getUser(id) != null;
+        }catch(Exception ex){
+            return false;
+        }
+    }
+
+    public final boolean userIsFacebookValid(String accessToken, long id){
+        try{
+            User user = getMyInfoFromFacebook(accessToken);
+            if (user == null) return false;
+            return (Long.parseLong(user.getId()) == id);
         }catch(Exception ex){
             return false;
         }

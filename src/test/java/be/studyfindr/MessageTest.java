@@ -34,6 +34,7 @@ public class MessageTest {
         Message message3 = new Message("", new Date(46446), 1, 2);
         Message message4 = new Message("", new Date(), 3, 2);
         Message message5 = new Message("", new Date(), 1, 3);
+        Message message6 = new Message("", null, 1, 3);
         Object obj = new Object();
         assert(message1.equals(null) == false &&
                 message1.equals(message1) == true &&
@@ -41,7 +42,9 @@ public class MessageTest {
                 message1.equals(message3) == false &&
                 message1.equals(message4) == false &&
                 message1.equals(message5) == false &&
-                message1.equals(obj) == false
+                message1.equals(obj) == false &&
+                message2.equals(message1) == false &&
+                message6.equals(message5) == false
         );
     }
 }
