@@ -410,7 +410,7 @@ public class User {
 	 * Sets the latitude of the location of the user
 	 * @param lat new latitude
 	 */
-	public void setLat(long lat){
+	public void setLat(double lat){
 		this.lat = lat;
 	}
 
@@ -418,7 +418,7 @@ public class User {
 	 * Sets the longitude of the location of the user
 	 * @param lon new longitude
 	 */
-	public void setLon(long lon){
+	public void setLon(double lon){
 		this.lon = lon;
 	}
 
