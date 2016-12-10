@@ -7,12 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
-* The UserController defines the interface for all User operations.
-* @version 1.1
-*/
+ * The UserController defines the interface for all User operations.
+ *
+ * @version 1.1
+ */
 @RestController
 @CrossOrigin
 public class UsersController {
@@ -24,14 +26,15 @@ public class UsersController {
     /**
      * Inits. the UserController
      */
-    public UsersController(){
+    public UsersController() {
         fb = new FacebookLogic();
     }
 
     /**
      * Returns the user object of the requesting user
+     *
      * @param accessToken a valid Facebook access token
-     * @param id Facebook user id
+     * @param id          Facebook user id
      * @return User object
      */
     @RequestMapping("/user/getmyinfo")
@@ -40,10 +43,10 @@ public class UsersController {
         be.studyfindr.entities.User s;
         try {
             s = fb.getMyInfoFromBackend(accessToken, id);
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             s = null;
         }
-        if(s == null){
+        if (s == null) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<be.studyfindr.entities.User>(s, HttpStatus.OK);
@@ -51,18 +54,19 @@ public class UsersController {
 
     /**
      * Returns the user object of the queried user.
-     * @param target_id id of the queried user
+     *
+     * @param target_id   id of the queried user
      * @param accessToken a valid access token
-     * @param id Facebook id bound to the access token
+     * @param id          Facebook id bound to the access token
      * @return User object
      */
     @RequestMapping(value = "/user/{target_id}/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUserInfo(@PathVariable("target_id") long target_id, @RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         User user;
-        try{
+        try {
             user = dataLayer.getUser(target_id);
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -70,19 +74,20 @@ public class UsersController {
 
     /**
      * Updates the user information.
-     * @param id id bound to the access token
+     *
+     * @param id          id bound to the access token
      * @param accessToken valid access token
-     * @param user User object with new information
+     * @param user        User object with new information
      * @return updated user object
      */
     @RequestMapping(path = "/user/{id}/update", method = RequestMethod.POST)
     public ResponseEntity<User> updateUserInfo(@PathVariable("id") long id, @RequestParam("accessToken") String accessToken, @RequestBody User user) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         User updated;
-        try{
+        try {
             dataLayer.updateUser(user);
             updated = dataLayer.getUser(id);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<User>(updated, HttpStatus.OK);
@@ -91,10 +96,11 @@ public class UsersController {
 
     /**
      * Likes or dislikes a user.
-     * @param id_to_like id to like or dislike
+     *
+     * @param id_to_like  id to like or dislike
      * @param accessToken valid access token
-     * @param myId own id bound to the access token
-     * @param like true if like, false if dislike
+     * @param myId        own id bound to the access token
+     * @param like        true if like, false if dislike
      * @return the liked user object
      */
     @RequestMapping(path = "/user/{id_to_like}/like", method = RequestMethod.POST)
@@ -104,22 +110,30 @@ public class UsersController {
         User userToLike;
         Like likeMyId = new Like(myId, id_to_like, like, false);
         Like likeUserToLike;
-        try{
+        try {
             // test id to like
             userToLike = dataLayer.getUser(id_to_like);
             // check if userToLike likes myId
             try {
                 likeUserToLike = dataLayer.getLike(id_to_like, myId);
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 likeUserToLike = null;
             }
             if (likeUserToLike != null) {
                 likeMyId.setStatus(true);
                 likeUserToLike.setStatus(true);
                 dataLayer.updateLike(likeUserToLike);
+                // Delete messages if like changed to false
+                if (!like) {
+                    try {
+                        dataLayer.deleteConversation(myId, id_to_like);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
             dataLayer.addLike(likeMyId);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<User>(userToLike, HttpStatus.OK);
@@ -127,7 +141,8 @@ public class UsersController {
 
     /**
      * Returns a list of potential candidates
-     * @param id own id bound to the access token
+     *
+     * @param id          own id bound to the access token
      * @param accessToken valid access token
      * @return list of potential candidates
      */
@@ -140,16 +155,17 @@ public class UsersController {
 
     /**
      * Returns all of matches for the own user.
-     * @param id own user id
+     *
+     * @param id          own user id
      * @param accessToken valid access token
      * @return list of user objects representing the matches
      */
     @RequestMapping("/user/getmatches")
     public ResponseEntity<List<User>> getMatches(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
-        try{
+        try {
             return new ResponseEntity<List<User>>(dataLayer.getMatches(id), HttpStatus.OK);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseEntity<List<User>>(HttpStatus.BAD_REQUEST);
         }
     }

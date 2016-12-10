@@ -4,8 +4,8 @@ import be.studyfindr.entities.LoginResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.nashorn.internal.parser.JSONParser;
+import net.minidev.json.JSONArray;
 import org.bson.Document;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -225,7 +225,7 @@ public class FacebookLogic {
             facebook = connection.getApi();
             String members = facebook.fetchObject("/" + pageId + "/members?limit=5000", String.class);
             JSONObject membersA = new JSONObject(members);
-            JSONArray actualObj = membersA.getJSONArray("data");
+            org.json.JSONArray actualObj = membersA.getJSONArray("data");
 
             List<be.studyfindr.entities.User> users = new ArrayList<be.studyfindr.entities.User>();
             for (int i = 0; i < actualObj.length(); i++) {

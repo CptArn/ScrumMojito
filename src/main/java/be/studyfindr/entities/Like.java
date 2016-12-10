@@ -42,6 +42,10 @@ public class Like {
         return like;
     }
 
+    public void setLike(boolean like) {
+        this.like = like;
+    }
+
     public boolean getStatus() {
         return confirmed;
     }

@@ -130,6 +130,47 @@ public class MessageControllerTest {
         }
     }
 
+    /*@Test
+    public void test03RemoveMessages() {
+        try {
+            mockMvc.perform(post("/messages/postmessage")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("id", u1.getid() + "")
+                    .param("accessToken", "testtoken")
+                    .param("matchid", u2.getid() + "")
+                    .content(this.json("TEST1"))
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            mockMvc.perform(post("/messages/postmessage")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("id", u2.getid() + "")
+                    .param("accessToken", "testtoken")
+                    .param("matchid", u1.getid() + "")
+                    .content(this.json("TEST2"))
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            mockMvc.perform(post("/messages/postmessage")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("id", u1.getid() + "")
+                    .param("accessToken", "testtoken")
+                    .param("matchid", u2.getid() + "")
+                    .content(this.json("TEST3"))
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            List<User> temp = dataLayer.getMatches(u1.getid());
+            l1.setLike(false);
+            dataLayer.updateLike(l1);
+            MvcResult result = this.mockMvc.perform(
+                    get("/messages/getconversation?id=" + u1.getid() + "&accessToken=testtoken&matchid=" + u2.getid())
+            ).andExpect(status().isOk()).andReturn();
+            String resString = result.getResponse().getContentAsString();
+            JSONArray jsonarray = new JSONArray(resString);
+            assert(jsonarray.length() < 1);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }*/
+
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
         this.mappingJackson2HttpMessageConverter.write(
