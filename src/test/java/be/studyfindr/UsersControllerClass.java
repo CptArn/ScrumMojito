@@ -290,6 +290,15 @@ public class UsersControllerClass {
         dataLayer.deleteLike(l2);
     }
 
+    @Test
+    public void test13GetUserInfoNotFound(){
+        try {
+            this.mockMvc.perform(get("/user/-1/info?accessToken=testtoken&id=1")).andExpect(status().is4xxClientError());
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @AfterClass
     public static void tearDown() {
         dataLayer.deleteUser(u1);
