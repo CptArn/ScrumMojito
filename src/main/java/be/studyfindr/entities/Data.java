@@ -170,22 +170,6 @@ public class Data {
 	}
 
 	/**
-	 * Adds a school to the database
-	 * @param s school to add
-	 */
-	public void addSchool(School s) {
-		MongoCollection<Document> coll = db.getCollection("schools");
-		Bson filter = new Document("name", s.getName());
-		Document found = coll.find(filter).first();
-		if (found == null) {
-			Document d = new Document("_id", (int)(coll.count() + 1))
-					.append("name", s.getName())
-					.append("address", s.getAddress());
-			coll.insertOne(d);
-		}
-	}
-
-	/**
 	 * Gets a list of documents, named 'collection' based on a collection name
 	 * @param collection collection name
 	 * @return collection
@@ -287,56 +271,6 @@ public class Data {
 	 */
 	public void deleteAllUsers() {
 		db.getCollection("users").deleteMany(new BasicDBObject());
-	}
-
-	/**
-	 * Returns all schools from database
-	 * @return all schools from database
-	 */
-	public List<School> getAllSchools() {
-		List<School> found = new ArrayList<School>();
-		FindIterable<Document> returnedSchools = db.getCollection("schools").find();
-		for(Document doc : returnedSchools) {
-			found.add(new School(doc));
-		}
-		return found;
-	}
-
-	/**
-	 * Gets a school from database by name
-	 * @param schoolName name of school to find
-	 * @return school from database
-	 */
-	public School getSchool(String schoolName) {
-		School found;
-		Bson filter = new Document("name", schoolName);
-		Document objectFound = db.getCollection("schools").find(filter).first();
-		found = new School(objectFound);
-		return found;
-	}
-
-	/**
-	 * Updates a school in database
-	 * @param s school to update
-	 */
-	public void updateSchool(School s) {
-		MongoCollection<Document> coll = db.getCollection("schools");
-		Bson filter = new Document("_id", s.getId());
-		Bson newValue = new Document("_id", s.getId())
-				.append("name", s.getName())
-				.append("address", s.getAddress());
-		Bson updateOperationDocument = new Document("$set", newValue);
-		coll.updateOne(filter, updateOperationDocument);
-	}
-
-	/**
-	 * Deletes a school from database
-	 * @param school school to remove
-	 */
-	public void deleteSchool(School school) {
-		MongoCollection<Document> coll = db.getCollection("schools");
-		Bson filter = new Document("name", school.getName());
-		coll.deleteOne(filter);
 	}
 
 	/**
