@@ -52,9 +52,9 @@ public class FacebookController {
   	@RequestMapping("/auth/facebook/callback")
   	public ResponseEntity<LoginResponse> callBack(@RequestParam("code") String code, @RequestParam("state") String state, HttpSession session) {
 	  	try{
-			return new ResponseEntity<LoginResponse>(fb.callBack(code, state, session), HttpStatus.OK);
+			return new ResponseEntity<>(fb.callBack(code, state, session), HttpStatus.OK);
 		}catch(Exception ex){
-			return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
   	}
@@ -69,10 +69,10 @@ public class FacebookController {
 	public ResponseEntity<HashMap<String, String>> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
 		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<HashMap<String, String>>(HttpStatus.UNAUTHORIZED);
 		boolean state = fb.logout(accessToken, id);
-		if (!state) return new ResponseEntity<HashMap<String, String>>(HttpStatus.BAD_REQUEST);
+		if (!state) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		HashMap<String, String> status = new HashMap<String, String>();
 		status.put("mesage", "successfully logged out");
-		return new ResponseEntity<HashMap<String, String>>(status, HttpStatus.OK);
+		return new ResponseEntity<>(status, HttpStatus.OK);
 	}
 
 	/**
@@ -83,15 +83,9 @@ public class FacebookController {
 	 */
 	@RequestMapping(path = "/facebook/login", method = RequestMethod.POST)
 	public ResponseEntity<LoginResponse> login(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
-		if (!fb.userIsFacebookValid(accessToken, id)) return new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED);
+		if (!fb.userIsFacebookValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		User me = fb.getMyInfoFromFacebook(accessToken);
-		if (!fb.newUserHandler(me)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<LoginResponse>(new LoginResponse(accessToken, id), HttpStatus.OK);
-	}
-
-	@RequestMapping(path = "/facebook/bootstrap", method = RequestMethod.GET)
-	public ResponseEntity<LoginResponse> bootstrap(@RequestParam("accessToken") String accessToken, @RequestParam("pageid") String pageid) {
-		if (!fb.bootstrap(accessToken, pageid)) return new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<LoginResponse>(HttpStatus.OK);
+		if (!fb.newUserHandler(me)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(new LoginResponse(accessToken, id), HttpStatus.OK);
 	}
 }
