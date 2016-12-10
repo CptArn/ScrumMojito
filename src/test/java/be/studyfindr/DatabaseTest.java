@@ -146,7 +146,7 @@ public class DatabaseTest {
 		assert(allUsers.contains(u1) && allUsers.contains(u2));
 	}
 
-	@Test
+	/*@Test
 	public  void test13RemoveAllUsers() {
 		List<User> allUsers = dataLayer.getAllUsers();
 		dataLayer.deleteAllUsers();
@@ -156,7 +156,7 @@ public class DatabaseTest {
 			dataLayer.addUser(u);
 		}
 		assert(emptyList != null && emptyList.size() == 0);
-	}
+	}*/
 
 	@Test
 	public  void test14AddMessage() {

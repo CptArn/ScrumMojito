@@ -251,7 +251,7 @@ public class FacebookLogic {
                         in.close();
                         JSONObject genderizeResult = new JSONObject(response.toString());
                         if (genderizeResult.has("gender")){
-                            if (genderizeResult.get("gender") == "male"){
+                            if (genderizeResult.get("gender").equals("male")){
                                 isFemale = false;
                             }else{
                                 isMale = false;
@@ -278,7 +278,11 @@ public class FacebookLogic {
                             0.0,
                             ""
                     );
-                    backend.addUser(newUser);
+                    if (backend.backendHasUser(newUser.getid())){
+                        backend.updateUser(newUser);
+                    }else{
+                        backend.addUser(newUser);
+                    }
                 }catch(Exception ex){
                     System.out.println(ex.getMessage());
                 }
