@@ -265,6 +265,13 @@ public class Data {
 		return new User(doc);
 	}
 
+	public boolean backendHasUser(long id){
+		Bson filter = new Document("_id", id);
+		Document doc;
+		doc = db.getCollection("users").find(filter).first();
+		return doc != null;
+	}
+
 	/**
 	 * Returns a user from database based on the id of the user and a user object without user id.
 	 * @param id user id to find
