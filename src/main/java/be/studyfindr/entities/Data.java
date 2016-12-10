@@ -151,28 +151,6 @@ public class Data {
 	}
 
 	/**
-	 * Adds a match to the database
-	 * @param m match to add
-	 */
-	public void addMatch(Match m) {
-		MongoCollection<Document> coll = db.getCollection("matches");
-		Document d = new Document("liker_Id", m.getLiker_Id())
-				.append("likee_Id", m.getLikee_Id());
-		coll.insertOne(d);
-	}
-
-	/**
-	 * Deletes a match from database
-	 * @param m match to delete
-	 */
-	public void deleteMatch(Match m){
-		MongoCollection<Document> coll = db.getCollection("matches");
-		Bson filter = new Document("liker_Id", m.getLiker_Id())
-				.append("likee_Id", m.getLikee_Id());
-		coll.deleteOne(filter);
-	}
-
-	/**
 	 * Adds a like to the database
 	 * @param l like to add
 	 */

@@ -2,7 +2,6 @@ package be.studyfindr.rest;
 
 import be.studyfindr.entities.Data;
 import be.studyfindr.entities.Like;
-import be.studyfindr.entities.Match;
 import be.studyfindr.entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -118,18 +117,6 @@ public class UsersController {
                 likeMyId.setStatus(true);
                 likeUserToLike.setStatus(true);
                 dataLayer.updateLike(likeUserToLike);
-                if (likeMyId.getLike() && likeUserToLike.getLike()) {
-                    dataLayer.addMatch(new Match(myId, id_to_like));
-                }
-                // Delete matches if like changed to false
-                else {
-                    try {
-                        dataLayer.deleteMatch(new Match(myId, id_to_like));
-                    } catch(Exception e) {}
-                    try {
-                        dataLayer.deleteMatch(new Match(id_to_like, myId));
-                    } catch(Exception e) {}
-                }
             }
             dataLayer.addLike(likeMyId);
         }catch(Exception ex){
