@@ -9,6 +9,7 @@ import be.studyfindr.entities.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DatabaseTest {
@@ -224,4 +225,15 @@ public class DatabaseTest {
         dataLayer.deleteLike(l1);
         dataLayer.deleteLike(l2);
     }
+
+	/*@Test
+	public void test7PopulateLatLon() {
+		//double test = ThreadLocalRandom.current().nextDouble(50.5, 51.5);
+		List<User> allUsers = dataLayer.getAllUsers();
+		for (User user : allUsers) {
+			user.setLat(ThreadLocalRandom.current().nextDouble(50.5, 51.5));
+			user.setLon(ThreadLocalRandom.current().nextDouble(3, 4));
+			dataLayer.updateUser(user);
+		}
+	}*/
 }

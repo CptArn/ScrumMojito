@@ -132,7 +132,11 @@ public class UsersController {
                     }
                 }
             }
-            dataLayer.addLike(likeMyId);
+            try {
+                dataLayer.updateLike(likeMyId);
+            } catch(Exception ex) {
+                dataLayer.addLike(likeMyId);
+            }
         } catch (Exception ex) {
             return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
         }

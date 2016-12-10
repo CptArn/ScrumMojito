@@ -218,6 +218,8 @@ public class Data {
 						.append("prefLocation", u.getPrefLocation())
 						.append("male", u.getIsMale())
 						.append("female", u.getIsFemale())
+						.append("lat", u.getLat())
+						.append("lon", u.getLon())
 		));
 	}
 
