@@ -106,39 +106,18 @@ public class UsersController {
     @RequestMapping(path = "/user/{id_to_like}/like", method = RequestMethod.POST)
     public ResponseEntity<User> updateLikeUser(@PathVariable("id_to_like") long id_to_like, @RequestParam("accessToken") String accessToken,
                                                @RequestParam("id") long myId, @RequestParam("like") boolean like) {
-        if (!fb.userIsValid(accessToken, myId)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, myId)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         User userToLike;
         Like likeMyId = new Like(myId, id_to_like, like);
-        Like likeUserToLike;
-        try {
+        try{
             // test id to like
             userToLike = dataLayer.getUser(id_to_like);
-            // check if userToLike likes myId
-            try {
-                likeUserToLike = dataLayer.getLike(id_to_like, myId);
-            } catch (Exception ex) {
-                likeUserToLike = null;
-            }
-            if (likeUserToLike != null) {
-                dataLayer.updateLike(likeUserToLike);
-                // Delete messages if like changed to false
-                if (!like) {
-                    try {
-                        dataLayer.deleteConversation(myId, id_to_like);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-            }
-            try {
-                dataLayer.updateLike(likeMyId);
-            } catch(Exception ex) {
-                dataLayer.addLike(likeMyId);
-            }
-        } catch (Exception ex) {
-            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+            if (userToLike == null || userToLike.getid() == myId)  return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            dataLayer.addLike(likeMyId);
+        }catch(Exception ex){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<User>(userToLike, HttpStatus.OK);
+        return new ResponseEntity<>(userToLike, HttpStatus.OK);
     }
 
     /**
