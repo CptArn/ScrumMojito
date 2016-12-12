@@ -179,7 +179,6 @@ public class UsersControllerClass {
     @Test
     public void test9LikeSuccess() {
         try {
-
             mockMvc.perform(post("/user/2/like")
                     .contentType(MediaType.APPLICATION_JSON)
                     .param("accessToken", "testtoken")

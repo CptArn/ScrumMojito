@@ -259,7 +259,7 @@ public class Data {
 		try {
 			found = new Like(objectFound);
 		}catch(Exception ex){
-			throw ex;
+			found = null;
 		}
 		return found;
 	}

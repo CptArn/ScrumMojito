@@ -113,7 +113,12 @@ public class UsersController {
             // test id to like
             userToLike = dataLayer.getUser(id_to_like);
             if (userToLike == null || userToLike.getid() == myId)  return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            dataLayer.addLike(likeMyId);
+            Like likeExists = dataLayer.getLike(myId, id_to_like);
+            if (likeExists == null) {
+                dataLayer.addLike(likeMyId);
+            } else {
+                dataLayer.updateLike(likeMyId);
+            }
         }catch(Exception ex){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

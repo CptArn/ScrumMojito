@@ -71,7 +71,7 @@ public class DatabaseTest {
 		assert(found.getLikee_Id() == 2);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public  void test11DeleteLike() {
 		Like found = dataLayer.getLike((long)1, (long)2);
 		dataLayer.deleteLike(found);
