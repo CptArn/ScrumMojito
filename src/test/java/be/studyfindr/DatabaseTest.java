@@ -9,14 +9,13 @@ import be.studyfindr.entities.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DatabaseTest {
 	static Data dataLayer;
 	static User u1;
 	static User u2;
-	static School s1;
-	static School s2;
 	static Like l;
 
 	@BeforeClass
@@ -25,9 +24,7 @@ public class DatabaseTest {
 		// dataLayer.deleteAllUsers();
 		u1 = new User(19650, "email@email.com", "Jan", "Peeters", 18, true, false, false, 18, 35, 10, 1, false, false, 0.0, 0.0, "gent");
 		u2 = new User(98653, "email@email.com", "Bert", "Van Den Borre", 21, true, false, false, 20, 25, 15, 2, false, false, 0.0, 0.0, "gent");
-		s1 = new School("UGent", "St. Pietersnieuwstraat 33, 9000 Gent");
-		s2 = new School("UAntwerpen", "Prinsstraat 13, 2000 Antwerpen");
-		l = new Like(1, 2, true, false);
+		l = new Like(1, 2, true);
 	}
 
 	@Test
@@ -67,57 +64,11 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void test5AddSchool() {
-		int before = dataLayer.getCollectionDocuments("schools").size();
-		dataLayer.addSchool(s1);
-		dataLayer.addSchool(s2);
-		dataLayer.addSchool(s1);
-		int after = dataLayer.getCollectionDocuments("schools").size();
-
-		School return1 = dataLayer.getSchool(s1.getName());
-		School return2 = dataLayer.getSchool(s2.getName());
-		s1.setId(return1.getId());
-		s2.setId(return2.getId());
-		assert(return1.equals(s1) && return2.equals(s2) && (after-before==2));
-	}
-
-	@Test
- 	public void test6GetAllSchools() {
-		List<School> list = dataLayer.getAllSchools();
-		assert(list.contains(s1) && list.contains(s2));
-	}
-
-	@Test
- 	public void test7UpdateSchools() {
-		s1.setName("KULeuven Gent");
-		dataLayer.updateSchool(s1);
-		School found = dataLayer.getSchool((s1.getName()));
-		assert(found.equals(s1));
-	}
-
-	@Test(expected=NullPointerException.class)
-	public void test8DeleteSchool() {
-		dataLayer.deleteSchool(s1);
-		dataLayer.deleteSchool(s2);
-		School school = dataLayer.getSchool(s1.getName());
-		fail(school.getName());
-	}
-
-	@Test
 	public void test09AddLike() {
 		dataLayer.addLike(l);
 		Like found = dataLayer.getLike((long)1, (long)2);
 		assert(found.getLiker_Id() == 1);
 		assert(found.getLikee_Id() == 2);
-	}
-
-	@Test
-	public void test10UpdateLike() {
-		l.setStatus(true);
-		dataLayer.updateLike(l);
-		Like found = dataLayer.getLike((long)1, (long)2);
-		assert(found.getStatus() == true);
-
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -180,8 +131,8 @@ public class DatabaseTest {
 	public void test16MatchLikeLike(){
 		dataLayer.addUser(u1);
 		dataLayer.addUser(u2);
-		Like l1 = new Like(u1.getid(), u2.getid(), true, true);
-		Like l2 = new Like(u2.getid(), u1.getid(), true, true);
+		Like l1 = new Like(u1.getid(), u2.getid(), true);
+		Like l2 = new Like(u2.getid(), u1.getid(), true);
 		dataLayer.addLike(l1);
 		dataLayer.addLike(l2);
 		assert(dataLayer.getMatches(u1.getid()).size() == 1);
@@ -195,8 +146,8 @@ public class DatabaseTest {
 	public void test17MatchLikeDislike() {
 		dataLayer.addUser(u1);
 		dataLayer.addUser(u2);
-		Like l1 = new Like(u1.getid(), u2.getid(), true, true);
-		Like l2 = new Like(u2.getid(), u1.getid(), false, true);
+		Like l1 = new Like(u1.getid(), u2.getid(), true);
+		Like l2 = new Like(u2.getid(), u1.getid(), false);
 		dataLayer.addLike(l1);
 		dataLayer.addLike(l2);
 		System.out.println(dataLayer.getMatches(u1.getid()));
@@ -211,12 +162,12 @@ public class DatabaseTest {
     public void test18MatchLikeChanged() {
         dataLayer.addUser(u1);
         dataLayer.addUser(u2);
-        Like l1 = new Like(u1.getid(), u2.getid(), true, true);
-        Like l2 = new Like(u2.getid(), u1.getid(), true, true);
+        Like l1 = new Like(u1.getid(), u2.getid(), true);
+        Like l2 = new Like(u2.getid(), u1.getid(), true);
         dataLayer.addLike(l1);
         dataLayer.addLike(l2);
         assert(dataLayer.getMatches(u1.getid()).size() == 1);
-        l2 = new Like(u2.getid(), u1.getid(), false, true);
+        l2 = new Like(u2.getid(), u1.getid(), false);
         dataLayer.updateLike(l2);
         assert(dataLayer.getMatches(u1.getid()).size() == 0);
         dataLayer.deleteUser(u1);
@@ -224,4 +175,23 @@ public class DatabaseTest {
         dataLayer.deleteLike(l1);
         dataLayer.deleteLike(l2);
     }
+
+	@Test
+	public void test19BackendHasUser(){
+		dataLayer.addUser(u1);
+		boolean status = dataLayer.backendHasUser(u1.getid());
+		dataLayer.deleteUser(u1);
+		assert(status);
+	}
+
+	/*@Test
+	public void test7PopulateLatLon() {
+		//double test = ThreadLocalRandom.current().nextDouble(50.5, 51.5);
+		List<User> allUsers = dataLayer.getAllUsers();
+		for (User user : allUsers) {
+			user.setLat(ThreadLocalRandom.current().nextDouble(50.5, 51.5));
+			user.setLon(ThreadLocalRandom.current().nextDouble(3, 4));
+			dataLayer.updateUser(user);
+		}
+	}*/
 }

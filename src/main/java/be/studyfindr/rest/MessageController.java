@@ -35,11 +35,12 @@ public class MessageController {
      */
     @RequestMapping("/messages/getconversation")
     public ResponseEntity<List<Message>> getConversation(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken, @RequestParam("matchid") long matchId) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<Message>>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         try{
-            return new ResponseEntity<List<Message>>(dataLayer.getMessages(id, matchId), HttpStatus.OK);
+            if (!dataLayer.usersHaveMatch(id, matchId)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(dataLayer.getMessages(id, matchId), HttpStatus.OK);
         }catch(Exception ex){
-            return new ResponseEntity<List<Message>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -53,16 +54,16 @@ public class MessageController {
      */
     @RequestMapping(path = "/messages/postmessage", method = RequestMethod.POST)
     public ResponseEntity<Message> postMessage(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken, @RequestParam("matchid") long matchId, @RequestBody String message) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<Message>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         // message only while match
-        if (!dataLayer.usersHaveMatch(id, matchId)) return new ResponseEntity<Message>(HttpStatus.UNAUTHORIZED);
+        if (!dataLayer.usersHaveMatch(id, matchId)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         try{
             Message m = new Message(message, new Date(), id, matchId);
             long messId = dataLayer.addMessage(m);
             Message result = dataLayer.getMessage(messId);
-            return new ResponseEntity<Message>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }catch(Exception ex){
-            return new ResponseEntity<Message>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

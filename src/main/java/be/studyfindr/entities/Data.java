@@ -105,16 +105,6 @@ public class Data {
 	}
 
 	/**
-	 * Returns all messages in database
-	 * @return all messages
-	 */
-	public List<Message> getAllMessages(){
-		List<Message> messages = new ArrayList<Message>();
-		db.getCollection("messages").find().forEach((Block<? super Document>) (e) -> messages.add(new Message(e)));
-		return messages;
-	}
-
-	/**
 	 * Returns all messages between 2 users
 	 * @param my_id own id
 	 * @param other_id other id
@@ -163,24 +153,7 @@ public class Data {
 			Document d = new Document("liker_id", l.getLiker_Id())
 					.append("likee_id", l.getLikee_Id())
 					.append("_id", coll.count())
-					.append("confirmed", l.getStatus())
 					.append("like", l.getLike());
-			coll.insertOne(d);
-		}
-	}
-
-	/**
-	 * Adds a school to the database
-	 * @param s school to add
-	 */
-	public void addSchool(School s) {
-		MongoCollection<Document> coll = db.getCollection("schools");
-		Bson filter = new Document("name", s.getName());
-		Document found = coll.find(filter).first();
-		if (found == null) {
-			Document d = new Document("_id", (int)(coll.count() + 1))
-					.append("name", s.getName())
-					.append("address", s.getAddress());
 			coll.insertOne(d);
 		}
 	}
@@ -218,6 +191,8 @@ public class Data {
 						.append("prefLocation", u.getPrefLocation())
 						.append("male", u.getIsMale())
 						.append("female", u.getIsFemale())
+						.append("lat", u.getLat())
+						.append("lon", u.getLon())
 		));
 	}
 
@@ -251,25 +226,6 @@ public class Data {
 	}
 
 	/**
-	 * Returns a user from database based on the id of the user and a user object without user id.
-	 * @param id user id to find
-	 * @param user_pref object containing preferences
-	 * @return the found user, null if not present
-	 */
-	public User getUser(long id, User user_pref) {
-		Document doc;
-		doc = db.getCollection("users").find(and(
-				eq("_id", id),
-				lte("age", user_pref.getPrefAgeMax()),
-				gte("age", user_pref.getPrefAgeMin()),
-				eq("male", user_pref.getPrefMale()),
-				eq("female", user_pref.getPrefFemale())
-		)).first();
-		if (doc == null) return null;
-		return new User(doc);
-	}
-
-	/**
 	 * Returns all users from database
 	 * @return
 	 */
@@ -285,56 +241,6 @@ public class Data {
 	 */
 	public void deleteAllUsers() {
 		db.getCollection("users").deleteMany(new BasicDBObject());
-	}
-
-	/**
-	 * Returns all schools from database
-	 * @return all schools from database
-	 */
-	public List<School> getAllSchools() {
-		List<School> found = new ArrayList<School>();
-		FindIterable<Document> returnedSchools = db.getCollection("schools").find();
-		for(Document doc : returnedSchools) {
-			found.add(new School(doc));
-		}
-		return found;
-	}
-
-	/**
-	 * Gets a school from database by name
-	 * @param schoolName name of school to find
-	 * @return school from database
-	 */
-	public School getSchool(String schoolName) {
-		School found;
-		Bson filter = new Document("name", schoolName);
-		Document objectFound = db.getCollection("schools").find(filter).first();
-		found = new School(objectFound);
-		return found;
-	}
-
-	/**
-	 * Updates a school in database
-	 * @param s school to update
-	 */
-	public void updateSchool(School s) {
-		MongoCollection<Document> coll = db.getCollection("schools");
-		Bson filter = new Document("_id", s.getId());
-		Bson newValue = new Document("_id", s.getId())
-				.append("name", s.getName())
-				.append("address", s.getAddress());
-		Bson updateOperationDocument = new Document("$set", newValue);
-		coll.updateOne(filter, updateOperationDocument);
-	}
-
-	/**
-	 * Deletes a school from database
-	 * @param school school to remove
-	 */
-	public void deleteSchool(School school) {
-		MongoCollection<Document> coll = db.getCollection("schools");
-		Bson filter = new Document("name", school.getName());
-		coll.deleteOne(filter);
 	}
 
 	/**
@@ -364,31 +270,9 @@ public class Data {
 		Bson filter = new Document("liker_id", l.getLiker_Id()).append("likee_id", l.getLikee_Id());
 		Bson newValue = new Document("liker_id", l.getLiker_Id())
 				.append("likee_id", l.getLikee_Id())
-				.append("confirmed", l.getStatus())
 				.append("like", l.getLike());
 		Bson updateOperationDocument = new Document("$set", newValue);
 		coll.updateOne(filter, updateOperationDocument);
-	}
-
-	/**
-	 * Returns all likes based on likee
-	 * @param current_user likee
-	 * @return list of found likes
-	 */
-	public List<User> getLikesByLikee(User current_user) {
-		Bson filter = new Document("likee_id", current_user.getid())
-				.append("confirmed", false)
-				.append("like", true);
-		FindIterable<Document> documents = db.getCollection("likes").find(filter);
-		List<User> foundUsers = new ArrayList<>();
-		documents.forEach((Block<? super Document>) (e) -> {
-			try{
-				foundUsers.add(getUser(e.getLong("liker_id"), current_user));
-			}catch(Exception ex){
-				System.out.println(ex.getMessage());
-			}
-		});
-		return foundUsers;
 	}
 
 	/**

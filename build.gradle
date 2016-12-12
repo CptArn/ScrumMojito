@@ -30,6 +30,7 @@ task stage {
 }
 
 dependencies {
+	compile('net.minidev:json-smart:1.0.9-1')
 	compile('org.json:json:20140107')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-social-facebook')

@@ -1,16 +1,10 @@
 package be.studyfindr.rest;
 import be.studyfindr.entities.Data;
 import be.studyfindr.entities.LoginResponse;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.bson.Document;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.http.MediaType;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.facebook.api.AgeRange;
@@ -26,14 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -49,7 +35,7 @@ public class FacebookLogic {
     public static final String STATE = "state";
 
     // Fields to fetch from the Facebook API.
-    public final String[] fields = {
+    public static final String[] fields = {
             "id", "about", "age_range", "birthday",
             "context", "cover", "currency", "devices",
             "education", "email", "favorite_athletes",
@@ -185,7 +171,7 @@ public class FacebookLogic {
      * @param authorizationCode auth. token.
      * @return AccessGrant
      */
-    private AccessGrant getAccessGrant(String authorizationCode) {
+    public AccessGrant getAccessGrant(String authorizationCode) {
         OAuth2Operations oauthOperations = facebookConnectionFactory.getOAuthOperations();
         return oauthOperations.exchangeForAccess(authorizationCode, applicationHost + "/auth/facebook/callback", null);
     }
@@ -218,81 +204,7 @@ public class FacebookLogic {
         return facebook.fetchObject("me", User.class, fields);
     }
 
-    public boolean bootstrap(String accessToken, String pageId){
-        Facebook facebook;
-        try {
-            Connection<Facebook> connection = facebookConnectionFactory.createConnection(new AccessGrant(accessToken));
-            facebook = connection.getApi();
-            String members = facebook.fetchObject("/" + pageId + "/members?limit=5000", String.class);
-            JSONObject membersA = new JSONObject(members);
-            JSONArray actualObj = membersA.getJSONArray("data");
 
-            List<be.studyfindr.entities.User> users = new ArrayList<be.studyfindr.entities.User>();
-            for (int i = 0; i < actualObj.length(); i++) {
-                try{
-                    boolean isMale, isFemale;
-                    isFemale = true;
-                    isMale = true;
-                    JSONObject t = new JSONObject(actualObj.get(i).toString());
-                    User user = facebook.fetchObject(t.getString("id"), User.class, fields);
-                    URL obj = new URL("https://api.genderize.io/?name=" + user.getFirstName());
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                    con.setRequestMethod("GET");
-                    con.setRequestProperty("User-Agent", "Mozilla/5.0");
-                    int responseCode = con.getResponseCode();
-                    if (responseCode == 200){
-                        BufferedReader in = new BufferedReader(
-                                new InputStreamReader(con.getInputStream()));
-                        String inputLine;
-                        StringBuffer response = new StringBuffer();
-                        while ((inputLine = in.readLine()) != null) {
-                            response.append(inputLine);
-                        }
-                        in.close();
-                        JSONObject genderizeResult = new JSONObject(response.toString());
-                        if (genderizeResult.has("gender")){
-                            if (genderizeResult.get("gender").equals("male")){
-                                isFemale = false;
-                            }else{
-                                isMale = false;
-                            }
-                        }
-                    }
-                    String g = user.getGender();
-                    be.studyfindr.entities.User newUser = new be.studyfindr.entities.User(
-                            Long.parseLong(user.getId()),
-                            user.getEmail(),
-                            user.getFirstName(),
-                            user.getLastName(),
-                            user.getAgeRange() == AgeRange.UNKNOWN ? 18 : user.getAgeRange().getMin(),
-                            true,
-                            true,
-                            true,
-                            18,
-                            35,
-                            25,
-                            1,
-                            isMale,
-                            isFemale,
-                            0.0,
-                            0.0,
-                            ""
-                    );
-                    if (backend.backendHasUser(newUser.getid())){
-                        backend.updateUser(newUser);
-                    }else{
-                        backend.addUser(newUser);
-                    }
-                }catch(Exception ex){
-                    System.out.println(ex.getMessage());
-                }
-
-            }
-        }catch(Exception ex) {
-            return false;
-        }
-        return true;
-    }
 
     /**
      * Checks if the login session is valid by requesting the user ID from Facebook based on the given access token.
@@ -308,6 +220,16 @@ public class FacebookLogic {
             if (user == null) return false;
             Data d = new Data();
             return (Long.parseLong(user.getId()) == id) && d.getUser(id) != null;
+        }catch(Exception ex){
+            return false;
+        }
+    }
+
+    public final boolean userIsFacebookValid(String accessToken, long id){
+        try{
+            User user = getMyInfoFromFacebook(accessToken);
+            if (user == null) return false;
+            return (Long.parseLong(user.getId()) == id);
         }catch(Exception ex){
             return false;
         }

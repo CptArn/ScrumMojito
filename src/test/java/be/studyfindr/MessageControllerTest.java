@@ -49,8 +49,8 @@ public class MessageControllerTest {
         u1 = new User(1, "email@email.com", "Jan", "Peeters", 18, true, false, true, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
         u2 = new User(2, "email2@email.com", "Silke", "Yolo", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
         u3 = new User(3, "email3@email.com", "sander", "maes", 22, false, true, false, 18, 35, 25, 1, false, false, 0.0, 0.0, "gent");
-        l1 = new Like(u1.getid(), u2.getid(), true, false);
-        l2 = new Like(u2.getid(), u1.getid(), true, false);
+        l1 = new Like(u1.getid(), u2.getid(), true);
+        l2 = new Like(u2.getid(), u1.getid(), true);
         dataLayer = new Data();
         dataLayer.addUser(u1);
         dataLayer.addUser(u2);
@@ -81,7 +81,7 @@ public class MessageControllerTest {
                     .content(this.json("TEST"))
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isUnauthorized());
-        } catch(Exception e) {
+        }catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -129,6 +129,58 @@ public class MessageControllerTest {
             throw e;
         }
     }
+
+    @Test
+    public void test03GetChatSessionFailNoMatch() {
+        try {
+            this.mockMvc.perform(
+                    get("/messages/getconversation?id=" + u1.getid() + "&accessToken=testtoken&matchid=-1")
+            ).andExpect(status().isBadRequest());
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /*@Test
+    public void test03RemoveMessages() {
+        try {
+            mockMvc.perform(post("/messages/postmessage")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("id", u1.getid() + "")
+                    .param("accessToken", "testtoken")
+                    .param("matchid", u2.getid() + "")
+                    .content(this.json("TEST1"))
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            mockMvc.perform(post("/messages/postmessage")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("id", u2.getid() + "")
+                    .param("accessToken", "testtoken")
+                    .param("matchid", u1.getid() + "")
+                    .content(this.json("TEST2"))
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            mockMvc.perform(post("/messages/postmessage")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("id", u1.getid() + "")
+                    .param("accessToken", "testtoken")
+                    .param("matchid", u2.getid() + "")
+                    .content(this.json("TEST3"))
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk());
+            List<User> temp = dataLayer.getMatches(u1.getid());
+            l1.setLike(false);
+            dataLayer.updateLike(l1);
+            MvcResult result = this.mockMvc.perform(
+                    get("/messages/getconversation?id=" + u1.getid() + "&accessToken=testtoken&matchid=" + u2.getid())
+            ).andExpect(status().isOk()).andReturn();
+            String resString = result.getResponse().getContentAsString();
+            JSONArray jsonarray = new JSONArray(resString);
+            assert(jsonarray.length() < 1);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }*/
 
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
