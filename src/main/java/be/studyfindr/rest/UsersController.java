@@ -153,4 +153,18 @@ public class UsersController {
             return new ResponseEntity<List<User>>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping("/user/updatemylocation")
+    public ResponseEntity<User> updateLocationUser(@PathVariable("id") long id, @RequestParam("accessToken") String accessToken, @RequestParam("lat") double lat, @RequestParam("lon") double lon) {
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+        try{
+            User user = dataLayer.getUser(id);
+            user.setLon(lon);
+            user.setLat(lat);
+            dataLayer.updateUser(user);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
