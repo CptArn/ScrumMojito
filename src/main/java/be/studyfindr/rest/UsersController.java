@@ -82,8 +82,6 @@ public class UsersController {
      */
     @RequestMapping(path = "/user/{id}/update", method = RequestMethod.POST)
     public ResponseEntity<User> updateUserInfo(@PathVariable("id") long id, @RequestParam("accessToken") String accessToken, @RequestBody User user) {
-        // debug
-        System.out.println("Req:[POST] /user/" + id + "/update?accessToken=" + accessToken + "\nUser: " + user.toString());
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         User updated;
         try {
@@ -150,6 +148,20 @@ public class UsersController {
             return new ResponseEntity<List<User>>(dataLayer.getMatches(id), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<List<User>>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/user/updatemylocation", method = RequestMethod.POST)
+    public ResponseEntity<User> updateLocationUser(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken, @RequestParam("lat") double lat, @RequestParam("lon") double lon) {
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+        try{
+            User user = dataLayer.getUser(id);
+            user.setLon(lon);
+            user.setLat(lat);
+            dataLayer.updateUser(user);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
         }
     }
 }
