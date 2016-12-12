@@ -153,7 +153,7 @@ public class UsersController {
         }
     }
 
-    @RequestMapping("/user/updatemylocation")
+    @RequestMapping(value = "/user/updatemylocation", method = RequestMethod.POST)
     public ResponseEntity<User> updateLocationUser(@PathVariable("id") long id, @RequestParam("accessToken") String accessToken, @RequestParam("lat") double lat, @RequestParam("lon") double lon) {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         try{
