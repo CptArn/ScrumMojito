@@ -74,16 +74,17 @@ public class Data {
 		}catch(Exception ex){
 
 		}
-		long id;
+
 		MongoCollection<Document> coll = db.getCollection("messages");
-		id = coll.count();
-		Document d = new Document("_id", coll.count())
+		Document id = db.getCollection("messages").find().sort(new Document("_id", -1)).first();
+
+		Document d = new Document("_id", id.getLong("_id") + 1)
 				.append("message", m.getMessage())
 				.append("date", m.getDate())
 				.append("sender_Id", m.getSender_Id())
 				.append("receiver_Id", m.getReceiver_Id());
 		coll.insertOne(d);
-		return id;
+		return (id.getLong("_id") + 1);
 	}
 
 	/**
@@ -148,11 +149,13 @@ public class Data {
 		Bson filter = new Document("liker_id", l.getLiker_Id())
 				.append("likee_id", l.getLikee_Id());
 		Document found = db.getCollection("likes").find(filter).first();
+		Document id = db.getCollection("likes").find().sort(new Document("_id", -1)).first();
+
 		if (found == null && l.getLikee_Id() != l.getLiker_Id()) {
 			MongoCollection<Document> coll = db.getCollection("likes");
 			Document d = new Document("liker_id", l.getLiker_Id())
 					.append("likee_id", l.getLikee_Id())
-					.append("_id", coll.count())
+					.append("_id", id.getLong("_id") + 1)
 					.append("like", l.getLike());
 			coll.insertOne(d);
 		}
