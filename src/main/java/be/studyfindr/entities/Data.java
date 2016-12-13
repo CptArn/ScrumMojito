@@ -28,8 +28,13 @@ public class Data {
 	 * Creates an instance of the database interface.
 	 */
 	public Data() {
-		client = new MongoClient(new MongoClientURI("mongodb://admin:scrum@ds147497.mlab.com:47497/mojito"));
+		client = new MongoClient(new MongoClientURI("mongodb://admin:scrum@ds147497.mlab.com:47497/mojito",
+				MongoClientOptions.builder()
+						.connectionsPerHost(10)
+						.threadsAllowedToBlockForConnectionMultiplier(5)
+		));
 		db = client.getDatabase("mojito");
+
 	}
 
 	/**

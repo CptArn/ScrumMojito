@@ -169,4 +169,15 @@ public class UsersController {
             return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
         }
     }
+
+
+    @RequestMapping("/user/{id_to_find}/images")
+    public ResponseEntity<List<String>> getImages(@PathVariable("id_to_find") long id_to_find, @RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        try {
+            return new ResponseEntity<>(fb.getImages(id_to_find, accessToken), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

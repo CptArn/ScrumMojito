@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -260,5 +262,16 @@ public class FacebookLogic {
         }catch(Exception ex){
             return false;
         }
+    }
+
+    public List<String> getImages(long id_to_find, String accessToken) {
+        try{
+            Connection<Facebook> connection = facebookConnectionFactory.createConnection(new AccessGrant(accessToken));
+            // TODO finish request
+            //connection.getApi().mediaOperations().getAlbums();
+        }catch(Exception ex){
+            return new ArrayList<>();
+        }
+        return null;
     }
 }
