@@ -38,7 +38,8 @@ public class MessageController {
         if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         try{
             if (!dataLayer.usersHaveMatch(id, matchId)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(dataLayer.getMessages(id, matchId), HttpStatus.OK);
+            List<Message> messages = dataLayer.getMessages(id, matchId);
+            return new ResponseEntity<>(messages, HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
