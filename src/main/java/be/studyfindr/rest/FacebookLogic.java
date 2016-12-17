@@ -220,8 +220,7 @@ public class FacebookLogic {
         try{
             User user = getMyInfoFromFacebook(accessToken);
             if (user == null) return false;
-            Data d = new Data();
-            return (Long.parseLong(user.getId()) == id) && d.getUser(id) != null;
+            return (Long.parseLong(user.getId()) == id) && backend.getUser(id) != null;
         }catch(Exception ex){
             return false;
         }
