@@ -1,4 +1,5 @@
 package be.studyfindr.rest;
+
 import be.studyfindr.entities.Data;
 import be.studyfindr.entities.LoginResponse;
 import org.springframework.core.io.ClassPathResource;

@@ -59,53 +59,98 @@ public class Message {
         }
     }
 
-    //
+    // privates
     private long id;
     private String message;
     private Date date;
     private long sender_Id;
     private long receiver_Id;
 
+    /**
+     * Gets the id
+     * @return new id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Sets the id
+     * @param id new id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * Gets the message
+     * @return message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Sets the message
+     * @param message new message to set
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Gets the date
+     * @return date of the message
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Sets the date
+     * @param date new date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Gets the sender id
+     * @return sender id
+     */
     public long getSender_Id() {
         return sender_Id;
     }
 
+    /**
+     * Sets the sender id
+     * @param sender_Id new sender id
+     */
     public void setSender_Id(long sender_Id) {
         this.sender_Id = sender_Id;
     }
 
+    /**
+     *Gets the receiver id
+     * @return receiver id
+     */
     public long getReceiver_Id() {
         return receiver_Id;
     }
 
+    /**
+     * Sets the receiver id
+     * @param receiver_Id new receiver id
+     */
     public void setReceiver_Id(long receiver_Id) {
         this.receiver_Id = receiver_Id;
     }
 
+    /**
+     * Compares the current Message with an other Message or object.
+     * @param obj other Message or object
+     * @return true if equal
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

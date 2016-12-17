@@ -34,11 +34,10 @@ public class Data {
 						.threadsAllowedToBlockForConnectionMultiplier(5)
 		));
 		db = client.getDatabase("mojito");
-
 	}
 
 	/**
-	 * Adds a new user to the database.
+	 * Adds a new user to the database if the user does't already exist.
 	 * @param u the user to add
 	 */
 	public void addUser(User u) {
@@ -74,12 +73,11 @@ public class Data {
 	public long addMessage(Message m) {
 		try{
 			getMessage(m);
-			// message exists
+			// message exists, exception is thrown
 			throw new IllegalArgumentException("Same message with same timestamp already exists");
-		}catch(Exception ex){
+		}catch(Exception ex){}
 
-		}
-
+		// Get last inserted id, this prevents duplicate keys
 		MongoCollection<Document> coll = db.getCollection("messages");
 		Document id = db.getCollection("messages").find().sort(new Document("_id", -1)).first();
 
@@ -102,6 +100,11 @@ public class Data {
 		coll.deleteOne(filter);
 	}
 
+	/**
+	 * Deletes a conversation between 2 users.
+	 * @param idUser1 user 1
+	 * @param idUser2 user 2
+	 */
 	public void deleteConversation(long idUser1, long idUser2){
 		MongoCollection<Document> coll = db.getCollection("messages");
 		Bson filter1 = new Document("sender_Id", idUser1).append("receiver_Id", idUser2);
@@ -226,6 +229,11 @@ public class Data {
 		return new User(doc);
 	}
 
+	/**
+	 * Checks if a user already exists.
+	 * @param id is to check
+	 * @return true if the user exists
+	 */
 	public boolean backendHasUser(long id){
 		Bson filter = new Document("_id", id);
 		Document doc;

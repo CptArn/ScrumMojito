@@ -99,8 +99,10 @@ public class User {
 		this.prefLocation = doc.getInteger("prefLocation");
 		this.male = doc.getBoolean("male", false);
 		this.female = doc.getBoolean("female", false);
-		this.lat = doc.containsKey("lat")? doc.getDouble("lat") : 0.0;
-		this.lon = doc.containsKey("lon")? doc.getDouble("lon") : 0.0;
+		if (doc.containsKey("lat") && doc.containsKey("lon")){
+			this.lat = doc.getOrDefault("lat", "0.0") instanceof Integer ? (double)doc.getInteger("lat"): doc.getDouble("lat");
+			this.lon = doc.getOrDefault("lon", "0.0") instanceof Integer ? (double)doc.getInteger("lon"): doc.getDouble("lon");
+		}
 	}
 
 	/**

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-/*
+/**
 * The UserController defines the interface for all User operations.
 * @version 1.0
 */
