@@ -309,6 +309,19 @@ public class UsersControllerTest {
         }
     }
 
+    @Test
+    public void test15getmyqueueInvalidUserWithTestToken() {
+        try{
+            mockMvc.perform(get("/user/getmyqueue")
+                    .param("accessToken", "testtoken")
+                    .param("id", "-1")
+                    .accept(MediaType.APPLICATION_JSON_UTF8)
+            ).andExpect(status().isBadRequest());
+        }catch(Exception ex){
+            fail(ex.getMessage());
+        }
+    }
+
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
         this.mappingJackson2HttpMessageConverter.write(
