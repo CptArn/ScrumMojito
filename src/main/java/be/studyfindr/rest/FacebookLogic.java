@@ -1,7 +1,6 @@
 package be.studyfindr.rest;
 import be.studyfindr.entities.Data;
 import be.studyfindr.entities.LoginResponse;
-import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -226,6 +223,13 @@ public class FacebookLogic {
         }
     }
 
+    /**
+     * Checks if the user id is valid by requesting the id from Facebook (based on th access token).
+     * The user is valid when the id and the id from Facebook match.
+     * @param accessToken valid access token for the id
+     * @param id id to validate
+     * @return true if valid
+     */
     public final boolean userIsFacebookValid(String accessToken, long id){
         try{
             User user = getMyInfoFromFacebook(accessToken);
@@ -261,16 +265,5 @@ public class FacebookLogic {
         }catch(Exception ex){
             return false;
         }
-    }
-
-    public List<String> getImages(long id_to_find, String accessToken) {
-        try{
-            Connection<Facebook> connection = facebookConnectionFactory.createConnection(new AccessGrant(accessToken));
-            // TODO finish request
-            //connection.getApi().mediaOperations().getAlbums();
-        }catch(Exception ex){
-            return new ArrayList<>();
-        }
-        return null;
     }
 }

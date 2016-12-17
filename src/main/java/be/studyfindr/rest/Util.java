@@ -39,10 +39,11 @@ public class Util {
      */
     public boolean usersAreInRange(User u1, User u2){
         double[] bb = getBoundingBox(u1.getLat(), u1.getLon(), u1.getPrefDistance());
-        return u2.getLat() > bb[0] &&
+        boolean s = u2.getLat() > bb[0] &&
                 u2.getLon() > bb[1] &&
                 u2.getLat() < bb[2] &&
                 u2.getLon() < bb[3];
+        return s;
      }
 
     /**

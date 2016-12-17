@@ -1,15 +1,18 @@
 package be.studyfindr;
 
-import static org.junit.Assert.*;
-
-import org.junit.*;
+import be.studyfindr.entities.Data;
+import be.studyfindr.entities.Like;
+import be.studyfindr.entities.Message;
+import be.studyfindr.entities.User;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import be.studyfindr.entities.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DatabaseTest {
@@ -77,9 +80,6 @@ public class DatabaseTest {
 		dataLayer.deleteLike(found);
 		found = dataLayer.getLike((long)1, (long)2);
 		assertNull(found);
-		// older version Test
-		//assert(found.getLiker_Id() == 0);
-		//assert(found.getLikee_Id() == 0);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -97,6 +97,9 @@ public class DatabaseTest {
 		assert(allUsers.contains(u1) && allUsers.contains(u2));
 	}
 
+	/**
+	 * Don't run this test in production!
+	 */
 	/*@Test
 	public  void test13RemoveAllUsers() {
 		List<User> allUsers = dataLayer.getAllUsers();
@@ -183,15 +186,4 @@ public class DatabaseTest {
 		dataLayer.deleteUser(u1);
 		assert(status);
 	}
-
-	/*@Test
-	public void test7PopulateLatLon() {
-		//double test = ThreadLocalRandom.current().nextDouble(50.5, 51.5);
-		List<User> allUsers = dataLayer.getAllUsers();
-		for (User user : allUsers) {
-			user.setLat(ThreadLocalRandom.current().nextDouble(50.5, 51.5));
-			user.setLon(ThreadLocalRandom.current().nextDouble(3, 4));
-			dataLayer.updateUser(user);
-		}
-	}*/
 }

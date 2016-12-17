@@ -47,9 +47,9 @@ public class UsersController {
             s = null;
         }
         if (s == null) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<be.studyfindr.entities.User>(s, HttpStatus.OK);
+        return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
     /**
@@ -62,14 +62,14 @@ public class UsersController {
      */
     @RequestMapping(value = "/user/{target_id}/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUserInfo(@PathVariable("target_id") long target_id, @RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         User user;
         try {
             user = dataLayer.getUser(target_id);
         } catch (Exception ex) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     /**
@@ -134,9 +134,9 @@ public class UsersController {
      */
     @RequestMapping("/user/getmyqueue")
     public ResponseEntity<List<User>> getQueue(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         List<User> users = dataLayer.getQueue(id);
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     /**
@@ -148,35 +148,24 @@ public class UsersController {
      */
     @RequestMapping("/user/getmatches")
     public ResponseEntity<List<User>> getMatches(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<List<User>>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         try {
-            return new ResponseEntity<List<User>>(dataLayer.getMatches(id), HttpStatus.OK);
+            return new ResponseEntity<>(dataLayer.getMatches(id), HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<List<User>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @RequestMapping(value = "/user/updatemylocation", method = RequestMethod.POST)
     public ResponseEntity<User> updateLocationUser(@RequestParam("id") long id, @RequestParam("accessToken") String accessToken, @RequestParam("lat") double lat, @RequestParam("lon") double lon) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         try{
             User user = dataLayer.getUser(id);
             user.setLon(lon);
             user.setLat(lat);
             dataLayer.updateUser(user);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }catch(Exception ex) {
-            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-
-    @RequestMapping("/user/{id_to_find}/images")
-    public ResponseEntity<List<String>> getImages(@PathVariable("id_to_find") long id_to_find, @RequestParam("id") long id, @RequestParam("accessToken") String accessToken) {
-        if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        try {
-            return new ResponseEntity<>(fb.getImages(id_to_find, accessToken), HttpStatus.OK);
-        } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

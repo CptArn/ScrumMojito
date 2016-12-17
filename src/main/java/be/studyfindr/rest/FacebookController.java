@@ -1,14 +1,14 @@
 package be.studyfindr.rest;
 
-import java.util.HashMap;
-import javax.servlet.http.HttpSession;
-
 import be.studyfindr.entities.LoginResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.facebook.api.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 /**
  * The FacebookController defines the interface for all Facebook operations.
@@ -67,7 +67,7 @@ public class FacebookController {
 	 */
 	@RequestMapping(path = "/facebook/logout", method = RequestMethod.POST)
 	public ResponseEntity<HashMap<String, String>> logout(@RequestParam("accessToken") String accessToken, @RequestParam("id") long id) {
-		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<HashMap<String, String>>(HttpStatus.UNAUTHORIZED);
+		if (!fb.userIsValid(accessToken, id)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		boolean state = fb.logout(accessToken, id);
 		if (!state) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		HashMap<String, String> status = new HashMap<String, String>();

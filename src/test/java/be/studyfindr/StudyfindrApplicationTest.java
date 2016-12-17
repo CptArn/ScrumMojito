@@ -9,7 +9,7 @@ import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class StudyfindrApplicationTests {
+public class StudyfindrApplicationTest {
 
 	@Test
 	public void test1HasMain() {

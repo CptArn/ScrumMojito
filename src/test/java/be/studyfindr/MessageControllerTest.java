@@ -5,7 +5,6 @@ import be.studyfindr.entities.Like;
 import be.studyfindr.entities.Message;
 import be.studyfindr.entities.User;
 import be.studyfindr.rest.MessageController;
-import be.studyfindr.rest.UsersController;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.junit.AfterClass;
@@ -24,12 +23,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.test.util.AssertionErrors.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Created by anthony on 4/12/2016.
+ * Created by on 4/12/2016.
  */
 public class MessageControllerTest {
     static User u1;
@@ -82,7 +82,7 @@ public class MessageControllerTest {
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isUnauthorized());
         }catch(Exception e) {
-            System.out.println(e.getMessage());
+            fail(e.getMessage());
         }
     }
 
@@ -125,8 +125,7 @@ public class MessageControllerTest {
             dataLayer.deleteConversation(u1.getid(), u2.getid());
             assert(messages.size() > 2);
         } catch(Exception e) {
-            System.out.println(e.getMessage());
-            throw e;
+            fail(e.getMessage());
         }
     }
 
@@ -137,50 +136,9 @@ public class MessageControllerTest {
                     get("/messages/getconversation?id=" + u1.getid() + "&accessToken=testtoken&matchid=-1")
             ).andExpect(status().isBadRequest());
         }catch(Exception e) {
-            System.out.println(e.getMessage());
+            fail(e.getMessage());
         }
     }
-
-    /*@Test
-    public void test03RemoveMessages() {
-        try {
-            mockMvc.perform(post("/messages/postmessage")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .param("id", u1.getid() + "")
-                    .param("accessToken", "testtoken")
-                    .param("matchid", u2.getid() + "")
-                    .content(this.json("TEST1"))
-                    .accept(MediaType.APPLICATION_JSON)
-            ).andExpect(status().isOk());
-            mockMvc.perform(post("/messages/postmessage")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .param("id", u2.getid() + "")
-                    .param("accessToken", "testtoken")
-                    .param("matchid", u1.getid() + "")
-                    .content(this.json("TEST2"))
-                    .accept(MediaType.APPLICATION_JSON)
-            ).andExpect(status().isOk());
-            mockMvc.perform(post("/messages/postmessage")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .param("id", u1.getid() + "")
-                    .param("accessToken", "testtoken")
-                    .param("matchid", u2.getid() + "")
-                    .content(this.json("TEST3"))
-                    .accept(MediaType.APPLICATION_JSON)
-            ).andExpect(status().isOk());
-            List<User> temp = dataLayer.getMatches(u1.getid());
-            l1.setLike(false);
-            dataLayer.updateLike(l1);
-            MvcResult result = this.mockMvc.perform(
-                    get("/messages/getconversation?id=" + u1.getid() + "&accessToken=testtoken&matchid=" + u2.getid())
-            ).andExpect(status().isOk()).andReturn();
-            String resString = result.getResponse().getContentAsString();
-            JSONArray jsonarray = new JSONArray(resString);
-            assert(jsonarray.length() < 1);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
 
     protected String json(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
