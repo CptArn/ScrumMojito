@@ -88,48 +88,6 @@ Logout from the current Facebook profile.
                     }
             }
 
-## School [/schools]
-
-### Get schools [GET /schools{?name}]
-
-Get all schools or the school with a given name.
-
-+ Parameters
-    + name (string, optional) - Name of the required school (if NULL, all schools get returned)
-    
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                {
-                    "id": 1,
-                    "name": "Technologiecampus Odisee",
-                    "address": "Gebroeders De Smedtstraat 1, 9000 Gent"
-                },
-                {
-                    "id": 2,
-                    "name": "HoGent",
-                    "address": "Valentin Vaerwyckweg, 9000 Gent"
-                }
-            }
-            
-    + Schema
-    
-            {
-                {
-                    "id": {
-                        "type": "int"
-                        },
-                    "name": {
-                        "type": "string"
-                        },
-                    "address" : {
-                        "type": "string"
-                        }
-                }
-            }
-            
 ## User [/user]
 
 ### Get user info [GET /user/{target_id}/info{?accessToken,id}]
